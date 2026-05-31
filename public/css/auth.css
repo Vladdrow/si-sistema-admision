@@ -1,0 +1,228 @@
+:root {
+    color-scheme: light;
+    font-family: Inter, Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    align-items: stretch;
+    background: #eef3f8;
+    color: #172033;
+    display: flex;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.auth-shell {
+    display: grid;
+    grid-template-columns: minmax(320px, 480px) minmax(0, 1fr);
+    min-height: 100vh;
+    width: 100%;
+}
+
+.auth-panel {
+    align-items: center;
+    background: #fff;
+    border-right: 1px solid #dce4ef;
+    display: flex;
+    justify-content: center;
+    padding: clamp(22px, 5vw, 56px);
+}
+
+.card {
+    max-width: 400px;
+    width: 100%;
+}
+
+.auth-brand {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 34px;
+}
+
+.brand-mark {
+    align-items: center;
+    background: #172033;
+    border-radius: 8px;
+    color: #fff;
+    display: inline-flex;
+    font-weight: 900;
+    height: 40px;
+    justify-content: center;
+    width: 40px;
+}
+
+.auth-brand strong {
+    display: block;
+    font-size: 15px;
+}
+
+.auth-brand span {
+    color: #667085;
+    display: block;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+h1 {
+    font-size: 28px;
+    line-height: 1.12;
+    margin: 0 0 8px;
+}
+
+p {
+    color: #667085;
+    line-height: 1.55;
+    margin: 0 0 24px;
+}
+
+form {
+    display: grid;
+    gap: 14px;
+}
+
+.field {
+    display: grid;
+    gap: 7px;
+}
+
+label {
+    color: #475467;
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .02em;
+}
+
+input {
+    background: #fcfdff;
+    border: 1px solid #cfd8e6;
+    border-radius: 7px;
+    font-size: 14px;
+    min-height: 44px;
+    padding: 11px 12px;
+    width: 100%;
+}
+
+input:focus {
+    background: #fff;
+    border-color: #1f6feb;
+    box-shadow: 0 0 0 3px rgba(31, 111, 235, .14);
+    outline: none;
+}
+
+button {
+    background: #1f6feb;
+    border: 0;
+    border-radius: 7px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 800;
+    min-height: 44px;
+    padding: 11px 14px;
+    width: 100%;
+}
+
+.alert,
+.status {
+    border-radius: 7px;
+    font-size: 13px;
+    line-height: 1.45;
+    margin-bottom: 16px;
+    padding: 11px 12px;
+}
+
+.alert {
+    background: #fef3f2;
+    color: #b42318;
+}
+
+.status {
+    background: #ecfdf3;
+    color: #05603a;
+}
+
+.auth-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-top: 18px;
+}
+
+a {
+    color: #1f6feb;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.auth-visual {
+    background:
+        linear-gradient(90deg, rgba(15, 23, 42, .86), rgba(15, 23, 42, .34)),
+        url("../images/ficct-hero.png") center / cover;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(28px, 5vw, 64px);
+}
+
+.auth-visual h2 {
+    font-size: clamp(30px, 5vw, 56px);
+    line-height: 1.02;
+    margin: 0 0 14px;
+    max-width: 760px;
+}
+
+.auth-visual p {
+    color: rgba(255, 255, 255, .82);
+    font-size: 16px;
+    max-width: 560px;
+}
+
+.auth-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.auth-stat {
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .22);
+    border-radius: 8px;
+    min-width: 128px;
+    padding: 12px;
+}
+
+.auth-stat strong {
+    display: block;
+    font-size: 18px;
+}
+
+.auth-stat span {
+    color: rgba(255, 255, 255, .76);
+    display: block;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+@media (max-width: 860px) {
+    .auth-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-panel {
+        border-right: 0;
+        min-height: 100vh;
+    }
+
+    .auth-visual {
+        display: none;
+    }
+}
