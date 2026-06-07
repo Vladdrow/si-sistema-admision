@@ -230,6 +230,7 @@
                 @auth
                     <a class="button" href="{{ route('dashboard') }}">Ir al panel</a>
                 @else
+                    <a class="button" href="{{ route('registro.create') }}">Registrarse</a>
                     <a class="button secondary" href="{{ route('password.recovery.request') }}">Recuperar acceso</a>
                     <a class="button" href="{{ route('login') }}">Iniciar sesion</a>
                 @endauth
@@ -244,7 +245,8 @@
                     @auth
                         <a class="button" href="{{ route('dashboard') }}">Continuar gestionando</a>
                     @else
-                        <a class="button" href="{{ route('login') }}">Entrar al sistema</a>
+                        <a class="button" href="{{ route('registro.create') }}">Registrarse como postulante</a>
+                        <a class="button secondary" href="{{ route('login') }}">Entrar al sistema</a>
                     @endauth
                 </div>
             </div>

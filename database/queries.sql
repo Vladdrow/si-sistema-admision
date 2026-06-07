@@ -143,14 +143,14 @@ INSERT INTO carrera (id_carrera, codigo, nombre) VALUES
 -- POSTULANTES (id_postulante = id_persona)
 -- =============================================
 INSERT INTO postulante (
-    id_postulante, 
-    colegio_procedencia, 
-    ciudad, 
-    estado_admision, 
-    codigo_libreta, 
-    codigo_titulo, 
-    id_carrera_primera_opc, 
-    id_carrera_segunda_opc, 
+    id_postulante,
+    colegio_procedencia,
+    ciudad,
+    estado_admision,
+    codigo_libreta,
+    codigo_titulo,
+    id_carrera_primera_opc,
+    id_carrera_segunda_opc,
     id_carrera_admitido
 ) VALUES
 (6, 'Unidad Educativa San José', 'Santa Cruz', 'Pendiente', 'LIB2024001', 'TIT2024001', 1, 2, NULL),
@@ -170,10 +170,10 @@ INSERT INTO postulante (
 -- SEMESTRES
 -- =============================================
 INSERT INTO semestre (id_semestre, nombre) VALUES
-(1, '2024-1'),
-(2, '2024-2'),
-(3, '2025-1'),
-(4, '2025-2');
+(1, '1-2024'),
+(2, '2-2024'),
+(3, '1-2025'),
+(4, '2-2025');
 
 -- Reiniciar secuencia de semestre (PostgreSQL)
 SELECT setval('semestre_id_semestre_seq', (SELECT MAX(id_semestre) FROM semestre));
@@ -192,3 +192,48 @@ INSERT INTO carrera_semestre (cantidad_cupos, cantidad_estudiantes, id_carrera, 
 (35, 0, 2, 2),
 (30, 0, 3, 2),
 (25, 0, 4, 2);
+
+
+INSERT INTO materia (codigo, nombre) VALUES
+('INF001','Computación'),
+('MAT001','Matemáticas'),
+('FIS001','Fisica'),
+('ING001','Inglés');
+
+
+-- AULAS DEL 11 AL 17 (Piso 1)
+INSERT INTO aula (nombre, capacidad, ubicacion) VALUES
+('Aula 11', 80, 'Piso 1'),
+('Aula 12', 75, 'Piso 1'),
+('Aula 13', 90, 'Piso 1'),
+('Aula 14', 70, 'Piso 1'),
+('Aula 15', 85, 'Piso 1'),
+('Aula 16', 95, 'Piso 1'),
+('Aula 17', 78, 'Piso 1'),
+
+-- AULAS DEL 21 AL 27 (Piso 2)
+('Aula 21', 82, 'Piso 2'),
+('Aula 22', 88, 'Piso 2'),
+('Aula 23', 72, 'Piso 2'),
+('Aula 24', 92, 'Piso 2'),
+('Aula 25', 76, 'Piso 2'),
+('Aula 26', 84, 'Piso 2'),
+('Aula 27', 98, 'Piso 2'),
+
+-- AULAS DEL 31 AL 37 (Piso 3)
+('Aula 31', 86, 'Piso 3'),
+('Aula 32', 74, 'Piso 3'),
+('Aula 33', 94, 'Piso 3'),
+('Aula 34', 68, 'Piso 3'),
+('Aula 35', 100, 'Piso 3'),
+('Aula 36', 79, 'Piso 3'),
+('Aula 37', 83, 'Piso 3'),
+
+-- AULAS DEL 41 AL 47 (Piso 4)
+('Aula 41', 91, 'Piso 4'),
+('Aula 42', 77, 'Piso 4'),
+('Aula 43', 87, 'Piso 4'),
+('Aula 44', 73, 'Piso 4'),
+('Aula 45', 96, 'Piso 4'),
+('Aula 46', 81, 'Piso 4'),
+('Aula 47', 89, 'Piso 4');

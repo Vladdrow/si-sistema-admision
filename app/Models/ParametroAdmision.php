@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ParametroAdmision extends Model
 {
@@ -39,5 +40,16 @@ class ParametroAdmision extends Model
     public function semestre(): BelongsTo
     {
         return $this->belongsTo(Semestre::class, 'id_semestre', 'id_semestre');
+    }
+
+    public function cuposCarrera(): HasMany
+    {
+        return $this->hasMany(CarreraSemestre::class, 'id_semestre', 'id_semestre');
+    }
+
+    public function examenes(): HasMany
+    {
+        return $this->hasMany(Examen::class, 'id_semestre', 'id_semestre')
+            ->orderBy('numero_examen');
     }
 }

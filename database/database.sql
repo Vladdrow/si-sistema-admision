@@ -1,5 +1,5 @@
 -- Active: 1780052698035@@127.0.0.1@5432@sistema_admision
-CREATE DATABASE sistema_admision;
+-- CREATE DATABASE sistema_admision;
 -- 1. TABLA PERSONA
 CREATE TABLE persona (
     id_persona SERIAL PRIMARY KEY,
@@ -20,7 +20,7 @@ CREATE TABLE personal_administrativo (
     cargo VARCHAR(50) NOT NULL
 );
 
--- ALTER TABLE personal_administrativo 
+-- ALTER TABLE personal_administrativo
 -- ALTER COLUMN cargo TYPE VARCHAR(50),
 -- ALTER COLUMN cargo SET NOT NULL;
 -- 3. TABLA DOCENTE
@@ -169,6 +169,7 @@ CREATE TABLE detalle_plantilla_horario (
     hora_inicio TIME NOT NULL,
     hora_fin TIME NOT NULL,
     modalidad VARCHAR(20) NOT NULL CHECK (modalidad IN ('Presencial', 'Virtual')),
+    id_materia INTEGER NOT NULL REFERENCES materia(id_materia) ON DELETE CASCADE,
     id_plantilla INTEGER NOT NULL REFERENCES plantilla_horario(id_plantilla) ON DELETE CASCADE
 );
 
@@ -177,10 +178,10 @@ CREATE TABLE aula (
     id_aula SERIAL PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
     capacidad INTEGER NOT NULL CHECK (capacidad > 0),
-    ubicacion VARCHAR(25),
-    estado VARCHAR(20) NOT NULL DEFAULT 'Disponible' CHECK (estado IN ('Disponible', 'En mantenimiento', 'Ocupado'))
+    ubicacion VARCHAR(25)
 );
 
+--estado VARCHAR(20) NOT NULL DEFAULT 'Disponible' CHECK (estado IN ('Disponible', 'En mantenimiento', 'Ocupado'))
 -- 19. TABLA GRUPO_HORARIO
 CREATE TABLE grupo_horario (
     id_grupo_horario SERIAL PRIMARY KEY,

@@ -1,9 +1,13 @@
 <x-data-table
-    :columns="['Docente', 'Contacto', 'Titulo', 'Codigo RDA', 'Formacion', 'Acciones']"
+    :columns="['Registro', 'Docente', 'Contacto', 'Titulo', 'Codigo RDA', 'Formacion', 'Estado', 'Acciones']"
     :paginator="$docentes"
     empty="No se encontraron docentes."
 >
             @foreach ($docentes as $docente)
+                @php
+                    $credencial = $docente->persona?->credencial;
+                    $activo = (bool) ($credencial?->estado ?? false);
+                @endphp
                 <tr
                     class="teacher-row"
                     data-id="{{ $docente->id_docente }}"
@@ -22,7 +26,11 @@
                     data-tiene-diplomado="{{ $docente->tiene_diplomado ? '1' : '0' }}"
                     data-update-url="{{ route('docentes.update', $docente->id_docente) }}"
                     data-delete-url="{{ route('docentes.destroy', $docente->id_docente) }}"
+                    data-restore-url="{{ route('docentes.restore', $docente->id_docente) }}"
                 >
+                    <td data-label="Registro">
+                        <span class="muted">{{ $credencial?->registro ?? 'Sin registro' }}</span>
+                    </td>
                     <td data-label="Docente">
                         <span class="person-line">
                             <strong>{{ $docente->persona?->nombre_completo ?? 'Sin nombre' }}</strong>
@@ -50,10 +58,17 @@
                             @endif
                         </div>
                     </td>
+                    <td data-label="Estado">
+                        <span class="badge {{ $activo ? 'ok' : 'off' }}">{{ $activo ? 'Activo' : 'Inactivo' }}</span>
+                    </td>
                     <td data-label="Acciones">
                         <div class="actions">
-                            <button class="secondary" type="button" data-teacher-action="edit">Modificar</button>
-                            <button class="danger" type="button" data-teacher-action="delete">Eliminar</button>
+                            @if ($activo)
+                                <button class="secondary" type="button" data-teacher-action="edit">Modificar</button>
+                                <button class="danger" type="button" data-teacher-action="delete">Desactivar</button>
+                            @else
+                                <button class="secondary" type="button" data-teacher-action="restore">Restaurar</button>
+                            @endif
                         </div>
                     </td>
                 </tr>

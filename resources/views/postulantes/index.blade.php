@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Gestionar Postulantes')
-@section('subtitle', 'Registra, lista, modifica y elimina postulantes.')
+@section('subtitle', 'Lista, modifica, desactiva y restaura postulantes. El registro inicial lo realiza el propio postulante.')
 
 @section('content')
     <div class="panel">
@@ -70,16 +70,24 @@
 
         <x-filter-panel :action="route('postulantes.index')">
             <div>
-                <label for="buscar">Buscar por nombre, CI, colegio, ciudad o codigo</label>
+                <label for="buscar">Buscar por nombre, CI, registro, colegio, ciudad o codigo</label>
                 <input id="buscar" name="buscar" value="{{ $search }}" data-filter-field placeholder="Ej. Perez, libreta o ciudad">
             </div>
             <div>
-                <label for="estado">Estado</label>
+                <label for="estado">Estado admision</label>
                 <select id="estado" name="estado" data-filter-field>
                     <option value="">Todos</option>
                     @foreach ($statuses as $item)
-                        <option value="{{ $item }}" @selected($status === $item)>{{ $item }}</option>
+                        <option value="{{ $item }}" @selected($admisionStatus === $item)>{{ $item }}</option>
                     @endforeach
+                </select>
+            </div>
+            <div>
+                <label for="acceso">Acceso</label>
+                <select id="acceso" name="acceso" data-filter-field>
+                    <option value="1" @selected($acceso === '1')>Activos</option>
+                    <option value="0" @selected($acceso === '0')>Inactivos</option>
+                    <option value="" @selected($acceso === '')>Todos</option>
                 </select>
             </div>
             <div>

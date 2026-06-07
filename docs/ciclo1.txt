@@ -1,0 +1,455 @@
+CASOS DE USO CICLO 1
+
+==================================
+CU05: GESTIONAR DOCENTE
+==================================
+
+Opcion: Buscar/Listar docente
+
+Vista: resources/views/docentes/index.blade.php y resources/views/docentes/partials/table.blade.php
+La vista muestra el listado de docentes y permite filtrar por nombre, CI, correo, registro, titulo profesional, codigo RDA, formacion y estado. Los filtros ingresados por el usuario se usan para consultar docentes registrados.
+
+Controller: app/Http/Controllers/DocenteController.php
+Metodo principal: DocenteController::index()
+
+Flujo:
+El usuario ingresa un criterio de busqueda o selecciona filtros en la vista. Esa informacion llega a DocenteController::index(). Este metodo consulta el modelo Docente cargando la relacion persona.credencial. Si existe texto de busqueda, filtra por codigo_rda, titulo_profesional, datos de la tabla persona o registro de la tabla credencial. Si se selecciona formacion, filtra por tiene_maestria o tiene_diplomado. Si se selecciona estado, filtra por credenciales activas o inactivas.
+
+Modelo: Docente
+Se usa para consultar la tabla docente.
+
+Modelo relacionado: Persona
+Se usa para consultar datos personales del docente desde la tabla persona.
+
+Modelo relacionado: Credencial
+Se usa para consultar el registro y el estado del acceso desde la tabla credencial.
+
+Tablas consultadas:
+- docente
+- persona
+- credencial
+
+Resultado:
+DocenteController::index() devuelve la vista con los docentes encontrados. Si no hay resultados, la tabla muestra el mensaje definido en la vista parcial.
+
+------------------------------------------------------------
+
+Opcion: Registrar docente
+
+Vista: resources/views/docentes/index.blade.php
+La vista recibe los datos personales y profesionales del docente: CI, nombres, apellidos, fecha de nacimiento, sexo, direccion, telefono, correo, titulo profesional, codigo RDA, maestria y diplomado.
+
+Controller: app/Http/Controllers/DocenteController.php
+Metodo principal: DocenteController::store()
+
+Flujo:
+Los datos ingresados en la vista llegan a DocenteController::store(). Primero, este metodo llama a DocenteController::validatedData() para validar los campos. Ahi se verifica que los campos requeridos existan, que el CI no este repetido en la tabla persona, que el correo no este repetido en la tabla persona y que el codigo RDA no este repetido en la tabla docente.
+
+Luego DocenteController::store() abre una transaccion de base de datos. Dentro de esa transaccion llama a DocenteController::personData() para preparar los datos personales y crea un registro en el modelo Persona. Ese registro se guarda en la tabla persona.
+
+Despues llama a DocenteController::teacherData() para preparar los datos profesionales y crea un registro en el modelo Docente. El id_docente usado es el mismo id_persona generado al crear la persona. Ese registro se guarda en la tabla docente.
+
+Luego DocenteController::store() llama a Credencial::generateUniqueRegistro(), que pertenece al modelo Credencial, para generar un numero de registro unico. Despues crea una credencial asociada a la persona del docente. La credencial se guarda con rol "Docente", estado activo, intentos_fallidos en 0 y contrasena inicial generada con Hash::make(ci).
+
+Modelos usados:
+- Persona: inserta datos personales en persona.
+- Docente: inserta datos profesionales en docente.
+- Credencial: genera registro e inserta credencial en credencial.
+
+Tablas afectadas:
+- persona: inserta un nuevo registro.
+- docente: inserta un nuevo registro.
+- credencial: inserta una nueva credencial para el docente.
+
+Resultado:
+Si el registro se completa, DocenteController::store() devuelve mensaje de exito con el numero de registro generado y la vista actualiza el listado.
+
+------------------------------------------------------------
+
+Opcion: Modificar docente
+
+Vista: resources/views/docentes/index.blade.php y resources/views/docentes/partials/table.blade.php
+La vista muestra la opcion "Modificar" en cada docente activo. Al seleccionarla, se cargan en el formulario los datos personales y profesionales del docente seleccionado.
+
+Controller: app/Http/Controllers/DocenteController.php
+Metodo principal: DocenteController::update()
+
+Flujo:
+Los datos modificados llegan a DocenteController::update(). Primero, este metodo carga la relacion persona del docente. Luego llama a DocenteController::validatedData(), pasando el docente actual para que la validacion ignore su propio CI, correo y codigo RDA. Esto evita que el sistema marque como duplicados los datos que ya pertenecen a ese mismo docente.
+
+Despues DocenteController::update() abre una transaccion. Dentro de la transaccion llama a DocenteController::personData() y actualiza la informacion personal en el modelo Persona, afectando la tabla persona. Luego llama a DocenteController::teacherData() y actualiza la informacion profesional en el modelo Docente, afectando la tabla docente.
+
+En esta opcion no se modifica la tabla credencial, porque el caso de uso solo cambia los datos del docente, no sus datos de acceso.
+
+Modelos usados:
+- Persona: actualiza datos personales.
+- Docente: actualiza datos profesionales.
+
+Tablas afectadas:
+- persona: actualiza datos personales.
+- docente: actualiza datos profesionales.
+
+Resultado:
+Si la modificacion es valida, DocenteController::update() devuelve mensaje de exito y la vista actualiza el listado.
+
+------------------------------------------------------------
+
+Opcion: Eliminar docente (baja logica)
+
+Vista: resources/views/docentes/partials/table.blade.php
+La vista muestra la opcion "Desactivar" para docentes activos. Esta opcion representa la eliminacion indicada por el caso de uso, pero en el codigo se implementa como baja logica.
+
+Controller: app/Http/Controllers/DocenteController.php
+Metodo principal: DocenteController::destroy()
+
+Flujo:
+La accion de desactivar llega a DocenteController::destroy(). Este metodo carga el docente con la relacion persona.credencial. Primero verifica si el docente tiene una credencial asociada. Si no tiene credencial, devuelve error. Luego verifica si la credencial ya esta inactiva. Si ya esta inactiva, tambien devuelve error.
+
+Si el docente tiene credencial y esta activa, DocenteController::destroy() actualiza el modelo Credencial colocando estado = false. No elimina registros de la tabla persona ni de la tabla docente.
+
+Modelo usado:
+- Credencial: actualiza el estado de la credencial asociada al docente.
+
+Tablas afectadas:
+- credencial: actualiza estado = false.
+
+Tablas no eliminadas:
+- persona: no se borra.
+- docente: no se borra.
+
+Resultado:
+El docente queda inactivo para el sistema porque su credencial queda desactivada. La vista muestra mensaje de exito y actualiza el listado.
+
+============================================================
+CU17 - Cerrar Sesion
+============================================================
+
+Redaccion por opciones del CU17:
+
+Opcion: Cerrar sesion
+
+Vista: resources/views/partials/sidebar.blade.php
+La vista muestra el boton "Cerrar sesion" dentro del menu lateral. El usuario no ingresa datos adicionales; solo presiona el boton para finalizar su sesion activa. La vista incluye el token CSRF requerido por Laravel para que la accion sea valida.
+
+Controller: app/Http/Controllers/AuthController.php
+Metodo principal: AuthController::logout()
+
+Flujo:
+La accion de cerrar sesion llega a AuthController::logout(). Primero, este metodo obtiene el usuario autenticado con $request->user(). En este sistema, el usuario autenticado corresponde al modelo Credencial.
+
+Luego AuthController::logout() verifica si el usuario obtenido es una instancia de Credencial. Si lo es, llama a BitacoraLogger::registrar(), que pertenece al servicio app/Services/BitacoraLogger.php. A este metodo le envia la credencial autenticada, la accion "Cerrar sesion", el modulo "Autenticacion" y la descripcion "Cerro sesion en el sistema.".
+
+Servicio: app/Services/BitacoraLogger.php
+Metodo usado: BitacoraLogger::registrar()
+
+Flujo del servicio:
+BitacoraLogger::registrar() verifica que la credencial tenga id_persona. Si no tiene id_persona, no registra nada. Si si tiene id_persona, crea un registro mediante el modelo Bitacora. Ese registro se guarda en la tabla bitacora con accion, modulo, descripcion, ip_origen e id_persona.
+
+Despues de registrar la bitacora, el flujo vuelve a AuthController::logout(). El controlador ejecuta Auth::logout() para cerrar la autenticacion del usuario. Luego invalida la sesion actual con $request->session()->invalidate() y regenera el token CSRF con $request->session()->regenerateToken().
+
+Finalmente, AuthController::logout() redirige al usuario a la pantalla de login con el mensaje "Sesion cerrada correctamente.".
+
+Modelos usados:
+- Credencial: se usa para identificar al usuario autenticado.
+- Bitacora: se usa para registrar la accion de cierre de sesion.
+
+Tablas afectadas:
+- bitacora: inserta un registro con la accion "Cerrar sesion".
+
+Tablas no modificadas:
+- credencial: no se modifica; solo se usa para obtener el usuario autenticado y su id_persona.
+
+Resultado:
+La sesion del usuario queda cerrada, la sesion HTTP se invalida, el token CSRF se regenera y el usuario vuelve al login. Ademas, queda registrada la accion en la tabla bitacora.
+
+============================================================
+CU16 - Iniciar Sesion
+============================================================
+
+Redaccion por opciones del CU16:
+
+Opcion: Iniciar sesion
+
+Vista: resources/views/auth/login.blade.php
+La vista muestra el formulario donde el usuario ingresa registro y contrasena. Tambien muestra mensajes de error o estado cuando corresponde.
+
+Controller: app/Http/Controllers/AuthController.php
+Metodos principales: AuthController::showLogin() y AuthController::login()
+
+Flujo:
+AuthController::showLogin() solo devuelve la vista auth.login. No consulta ni modifica tablas.
+
+Cuando el usuario envia sus datos, estos llegan a AuthController::login(). Este metodo valida registro y contrasena, luego consulta Credencial por el registro ingresado, cargando tambien persona.docente, persona.postulante y persona.personalAdministrativo.
+
+Si no existe la credencial, si esta desactivada o si el rol no coincide con la persona relacionada, el controller devuelve error y no inicia sesion. Para validar el rol se usa AuthController::hasConsistentRole(), que pertenece al mismo controller.
+
+Si la credencial tiene fecha_bloqueo dentro de los ultimos 5 minutos, el controller rechaza el ingreso por bloqueo temporal.
+
+Luego AuthController::login() valida la contrasena con Hash::check() o con hash_equals() para contrasenas antiguas sin hash. Si la contrasena falla, actualiza la tabla credencial aumentando intentos_fallidos; si llega a 3 intentos, tambien guarda fecha_bloqueo.
+
+Si la contrasena es correcta, actualiza la credencial con fecha_ultimo_acceso, reinicia intentos_fallidos y limpia fecha_bloqueo. Si la contrasena necesita rehash, tambien actualiza contrasena con Hash::make().
+
+Despues inicia sesion con Auth::login($credencial), regenera la sesion HTTP y registra la accion en bitacora.
+
+Servicio: app/Services/BitacoraLogger.php
+Metodo usado: BitacoraLogger::registrar()
+
+Flujo del servicio:
+AuthController::login() llama a BitacoraLogger::registrar() con la accion "Iniciar sesion". El servicio valida que la credencial tenga id_persona y crea un registro en la tabla bitacora mediante el modelo Bitacora.
+
+Modelos usados:
+- Credencial: consulta el usuario por registro, valida estado, intentos, bloqueo y contrasena.
+- Persona: se consulta para validar el tipo de usuario relacionado.
+- Docente, Postulante y PersonalAdministrativo: se consultan mediante relaciones para validar el rol.
+- Bitacora: registra el inicio de sesion exitoso.
+
+Tablas consultadas:
+- credencial
+- persona
+- docente
+- postulante
+- personal_administrativo
+
+Tablas afectadas:
+- credencial: actualiza intentos_fallidos y fecha_bloqueo si falla; si ingresa correctamente, actualiza fecha_ultimo_acceso, intentos_fallidos, fecha_bloqueo y posiblemente contrasena.
+- bitacora: inserta el registro del inicio de sesion exitoso.
+
+Resultado:
+Si las credenciales son validas, el usuario queda autenticado y entra al dashboard. Si hay error de registro, contrasena, usuario inactivo, rol inconsistente o cuenta bloqueada, vuelve al login con el mensaje correspondiente.
+
+============================================================
+CU01 - Gestionar Credenciales
+============================================================
+
+Redaccion por opciones del CU01:
+
+Opcion: Buscar/Listar credenciales
+
+Vista: resources/views/credenciales/index.blade.php y resources/views/credenciales/partials/table.blade.php
+La vista muestra el listado de credenciales y permite filtrar por registro, CI, nombre, correo, rol y estado. Tambien muestra la tabla con las acciones de modificar, eliminar o restaurar.
+
+Controller: app/Http/Controllers/CredencialController.php
+Metodo principal: CredencialController::index()
+
+Flujo:
+Los filtros ingresados en la vista llegan a CredencialController::index(). Este metodo consulta el modelo Credencial cargando la relacion persona. Si existe texto de busqueda, filtra por registro o por datos de la persona asociada. Si se selecciona rol, filtra por el campo rol. Si se selecciona estado, filtra por credenciales activas o inactivas.
+
+Ademas, cuando se devuelve la vista completa, CredencialController::index() consulta el modelo Persona para obtener personas que aun no tienen credencial. Esas personas se muestran en el formulario de registro de credenciales.
+
+Modelos usados:
+- Credencial: consulta credenciales registradas.
+- Persona: consulta datos de persona asociados a la credencial y personas sin credencial.
+
+Tablas consultadas:
+- credencial
+- persona
+
+Resultado:
+El sistema muestra la lista de credenciales filtradas y, si corresponde, la lista de personas disponibles para registrar una nueva credencial.
+
+------------------------------------------------------------
+
+Opcion: Registrar credencial
+
+Vista: resources/views/credenciales/index.blade.php
+La vista permite seleccionar una persona sin credencial. Tambien permite ingresar correo y, opcionalmente, una nueva contrasena. El registro se genera automaticamente y el rol se obtiene segun el tipo de persona.
+
+Controller: app/Http/Controllers/CredencialController.php
+Metodo principal: CredencialController::store()
+
+Flujo:
+Los datos ingresados llegan a CredencialController::store(). Este metodo valida que id_persona exista en la tabla persona y que aun no exista en la tabla credencial. Tambien valida el correo y, si se ingreso una nueva contrasena, valida su confirmacion.
+
+Luego CredencialController::store() consulta la Persona seleccionada cargando sus relaciones docente, postulante y personalAdministrativo. Con esas relaciones determina el rol de la credencial: "Docente", "Postulante", "PersonalAdministrativo" o "Administrador".
+
+Despues llama a Credencial::generateUniqueRegistro(), que pertenece al modelo Credencial, para generar un numero de registro unico. La contrasena se guarda con Hash::make(); si el usuario ingreso una nueva contrasena se usa esa, caso contrario se usa el CI de la persona.
+
+Luego se crea una nueva Credencial con id_persona, registro, rol, estado activo, contrasena e intentos_fallidos en 0. Finalmente, se actualiza el correo de la persona seleccionada.
+
+Modelos usados:
+- Persona: consulta la persona seleccionada y actualiza su correo.
+- Credencial: genera registro unico e inserta la nueva credencial.
+
+Tablas afectadas:
+- credencial: inserta una nueva credencial.
+- persona: actualiza el correo de la persona seleccionada.
+
+Resultado:
+Se registra la credencial, se genera su numero de registro y la vista muestra un mensaje de exito.
+
+------------------------------------------------------------
+
+Opcion: Modificar credencial
+
+Vista: resources/views/credenciales/index.blade.php y resources/views/credenciales/partials/table.blade.php
+La vista muestra la opcion "Modificar" en cada credencial. Al seleccionarla, se cargan en el formulario los datos de la credencial y de la persona asociada.
+
+Controller: app/Http/Controllers/CredencialController.php
+Metodo principal: CredencialController::update()
+
+Flujo:
+Los datos modificados llegan a CredencialController::update(). Primero, el metodo carga la relacion persona y las relaciones docente, postulante y personalAdministrativo de esa persona. Luego valida rol, estado, correo y nueva contrasena si fue ingresada.
+
+Despues llama a CredencialController::ensureCompatibleRole(), que pertenece al mismo controller. Este metodo valida que el rol seleccionado coincida con el tipo de persona. Por ejemplo, una persona docente debe conservar rol "Docente".
+
+Luego CredencialController::update() valida reglas de seguridad: no permite que el administrador en sesion se quite su propio acceso de administrador y tampoco permite dejar el sistema sin ningun Administrador activo.
+
+Si las validaciones pasan, actualiza rol y estado en el modelo Credencial. Si se ingreso nueva contrasena, actualiza contrasena con Hash::make(), reinicia intentos_fallidos y limpia fecha_bloqueo. Despues actualiza el correo en la persona asociada.
+
+Modelos usados:
+- Credencial: actualiza rol, estado, contrasena, intentos y bloqueo.
+- Persona: actualiza correo y permite validar el tipo de persona.
+
+Tablas afectadas:
+- credencial: actualiza datos de acceso.
+- persona: actualiza correo.
+
+Resultado:
+La credencial queda actualizada y la vista muestra mensaje de exito.
+
+------------------------------------------------------------
+
+Opcion: Eliminar credencial (baja logica)
+
+Vista: resources/views/credenciales/partials/table.blade.php
+La vista muestra la opcion "Eliminar" para credenciales activas. En el codigo esta accion se implementa como baja logica, cambiando el estado de la credencial.
+
+Controller: app/Http/Controllers/CredencialController.php
+Metodo principal: CredencialController::destroy()
+
+Flujo:
+La accion llega a CredencialController::destroy(). Primero, este metodo verifica que la credencial no sea la del usuario autenticado, para evitar que el administrador elimine su propio acceso.
+
+Luego verifica si la credencial ya esta inactiva. Si ya esta inactiva, devuelve error. Despues valida que no se este eliminando al unico Administrador activo del sistema.
+
+Si las validaciones pasan, CredencialController::destroy() actualiza el modelo Credencial colocando estado = false. No elimina el registro de la tabla credencial ni elimina la persona asociada.
+
+Modelo usado:
+- Credencial: valida reglas de seguridad y actualiza estado.
+
+Tablas afectadas:
+- credencial: actualiza estado = false.
+
+Tablas no eliminadas:
+- persona: no se borra.
+- credencial: no se borra fisicamente.
+
+Resultado:
+La credencial queda desactivada y la vista muestra mensaje de exito.
+
+------------------------------------------------------------
+
+Opcion: Restaurar credencial
+
+Vista: resources/views/credenciales/partials/table.blade.php
+La vista muestra la opcion "Restaurar" para credenciales inactivas.
+
+Controller: app/Http/Controllers/CredencialController.php
+Metodo principal: CredencialController::restore()
+
+Flujo:
+La accion llega a CredencialController::restore(). Este metodo verifica si la credencial ya esta activa. Si ya esta activa, devuelve error.
+
+Si la credencial esta inactiva, CredencialController::restore() actualiza el modelo Credencial colocando estado = true, intentos_fallidos = 0 y fecha_bloqueo = null.
+
+Modelo usado:
+- Credencial: reactiva la credencial y limpia intentos/bloqueo.
+
+Tablas afectadas:
+- credencial: actualiza estado, intentos_fallidos y fecha_bloqueo.
+
+Resultado:
+La credencial queda activa nuevamente y la vista muestra mensaje de exito.
+
+============================================================
+CU02 - Gestionar Contrasena
+============================================================
+
+Redaccion por opciones del CU02:
+
+Opcion: Cambiar contrasena autenticado
+
+Vista: resources/views/password/edit.blade.php
+La vista muestra el formulario para cambiar contrasena cuando el usuario ya inicio sesion. El usuario ingresa contrasena actual, nueva contrasena y confirmacion de la nueva contrasena.
+
+Controller: app/Http/Controllers/PasswordController.php
+Metodo principal: PasswordController::update()
+
+Flujo:
+Los datos ingresados llegan a PasswordController::update(). Este metodo valida que se haya enviado contrasena_actual, nueva_contrasena y confirmacion. Luego obtiene el usuario autenticado con $request->user(), que corresponde al modelo Credencial.
+
+Despues PasswordController::update() llama a PasswordController::passwordMatches(), que pertenece al mismo controller. Este metodo verifica si la contrasena actual coincide con la contrasena guardada en la credencial. Para eso usa Hash::check() cuando la contrasena esta hasheada y hash_equals() para contrasenas antiguas sin hash.
+
+Si la contrasena actual no coincide, el controller devuelve error y no actualiza la tabla. Si coincide, actualiza la credencial con la nueva contrasena usando Hash::make(), reinicia intentos_fallidos en 0 y limpia fecha_bloqueo.
+
+Modelo usado:
+- Credencial: identifica al usuario autenticado y actualiza la contrasena.
+
+Tablas afectadas:
+- credencial: actualiza contrasena, intentos_fallidos y fecha_bloqueo.
+
+Resultado:
+La contrasena queda actualizada y la vista muestra mensaje de exito.
+
+------------------------------------------------------------
+
+Opcion: Solicitar codigo de recuperacion
+
+Vista: resources/views/password/recovery-request.blade.php y resources/views/password/edit.blade.php
+La vista permite ingresar el numero de registro para solicitar un codigo temporal. Este flujo puede usarse desde la pantalla publica de recuperacion o desde la pantalla de gestion de contrasena autenticada.
+
+Controller: app/Http/Controllers/PasswordController.php
+Metodo principal: PasswordController::sendRecoveryCode()
+
+Flujo:
+El registro ingresado llega a PasswordController::sendRecoveryCode(). Este metodo valida que se haya enviado registro y busca una Credencial con ese registro.
+
+Si no encuentra la credencial, devuelve un mensaje generico indicando que si el registro existe se enviara un codigo. Esto evita revelar si el registro existe o no.
+
+Si encuentra la credencial, genera un codigo numerico de 6 digitos. Luego carga la relacion persona de la credencial y actualiza la tabla credencial guardando codigo_recuperacion y fecha_expiracion_codigo con 15 minutos de vigencia.
+
+Despues verifica que la persona asociada tenga correo. Si no tiene correo, devuelve error. Si tiene correo, envia el codigo usando Mail::raw(). Si ocurre un error al enviar el correo, registra el problema con Log::error() y devuelve error.
+
+Modelo usado:
+- Credencial: busca la credencial y guarda codigo de recuperacion.
+- Persona: se consulta para obtener el correo asociado.
+
+Servicios usados:
+- Mail: envia el codigo al correo registrado.
+- Log: registra error si falla el envio del correo.
+
+Tablas consultadas:
+- credencial
+- persona
+
+Tablas afectadas:
+- credencial: actualiza codigo_recuperacion y fecha_expiracion_codigo.
+
+Resultado:
+Si el envio es correcto, el sistema informa que se envio un codigo al correo registrado. Si el usuario no esta autenticado, lo redirige a la pantalla para restablecer contrasena con el registro precargado.
+
+------------------------------------------------------------
+
+Opcion: Restablecer contrasena con codigo
+
+Vista: resources/views/password/recovery-reset.blade.php y resources/views/password/edit.blade.php
+La vista permite ingresar registro, codigo de recuperacion, nueva contrasena y confirmacion. Este flujo se usa para definir una nueva contrasena usando el codigo temporal.
+
+Controller: app/Http/Controllers/PasswordController.php
+Metodo principal: PasswordController::resetWithCode()
+
+Flujo:
+Los datos llegan a PasswordController::resetWithCode(). Este metodo valida registro, codigo_recuperacion, nueva_contrasena y confirmacion. Luego busca la Credencial por registro.
+
+Si no encuentra credencial o si el codigo ingresado no coincide con codigo_recuperacion, devuelve error. Si el codigo existe pero fecha_expiracion_codigo ya vencio, tambien devuelve error.
+
+Si el codigo es valido y sigue vigente, actualiza la credencial con la nueva contrasena usando Hash::make(). Tambien limpia codigo_recuperacion y fecha_expiracion_codigo, reinicia intentos_fallidos en 0 y limpia fecha_bloqueo.
+
+Modelo usado:
+- Credencial: busca la cuenta y actualiza contrasena, codigo, expiracion, intentos y bloqueo.
+
+Tablas afectadas:
+- credencial: actualiza contrasena, codigo_recuperacion, fecha_expiracion_codigo, intentos_fallidos y fecha_bloqueo.
+
+Resultado:
+La contrasena queda restablecida. Si el usuario estaba autenticado, vuelve a la pantalla de gestion de contrasena; si no estaba autenticado, vuelve al login con mensaje de exito.

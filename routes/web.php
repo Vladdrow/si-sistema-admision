@@ -5,11 +5,15 @@ use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\CredencialController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GrupoController;
+use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ParametroAdmisionController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PersonalAdministrativoController;
 use App\Http\Controllers\PlantillaHorarioController;
 use App\Http\Controllers\PostulanteController;
+use App\Http\Controllers\RegistroPostulanteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,7 +24,15 @@ Route::middleware('guest')->group(function (): void {
     // CU16 - Iniciar Sesion: muestra el formulario y valida registro/contrasena.
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+
+    // CU04 - Registrar Postulante: formulario publico de registro.
+    Route::get('/registro', [RegistroPostulanteController::class, 'create'])->name('registro.create');
+    Route::post('/registro', [RegistroPostulanteController::class, 'store'])->name('registro.store');
 });
+
+// CU04 - Libelula: pagina de pago simulada y callback de la pasarela.
+Route::get('/pago/libelula', [RegistroPostulanteController::class, 'showPago'])->name('pago.libelula');
+Route::post('/pago/libelula/callback', [RegistroPostulanteController::class, 'callback'])->name('pago.callback');
 
 // CU02 - Gestionar Contrasena: recuperacion publica mediante codigo enviado al correo registrado.
 Route::get('/recuperar-contrasena', [PasswordController::class, 'showRecoveryRequest'])->name('password.recovery.request');
@@ -38,9 +50,13 @@ Route::middleware(['auth', 'activity'])->group(function (): void {
     Route::get('/contrasena', [PasswordController::class, 'edit'])->name('password.edit');
     Route::patch('/contrasena', [PasswordController::class, 'update'])->name('password.update');
 
-    // CU18 - Consultar Bitacora: solo administrador, con filtros en el controlador.
+    // CU18 - Consultar Bitacora: solo administrador, con filtros y exportacion.
     Route::get('/bitacora', [BitacoraController::class, 'index'])
         ->name('bitacora.index')
+        ->middleware('admin');
+
+    Route::get('/bitacora/exportar', [BitacoraController::class, 'export'])
+        ->name('bitacora.export')
         ->middleware('admin');
 
     // CU01 - Gestionar Credenciales: restauracion de credenciales desactivadas.
@@ -61,26 +77,60 @@ Route::middleware(['auth', 'activity'])->group(function (): void {
         ->only(['index', 'store', 'update', 'destroy'])
         ->middleware('admin');
 
+    // CU11 - Consultar Horario: vista por rol (postulante, docente, admin).
+    Route::get('/horarios', [HorarioController::class, 'index'])->name('horarios.index');
+
     // CU10 - Gestionar Plantilla de Horario.
     Route::resource('plantillas', PlantillaHorarioController::class)
         ->parameters(['plantillas' => 'plantilla'])
         ->only(['index', 'store', 'update', 'destroy'])
         ->middleware('role:Administrador,PersonalAdministrativo');
 
-    // CU05 - Gestionar Docente.
+    // CU08 - Consultar Pagos: listar, filtrar y generar comprobantes.
+    Route::get('/pagos', [PagoController::class, 'index'])
+        ->name('pagos.index')
+        ->middleware('role:Administrador,PersonalAdministrativo');
+
+    Route::get('/pagos/{pago}/comprobante', [PagoController::class, 'comprobante'])
+        ->name('pagos.comprobante')
+        ->middleware('role:Administrador,PersonalAdministrativo');
+
+    // CU09 - Gestionar Grupo: crear, cerrar inscripciones, consultar, asignar horario.
+    Route::middleware('role:Administrador,PersonalAdministrativo')->group(function (): void {
+        Route::get('/grupos', [GrupoController::class, 'index'])->name('grupos.index');
+        Route::get('/grupos/{grupo}', [GrupoController::class, 'show'])->name('grupos.show');
+        Route::post('/grupos/crear', [GrupoController::class, 'crearGrupos'])->name('grupos.crear');
+        Route::post('/grupos/cerrar', [GrupoController::class, 'cerrarInscripciones'])->name('grupos.cerrar');
+        Route::get('/grupos/{grupo}/asignar-horario', [GrupoController::class, 'showAsignarHorario'])->name('grupos.asignar-horario');
+        Route::post('/grupos/{grupo}/asignar-horario', [GrupoController::class, 'asignarHorario'])->name('grupos.asignar-horario.store');
+        Route::get('/grupos/{grupo}/validar-asignacion', [GrupoController::class, 'validarAsignacion'])->name('grupos.validar-asignacion');
+    });
+
+    // CU05 - Gestionar Docente: baja logica y restauracion.
+    Route::patch('/docentes/{docente}/restaurar', [DocenteController::class, 'restore'])
+        ->name('docentes.restore')
+        ->middleware('role:Administrador,PersonalAdministrativo');
+
     Route::resource('docentes', DocenteController::class)
         ->parameters(['docentes' => 'docente'])
         ->only(['index', 'store', 'update', 'destroy'])
         ->middleware('role:Administrador,PersonalAdministrativo');
 
-    // CU06 - Gestionar Personal Administrativo.
+    // CU06 - Gestionar Personal Administrativo: baja logica y restauracion.
+    Route::patch('/personal/{personal}/restaurar', [PersonalAdministrativoController::class, 'restore'])
+        ->name('personal.restore')
+        ->middleware('admin');
+
     Route::resource('personal', PersonalAdministrativoController::class)
         ->parameters(['personal' => 'personal'])
         ->only(['index', 'store', 'update', 'destroy'])
         ->middleware('admin');
 
-    // CU03 - Gestionar Postulante: admin/personal solo modifica, elimina, busca y lista.
-    // El registro inicial queda fuera de este recurso porque lo realiza el propio postulante.
+    // CU03 - Gestionar Postulante: admin/personal solo modifica, elimina (baja logica), busca y lista.
+    Route::patch('/postulantes/{postulante}/restaurar', [PostulanteController::class, 'restore'])
+        ->name('postulantes.restore')
+        ->middleware('role:Administrador,PersonalAdministrativo');
+
     Route::resource('postulantes', PostulanteController::class)
         ->parameters(['postulantes' => 'postulante'])
         ->only(['index', 'update', 'destroy'])

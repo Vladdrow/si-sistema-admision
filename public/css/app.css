@@ -1036,6 +1036,46 @@ form.inline {
     margin-bottom: 0;
 }
 
+.parameter-rules-grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 16px;
+}
+
+.parameter-rule {
+    border: 1px solid #e1e8f2;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.parameter-rule .section-header {
+    margin-bottom: 10px;
+}
+
+.parameter-rule-list {
+    display: grid;
+    gap: 8px;
+}
+
+.parameter-rule-row {
+    align-items: center;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: minmax(0, 1fr) 104px;
+}
+
+.parameter-rule-row span {
+    color: #344054;
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 0;
+}
+
+.parameter-rule-row input {
+    text-align: right;
+}
+
 .template-workbench-footer {
     border-top: 1px solid #e5e7eb;
     justify-content: flex-end;
@@ -1166,7 +1206,7 @@ form.inline {
     border-radius: 8px;
     display: grid;
     gap: 10px;
-    grid-template-columns: minmax(220px, 1.6fr) .8fr .9fr .8fr 1fr auto;
+    grid-template-columns: minmax(220px, 1.5fr) .75fr .85fr .75fr 1fr .9fr auto;
     margin-top: 12px;
     padding: 12px;
 }
@@ -1426,6 +1466,10 @@ body.sidebar-open {
     }
 
     .template-workbench .app-modal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .parameter-rules-grid {
         grid-template-columns: 1fr;
     }
 

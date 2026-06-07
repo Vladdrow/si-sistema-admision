@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Gestionar Docentes')
-@section('subtitle', 'Registra, lista, modifica y elimina docentes desde una sola pantalla.')
+@section('subtitle', 'Registra, lista, modifica, desactiva y restaura docentes. Al registrar se genera automaticamente un numero de registro y la contrasena sera el CI.')
 
 @section('content')
     <div class="panel">
@@ -89,7 +89,7 @@
 
         <x-filter-panel :action="route('docentes.index')">
             <div>
-                <label for="buscar">Buscar por nombre, CI, correo, titulo o RDA</label>
+                <label for="buscar">Buscar por nombre, CI, correo, registro, titulo o RDA</label>
                 <input id="buscar" name="buscar" value="{{ $search }}" data-filter-field placeholder="Ej. Perez, 34567890 o RDA-001">
             </div>
             <div>
@@ -98,6 +98,14 @@
                     <option value="">Todos</option>
                     <option value="maestria" @selected($degree === 'maestria')>Con maestria</option>
                     <option value="diplomado" @selected($degree === 'diplomado')>Con diplomado</option>
+                </select>
+            </div>
+            <div>
+                <label for="estado">Estado</label>
+                <select id="estado" name="estado" data-filter-field>
+                    <option value="1" @selected($status === '1')>Activos</option>
+                    <option value="0" @selected($status === '0')>Inactivos</option>
+                    <option value="" @selected($status === '')>Todos</option>
                 </select>
             </div>
             <x-slot:actions>

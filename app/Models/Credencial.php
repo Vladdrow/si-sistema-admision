@@ -70,4 +70,13 @@ class Credencial extends Authenticatable
     {
         return $this->rol === 'PersonalAdministrativo';
     }
+
+    public static function generateUniqueRegistro(): string
+    {
+        do {
+            $registro = str_pad((string) random_int(0, 9999999999), 10, '0', STR_PAD_LEFT);
+        } while (self::where('registro', $registro)->exists());
+
+        return $registro;
+    }
 }

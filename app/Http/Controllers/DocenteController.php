@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Credencial;
 use App\Models\Docente;
 use App\Models\Persona;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 /**
  * CU05 - Gestionar Docente.
  *
- * Permite registrar, modificar, eliminar, buscar y listar docentes con sus
- * datos personales y profesionales, validando duplicados de CI, correo y RDA.
+ * Permite registrar, modificar, eliminar (baja logica), buscar y listar
+ * docentes con sus datos personales y profesionales. Al registrar genera
+ * automaticamente credenciales con registro de 10 digitos y contrasena = CI.
+ * La baja logica desactiva la credencial (estado=false), sin borrar datos.
  */
 class DocenteController extends Controller
 {
@@ -24,12 +28,17 @@ class DocenteController extends Controller
         $isAsync = $request->ajax() || $request->expectsJson();
         $search = $isAsync ? trim((string) $request->query('buscar')) : '';
         $degree = $isAsync ? (string) $request->query('grado', '') : '';
+        $status = $isAsync ? (string) $request->query('estado', '1') : '1';
 
         if (! in_array($degree, ['maestria', 'diplomado'], true)) {
             $degree = '';
         }
 
-        $docentes = Docente::with('persona')
+        if (! in_array($status, ['0', '1', ''], true)) {
+            $status = '1';
+        }
+
+        $docentes = Docente::with(['persona.credencial'])
             ->when($search !== '', function ($query) use ($search): void {
                 $query->where(function ($query) use ($search): void {
                     $query->where('codigo_rda', 'like', "%{$search}%")
@@ -40,6 +49,9 @@ class DocenteController extends Controller
                                 ->orWhere('apellido_paterno', 'like', "%{$search}%")
                                 ->orWhere('apellido_materno', 'like', "%{$search}%")
                                 ->orWhere('correo', 'like', "%{$search}%");
+                        })
+                        ->orWhereHas('persona.credencial', function ($credQuery) use ($search): void {
+                            $credQuery->where('registro', 'like', "%{$search}%");
                         });
                 });
             })
@@ -48,6 +60,18 @@ class DocenteController extends Controller
             })
             ->when($degree === 'diplomado', function ($query): void {
                 $query->where('tiene_diplomado', true);
+            })
+            ->when($status === '1', function ($query): void {
+                $query->whereHas('persona.credencial', function ($q): void {
+                    $q->where('estado', true);
+                });
+            })
+            ->when($status === '0', function ($query): void {
+                $query->where(function ($q): void {
+                    $q->whereHas('persona.credencial', function ($sq): void {
+                        $sq->where('estado', false);
+                    })->orWhereDoesntHave('persona.credencial');
+                });
             })
             ->join('persona', 'persona.id_persona', '=', 'docente.id_docente')
             ->orderBy('persona.apellido_paterno')
@@ -60,30 +84,51 @@ class DocenteController extends Controller
             return view('docentes.partials.table', compact('docentes'));
         }
 
-        return view('docentes.index', compact('docentes', 'search', 'degree'));
+        return view('docentes.index', compact('docentes', 'search', 'degree', 'status'));
     }
 
     /**
      * CU05 - Registrar docente con datos personales y profesionales.
+     *
+     * Genera automaticamente una credencial con registro de 10 digitos
+     * y contrasena igual al CI del docente.
      */
     public function store(Request $request): RedirectResponse|JsonResponse
     {
         $data = $this->validatedData($request);
 
-        $docente = DB::transaction(function () use ($data): Docente {
+        $result = DB::transaction(function () use ($data): array {
             $persona = Persona::create($this->personData($data));
 
-            return Docente::create($this->teacherData($data, $persona->id_persona));
+            $docente = Docente::create($this->teacherData($data, $persona->id_persona));
+
+            $registro = Credencial::generateUniqueRegistro();
+
+            Credencial::create([
+                'id_persona' => $persona->id_persona,
+                'registro' => $registro,
+                'contrasena' => Hash::make($data['ci']),
+                'rol' => 'Docente',
+                'estado' => true,
+                'intentos_fallidos' => 0,
+            ]);
+
+            return [
+                'docente' => $docente->load('persona'),
+                'registro' => $registro,
+            ];
         });
 
+        $message = "Docente registrado correctamente. Numero de registro: {$result['registro']}. Contrasena: su CI.";
         if ($request->expectsJson()) {
             return response()->json([
-                'message' => 'Docente registrado correctamente.',
-                'docente' => $this->payload($docente->load('persona')),
+                'message' => $message,
+                'docente' => $this->payload($result['docente']),
+                'registro' => $result['registro'],
             ], 201);
         }
 
-        return redirect()->route('docentes.index')->with('status', 'Docente registrado correctamente.');
+        return redirect()->route('docentes.index')->with('status', $message);
     }
 
     /**
@@ -110,20 +155,83 @@ class DocenteController extends Controller
     }
 
     /**
-     * CU05 - Eliminar docente junto con su registro base de persona.
+     * CU05 - Baja logica: desactiva la credencial del docente sin borrar datos.
      */
     public function destroy(Request $request, Docente $docente): RedirectResponse|JsonResponse
     {
-        DB::transaction(function () use ($docente): void {
-            $docente->load('persona');
-            $docente->persona?->delete();
-        });
+        $docente->load('persona.credencial');
 
-        if ($request->expectsJson()) {
-            return response()->json(['message' => 'Docente eliminado correctamente.']);
+        if (! $docente->persona?->credencial) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'El docente no tiene credencial asociada.',
+                    'errors' => ['docente' => ['El docente no tiene una credencial para desactivar.']],
+                ], 422);
+            }
+
+            return back()->withErrors(['docente' => 'El docente no tiene una credencial para desactivar.']);
         }
 
-        return redirect()->route('docentes.index')->with('status', 'Docente eliminado correctamente.');
+        if (! $docente->persona->credencial->estado) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'La credencial del docente ya esta inactiva.',
+                    'errors' => ['docente' => ['La credencial del docente ya ha sido desactivada.']],
+                ], 422);
+            }
+
+            return back()->withErrors(['docente' => 'La credencial del docente ya esta inactiva.']);
+        }
+
+        $docente->persona->credencial->update(['estado' => false]);
+
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Docente desactivado correctamente.']);
+        }
+
+        return redirect()->route('docentes.index')->with('status', 'Docente desactivado correctamente.');
+    }
+
+    /**
+     * CU05 - Restaurar la credencial de un docente inactivo.
+     */
+    public function restore(Request $request, Docente $docente): RedirectResponse|JsonResponse
+    {
+        $docente->load('persona.credencial');
+
+        if (! $docente->persona?->credencial) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'El docente no tiene credencial asociada.',
+                    'errors' => ['docente' => ['El docente no tiene una credencial para restaurar.']],
+                ], 422);
+            }
+
+            return back()->withErrors(['docente' => 'El docente no tiene una credencial para restaurar.']);
+        }
+
+        if ((bool) $docente->persona->credencial->estado) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'La credencial del docente ya esta activa.',
+                    'errors' => ['docente' => ['La credencial del docente ya esta activa.']],
+                ], 422);
+            }
+
+            return back()->withErrors(['docente' => 'La credencial del docente ya esta activa.']);
+        }
+
+        $docente->persona->credencial->update([
+            'estado' => true,
+            'intentos_fallidos' => 0,
+            'fecha_bloqueo' => null,
+        ]);
+
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Docente restaurado correctamente.']);
+        }
+
+        return redirect()->route('docentes.index')->with('status', 'Docente restaurado correctamente.');
     }
 
     private function validatedData(Request $request, ?Docente $docente = null): array
@@ -180,10 +288,12 @@ class DocenteController extends Controller
             'nombre' => $docente->persona?->nombre_completo,
             'ci' => $docente->persona?->ci,
             'correo' => $docente->persona?->correo,
+            'registro' => $docente->persona?->credencial?->registro,
             'titulo_profesional' => $docente->titulo_profesional,
             'codigo_rda' => $docente->codigo_rda,
             'tiene_maestria' => (bool) $docente->tiene_maestria,
             'tiene_diplomado' => (bool) $docente->tiene_diplomado,
+            'activo' => (bool) ($docente->persona?->credencial?->estado ?? false),
         ];
     }
 }

@@ -13,6 +13,8 @@
                 'dia' => $detalle->dia,
                 'hora_inicio' => substr((string) $detalle->hora_inicio, 0, 5),
                 'hora_fin' => substr((string) $detalle->hora_fin, 0, 5),
+                'id_materia' => $detalle->id_materia,
+                'materia_nombre' => $detalle->materia?->nombre,
                 'modalidad' => $detalle->modalidad,
             ])->values()->toJson();
         @endphp
@@ -31,7 +33,7 @@
             <td data-label="Resumen">
                 <span class="person-line">
                     @forelse ($plantilla->detalles->take(2) as $detalle)
-                        <span>{{ $days[$detalle->dia] ?? $detalle->dia }} {{ substr((string) $detalle->hora_inicio, 0, 5) }}-{{ substr((string) $detalle->hora_fin, 0, 5) }} {{ $detalle->modalidad }}</span>
+                        <span>{{ $days[$detalle->dia] ?? $detalle->dia }} {{ substr((string) $detalle->hora_inicio, 0, 5) }}-{{ substr((string) $detalle->hora_fin, 0, 5) }} {{ $detalle->materia?->nombre ?? 'Sin materia' }} / {{ $detalle->modalidad }}</span>
                     @empty
                         <span class="muted">Sin bloques definidos</span>
                     @endforelse

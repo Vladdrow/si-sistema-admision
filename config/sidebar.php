@@ -23,15 +23,15 @@ return [
             ['label' => 'Postulantes', 'route' => 'postulantes.index', 'active' => 'postulantes.*', 'icon' => 'user', 'admin' => true],
             ['label' => 'Docentes', 'route' => 'docentes.index', 'active' => 'docentes.*', 'icon' => 'teacher', 'admin' => true],
             ['label' => 'Personal administrativo', 'route' => 'personal.index', 'active' => 'personal.*', 'icon' => 'briefcase', 'admin' => true],
-            ['label' => 'Pagos', 'url' => '#', 'icon' => 'cash'],
+            ['label' => 'Pagos', 'route' => 'pagos.index', 'active' => 'pagos.*', 'icon' => 'cash', 'admin' => true],
         ],
     ],
     [
         'title' => 'Academico',
         'items' => [
-            ['label' => 'Grupos', 'url' => '#', 'icon' => 'users'],
+            ['label' => 'Grupos', 'route' => 'grupos.index', 'active' => 'grupos.*', 'icon' => 'users', 'admin' => true],
             ['label' => 'Plantillas de horario', 'route' => 'plantillas.index', 'active' => 'plantillas.*', 'icon' => 'calendar', 'admin' => true],
-            ['label' => 'Horarios', 'url' => '#', 'icon' => 'clock'],
+            ['label' => 'Horarios', 'route' => 'horarios.index', 'active' => 'horarios.*', 'icon' => 'clock', 'admin' => true],
             ['label' => 'Notas', 'url' => '#', 'icon' => 'grade'],
             ['label' => 'Admision', 'url' => '#', 'icon' => 'check'],
         ],

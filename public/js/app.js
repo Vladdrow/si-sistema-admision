@@ -171,14 +171,15 @@ const setupCredentials = () => {
         clearMessage(modalMessage);
         form.reset();
         fields.id.value = '';
-        fields.registro.disabled = false;
-        fields.rol.disabled = false;
+        fields.registro.disabled = true;
+        fields.registro.placeholder = 'Se genera automaticamente';
+        fields.rol.disabled = true;
         fields.persona.disabled = false;
         fields.persona.required = true;
         fields.personField.hidden = false;
-        fields.password.required = true;
-        fields.passwordConfirmation.required = true;
-        fields.password.placeholder = 'Obligatoria al registrar';
+        fields.password.required = false;
+        fields.passwordConfirmation.required = false;
+        fields.password.placeholder = 'Dejar vacio para usar el CI';
         fields.title.textContent = 'Registrar credencial';
         fields.subtitle.textContent = 'Seleccione una persona sin credencial o modifique una existente desde la tabla.';
         fields.ci.value = '';
@@ -309,16 +310,21 @@ const setupCredentials = () => {
             fields.nombre.value = '';
             fields.correo.value = '';
             fields.rol.value = 'Postulante';
-            fields.rol.disabled = false;
+            fields.rol.disabled = true;
+            fields.password.value = '';
+            fields.passwordConfirmation.value = '';
             return;
         }
 
-        fields.registro.value = option.dataset.registro || '';
+        fields.registro.value = '';
+        fields.registro.placeholder = 'Se genera automaticamente';
         fields.ci.value = option.dataset.ci || '';
         fields.nombre.value = option.dataset.nombre || '';
         fields.correo.value = option.dataset.correo || '';
         fields.rol.value = option.dataset.rol || 'Postulante';
         fields.rol.disabled = true;
+        fields.password.value = option.dataset.ci || '';
+        fields.passwordConfirmation.value = option.dataset.ci || '';
     });
 
     form.addEventListener('submit', async (event) => {
@@ -492,7 +498,37 @@ const setupTeachers = () => {
             return;
         }
 
-        if (!confirm(`Eliminar al docente ${row.dataset.nombres || row.dataset.ci}?`)) {
+        if (button.dataset.teacherAction === 'restore') {
+            clearMessage(pageMessage);
+            button.disabled = true;
+
+            try {
+                const response = await fetch(row.dataset.restoreUrl, {
+                    method: 'PATCH',
+                    headers: {
+                        Accept: 'application/json',
+                        'X-CSRF-TOKEN': csrfToken,
+                    },
+                });
+
+                if (!response.ok) {
+                    showMessage(pageMessage, `${await readErrors(response)} Ha errado el proceso.`, 'error');
+                    return;
+                }
+
+                const payload = await response.json();
+                await resultsContainer.reloadResults?.();
+                showMessage(pageMessage, `${payload.message || 'Docente restaurado.'} Se ha completado el proceso.`);
+            } catch (error) {
+                showMessage(pageMessage, 'No se pudo conectar con el servidor. Ha errado el proceso.', 'error');
+            } finally {
+                button.disabled = false;
+            }
+
+            return;
+        }
+
+        if (!confirm(`Desactivar al docente ${row.dataset.nombres || row.dataset.ci}?`)) {
             return;
         }
 
@@ -515,7 +551,7 @@ const setupTeachers = () => {
 
             const payload = await response.json();
             await resultsContainer.reloadResults?.();
-            showMessage(pageMessage, `${payload.message || 'Docente eliminado.'} Se ha completado el proceso.`);
+            showMessage(pageMessage, `${payload.message || 'Docente desactivado.'} Se ha completado el proceso.`);
         } catch (error) {
             showMessage(pageMessage, 'No se pudo conectar con el servidor. Ha errado el proceso.', 'error');
         } finally {
@@ -557,7 +593,7 @@ const setupTeachers = () => {
         }
     });
 
-    closeEditor();
+    closeModal();
 };
 
 const setupPersonCrud = () => {
@@ -684,7 +720,39 @@ const setupPersonCrud = () => {
             return;
         }
 
-        if (!confirm(`Eliminar ${labels[0]} ${row.dataset.nombres || row.dataset.ci}?`)) {
+        if (button.dataset.personAction === 'restore') {
+            clearMessage(pageMessage);
+            button.disabled = true;
+
+            try {
+                const response = await fetch(row.dataset.restoreUrl, {
+                    method: 'PATCH',
+                    headers: {
+                        Accept: 'application/json',
+                        'X-CSRF-TOKEN': csrfToken,
+                    },
+                });
+
+                if (!response.ok) {
+                    showMessage(pageMessage, `${await readErrors(response)} Ha errado el proceso.`, 'error');
+                    return;
+                }
+
+                const result = await response.json();
+                await resultsContainer.reloadResults?.();
+                showMessage(pageMessage, `${result.message || 'Registro restaurado.'} Se ha completado el proceso.`);
+            } catch (error) {
+                showMessage(pageMessage, 'No se pudo conectar con el servidor. Ha errado el proceso.', 'error');
+            } finally {
+                button.disabled = false;
+            }
+
+            return;
+        }
+
+        const actionVerb = kind === 'staff' ? 'Desactivar' : 'Eliminar';
+
+        if (!confirm(`${actionVerb} ${labels[0]} ${row.dataset.nombres || row.dataset.ci}?`)) {
             return;
         }
 
@@ -772,6 +840,8 @@ const setupSimpleCrud = () => {
     const saveButton = document.getElementById('save-simple');
     const title = document.getElementById('simple-modal-title');
     const fields = Object.fromEntries([...form.querySelectorAll('[data-simple-field]')].map((field) => [field.dataset.simpleField, field]));
+    const cupoInputs = [...form.querySelectorAll('[data-cupo-input]')];
+    const ponderacionInputs = [...form.querySelectorAll('[data-ponderacion-input]')];
     let activeRow = null;
 
     const setValue = (name, value = '') => {
@@ -780,12 +850,69 @@ const setupSimpleCrud = () => {
         }
     };
 
-    const openModal = (row = null) => {
-        activeRow = row;
+    const resetAdmissionRules = () => {
+        cupoInputs.forEach((input) => {
+            input.value = input.dataset.defaultValue || '0';
+        });
+        ponderacionInputs.forEach((input) => {
+            input.value = input.dataset.defaultValue || '0';
+        });
+    };
+
+    const fillAdmissionRules = (row = null) => {
+        resetAdmissionRules();
+
+        if (!row) {
+            return;
+        }
+
+        const cupos = JSON.parse(row.dataset.cupos || '[]');
+        const ponderaciones = JSON.parse(row.dataset.ponderaciones || '[]');
+
+        cupoInputs.forEach((input) => {
+            const cupo = cupos.find((item) => Number(item.id_carrera) === Number(input.dataset.careerId));
+            input.value = cupo?.cantidad_cupos ?? input.dataset.defaultValue ?? '0';
+        });
+
+        ponderacionInputs.forEach((input) => {
+            const ponderacion = ponderaciones.find((item) => Number(item.numero_examen) === Number(input.dataset.examNumber));
+            input.value = ponderacion?.ponderacion ?? input.dataset.defaultValue ?? '0';
+        });
+    };
+
+    const admissionRulesPayload = () => ({
+        cupos: cupoInputs.map((input) => ({
+            id_carrera: input.dataset.careerId,
+            cantidad_cupos: input.value,
+        })),
+        ponderaciones: ponderacionInputs.map((input) => ({
+            numero_examen: input.dataset.examNumber,
+            ponderacion: input.value,
+        })),
+    });
+
+    const openModal = (row = null, readOnly = false) => {
+        activeRow = readOnly ? null : row;
         clearMessage(modalMessage);
         form.reset();
-        title.textContent = row ? 'Modificar parametro' : 'Nuevo parametro';
+        resetAdmissionRules();
+
+        if (readOnly) {
+            title.textContent = 'Consultar parametro';
+            form.querySelectorAll('input, select, textarea, button[type="submit"]').forEach((el) => {
+                if (el !== saveButton) {
+                    el.disabled = true;
+                }
+            });
+            saveButton.hidden = true;
+        } else {
+            title.textContent = row ? 'Modificar parametro' : 'Nuevo parametro';
+            form.querySelectorAll('input, select, textarea').forEach((el) => { el.disabled = false; });
+            saveButton.hidden = false;
+        }
+
         Object.keys(fields).forEach((name) => setValue(name, row?.dataset[name] || ''));
+        fillAdmissionRules(row);
         modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
         fields.semestreNombre?.focus();
     };
@@ -794,11 +921,17 @@ const setupSimpleCrud = () => {
         activeRow = null;
         clearMessage(modalMessage);
         form.reset();
+        form.querySelectorAll('input, select, textarea').forEach((el) => { el.disabled = false; });
+        saveButton.hidden = false;
         title.textContent = 'Nuevo parametro';
+        resetAdmissionRules();
         fields.semestreNombre?.focus();
     };
 
-    const payload = () => Object.fromEntries([...form.elements].filter((field) => field.name).map((field) => [field.name, field.value]));
+    const payload = () => ({
+        ...Object.fromEntries([...form.elements].filter((field) => field.name).map((field) => [field.name, field.value])),
+        ...admissionRulesPayload(),
+    });
 
     document.querySelectorAll('[data-simple-close]').forEach((button) => button.addEventListener('click', closeModal));
 
@@ -810,6 +943,11 @@ const setupSimpleCrud = () => {
         }
 
         const row = button.closest('tr');
+
+        if (button.dataset.simpleAction === 'view') {
+            openModal(row, true);
+            return;
+        }
 
         if (button.dataset.simpleAction === 'edit') {
             openModal(row);
@@ -907,6 +1045,7 @@ const setupScheduleTemplates = () => {
         hora_inicio: document.querySelector('[data-template-input="hora_inicio"]'),
         duracion: document.querySelector('[data-template-input="duracion"]'),
         duracion_custom: document.querySelector('[data-template-input="duracion_custom"]'),
+        id_materia: document.querySelector('[data-template-input="id_materia"]'),
         modalidad: document.querySelector('[data-template-input="modalidad"]'),
     };
     let activeRow = null;
@@ -969,8 +1108,9 @@ const setupScheduleTemplates = () => {
     const buildDetailFromComposer = (day = selectedDays()[0]) => {
         const start = detailInputs.hora_inicio.value;
         const duration = currentDuration();
+        const subjectOption = detailInputs.id_materia?.selectedOptions?.[0];
 
-        if (!day || !start || duration <= 0) {
+        if (!day || !start || duration <= 0 || !detailInputs.id_materia?.value) {
             return null;
         }
 
@@ -978,6 +1118,8 @@ const setupScheduleTemplates = () => {
             dia: String(day),
             hora_inicio: start,
             hora_fin: timeFromMinutes(minutesFromTime(start) + duration),
+            id_materia: detailInputs.id_materia.value,
+            materia_nombre: subjectOption?.textContent?.trim() || '',
             modalidad: detailInputs.modalidad.value,
         };
     };
@@ -1071,11 +1213,12 @@ const setupScheduleTemplates = () => {
             return;
         }
 
-        detailPreview.innerHTML = `<span class="schedule-ok">Se agregara ${candidate.hora_inicio} - ${candidate.hora_fin} en ${formatDays(days)}.</span>`;
+        detailPreview.innerHTML = `<span class="schedule-ok">Se agregara ${candidate.materia_nombre} ${candidate.hora_inicio} - ${candidate.hora_fin} en ${formatDays(days)}.</span>`;
     };
 
     const renderPlanner = () => {
         details.innerHTML = '';
+        const materiaColors = ['#dbeafe', '#dcfce7', '#fef3c7', '#fce7f3', '#e0e7ff', '#ccfbf1', '#f5f5f4', '#ffedd5'];
 
         dayOptions.forEach(([day, label]) => {
             const column = document.createElement('div');
@@ -1097,9 +1240,12 @@ const setupScheduleTemplates = () => {
             dayDetails.forEach((detail) => {
                 const block = document.createElement('div');
                 block.className = 'schedule-block';
+                const color = detail.id_materia ? materiaColors[Number(detail.id_materia) % materiaColors.length] : '';
+                block.style.borderLeft = color ? `4px solid ${color}` : '';
+                block.style.background = color || '';
                 block.innerHTML = `
                     <strong>${detail.hora_inicio} - ${detail.hora_fin}</strong>
-                    <span>${detail.modalidad}</span>
+                    <span>${detail.materia_nombre || 'Sin materia'} / ${detail.modalidad}</span>
                     <button class="danger" type="button" data-remove-detail="${detail.index}">Quitar</button>
                 `;
                 column.appendChild(block);
@@ -1121,7 +1267,7 @@ const setupScheduleTemplates = () => {
         }
 
         if (!newDetails.length) {
-            showMessage(modalMessage, 'Complete la hora de inicio y la duracion del bloque.', 'error');
+            showMessage(modalMessage, 'Complete la hora de inicio, duracion y materia del bloque.', 'error');
             return;
         }
 
@@ -1341,4 +1487,85 @@ document.addEventListener('DOMContentLoaded', () => {
     setupPersonCrud();
     setupSimpleCrud();
     setupScheduleTemplates();
+    setupExportButtons();
+    setupPagos();
 });
+
+const setupPagos = () => {
+    const detailPanel = document.getElementById('pago-detail-workspace');
+    const resultsContainer = document.querySelector('[data-results]');
+
+    if (!detailPanel || !resultsContainer) {
+        return;
+    }
+
+    const fields = {
+        codigoOrden: document.getElementById('detail-codigo-orden'),
+        monto: document.getElementById('detail-monto'),
+        fechaPago: document.getElementById('detail-fecha-pago'),
+        estado: document.getElementById('detail-estado'),
+        numeroTransaccion: document.getElementById('detail-numero-transaccion'),
+        metodoPago: document.getElementById('detail-metodo-pago'),
+        mensajeError: document.getElementById('detail-mensaje-error'),
+        postulante: document.getElementById('detail-postulante'),
+        postulanteCi: document.getElementById('detail-postulante-ci'),
+        postulanteRegistro: document.getElementById('detail-postulante-registro'),
+        postulanteLibreta: document.getElementById('detail-postulante-libreta'),
+        postulanteTitulo: document.getElementById('detail-postulante-titulo'),
+    };
+
+    const closeDetail = () => {
+        detailPanel.hidden = true;
+    };
+
+    document.querySelector('[data-pago-detail-close]')?.addEventListener('click', closeDetail);
+
+    resultsContainer.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-pago-action="detail"]');
+
+        if (!button) {
+            return;
+        }
+
+        const row = button.closest('.pago-row');
+
+        Object.entries(fields).forEach(([key, field]) => {
+            if (field && row) {
+                field.value = row.dataset[key] || '';
+            }
+        });
+
+        detailPanel.hidden = false;
+        detailPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+};
+
+const setupExportButtons = () => {
+    document.querySelectorAll('[data-export]').forEach((button) => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const panel = button.closest('.panel');
+            const format = button.dataset.export;
+            const baseUrl = button.href.split('?')[0];
+            const url = new URL(baseUrl, window.location.origin);
+            url.searchParams.set('formato', format);
+
+            if (panel) {
+                panel.querySelectorAll('[data-filter-field]').forEach((field) => {
+                    const value = field.value?.trim?.() ?? field.value;
+
+                    if (value !== '') {
+                        url.searchParams.set(field.name, value);
+                    }
+                });
+            }
+
+            if (format === 'pdf') {
+                window.open(url.toString(), '_blank');
+            } else {
+                window.location.href = url.toString();
+            }
+        });
+    });
+};

@@ -15,9 +15,10 @@ use Illuminate\View\View;
 /**
  * CU03 - Gestionar Postulante.
  *
- * Implementa busqueda/listado, modificacion y eliminacion administrativa de
- * postulantes ya registrados. La ruta actual no expone store porque el registro
- * inicial pertenece al flujo propio del postulante, no a la gestion interna.
+ * Implementa busqueda/listado, modificacion y eliminacion (baja logica)
+ * de postulantes ya registrados. La ruta admin no expone store porque el
+ * registro inicial pertenece al flujo del postulante.
+ * La baja logica desactiva la credencial (estado=false), sin borrar datos.
  */
 class PostulanteController extends Controller
 {
@@ -25,20 +26,25 @@ class PostulanteController extends Controller
     {
         $isAsync = $request->ajax() || $request->expectsJson();
         $search = $isAsync ? trim((string) $request->query('buscar')) : '';
-        $status = $isAsync ? (string) $request->query('estado', '') : '';
+        $admisionStatus = $isAsync ? (string) $request->query('estado', '') : '';
         $career = $isAsync ? (string) $request->query('carrera', '') : '';
+        $acceso = $isAsync ? (string) $request->query('acceso', '1') : '1';
         $statuses = ['Pendiente', 'Admitido', 'No Admitido'];
         $careers = Carrera::orderBy('nombre')->get();
 
-        if (! in_array($status, $statuses, true)) {
-            $status = '';
+        if (! in_array($admisionStatus, $statuses, true)) {
+            $admisionStatus = '';
         }
 
         if ($career !== '' && ! $careers->contains('id_carrera', (int) $career)) {
             $career = '';
         }
 
-        $postulantes = Postulante::with(['persona', 'carreraPrimera', 'carreraSegunda', 'carreraAdmitido'])
+        if (! in_array($acceso, ['0', '1', ''], true)) {
+            $acceso = '1';
+        }
+
+        $postulantes = Postulante::with(['persona.credencial', 'carreraPrimera', 'carreraSegunda', 'carreraAdmitido'])
             ->when($search !== '', function ($query) use ($search): void {
                 $query->where(function ($query) use ($search): void {
                     $query->where('codigo_libreta', 'like', "%{$search}%")
@@ -51,15 +57,30 @@ class PostulanteController extends Controller
                                 ->orWhere('apellido_paterno', 'like', "%{$search}%")
                                 ->orWhere('apellido_materno', 'like', "%{$search}%")
                                 ->orWhere('correo', 'like', "%{$search}%");
+                        })
+                        ->orWhereHas('persona.credencial', function ($credQuery) use ($search): void {
+                            $credQuery->where('registro', 'like', "%{$search}%");
                         });
                 });
             })
-            ->when($status !== '', fn ($query) => $query->where('estado_admision', $status))
+            ->when($admisionStatus !== '', fn ($query) => $query->where('estado_admision', $admisionStatus))
             ->when($career !== '', function ($query) use ($career): void {
                 $query->where(function ($query) use ($career): void {
                     $query->where('id_carrera_primera_opc', $career)
                         ->orWhere('id_carrera_segunda_opc', $career)
                         ->orWhere('id_carrera_admitido', $career);
+                });
+            })
+            ->when($acceso === '1', function ($query): void {
+                $query->whereHas('persona.credencial', function ($q): void {
+                    $q->where('estado', true);
+                });
+            })
+            ->when($acceso === '0', function ($query): void {
+                $query->where(function ($q): void {
+                    $q->whereHas('persona.credencial', function ($sq): void {
+                        $sq->where('estado', false);
+                    })->orWhereDoesntHave('persona.credencial');
                 });
             })
             ->join('persona', 'persona.id_persona', '=', 'postulante.id_postulante')
@@ -73,30 +94,7 @@ class PostulanteController extends Controller
             return view('postulantes.partials.table', compact('postulantes'));
         }
 
-        return view('postulantes.index', compact('postulantes', 'search', 'status', 'career', 'statuses', 'careers'));
-    }
-
-    /**
-     * Flujo auxiliar no expuesto en rutas admin.
-     *
-     * Se conserva para reutilizacion futura, pero CU03 solo permite modificar,
-     * eliminar, buscar y listar postulantes desde administracion.
-     */
-    public function store(Request $request): RedirectResponse|JsonResponse
-    {
-        $data = $this->validatedData($request);
-
-        $applicant = DB::transaction(function () use ($data): Postulante {
-            $persona = Persona::create($this->personData($data));
-
-            return Postulante::create($this->applicantData($data, $persona->id_persona));
-        });
-
-        if ($request->expectsJson()) {
-            return response()->json(['message' => 'Postulante registrado correctamente.', 'postulante' => $applicant->load('persona')], 201);
-        }
-
-        return redirect()->route('postulantes.index')->with('status', 'Postulante registrado correctamente.');
+        return view('postulantes.index', compact('postulantes', 'search', 'admisionStatus', 'career', 'acceso', 'statuses', 'careers'));
     }
 
     /**
@@ -120,20 +118,83 @@ class PostulanteController extends Controller
     }
 
     /**
-     * CU03 - Eliminar el postulante desde la gestion administrativa.
+     * CU03 - Baja logica: desactiva la credencial del postulante sin borrar datos.
      */
     public function destroy(Request $request, Postulante $postulante): RedirectResponse|JsonResponse
     {
-        DB::transaction(function () use ($postulante): void {
-            $postulante->load('persona');
-            $postulante->persona?->delete();
-        });
+        $postulante->load('persona.credencial');
 
-        if ($request->expectsJson()) {
-            return response()->json(['message' => 'Postulante eliminado correctamente.']);
+        if (! $postulante->persona?->credencial) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'El postulante no tiene credencial asociada.',
+                    'errors' => ['postulante' => ['El postulante no tiene una credencial para desactivar.']],
+                ], 422);
+            }
+
+            return back()->withErrors(['postulante' => 'El postulante no tiene una credencial para desactivar.']);
         }
 
-        return redirect()->route('postulantes.index')->with('status', 'Postulante eliminado correctamente.');
+        if (! $postulante->persona->credencial->estado) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'La credencial del postulante ya esta inactiva.',
+                    'errors' => ['postulante' => ['La credencial del postulante ya ha sido desactivada.']],
+                ], 422);
+            }
+
+            return back()->withErrors(['postulante' => 'La credencial del postulante ya esta inactiva.']);
+        }
+
+        $postulante->persona->credencial->update(['estado' => false]);
+
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Postulante desactivado correctamente.']);
+        }
+
+        return redirect()->route('postulantes.index')->with('status', 'Postulante desactivado correctamente.');
+    }
+
+    /**
+     * CU03 - Restaurar la credencial de un postulante inactivo.
+     */
+    public function restore(Request $request, Postulante $postulante): RedirectResponse|JsonResponse
+    {
+        $postulante->load('persona.credencial');
+
+        if (! $postulante->persona?->credencial) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'El postulante no tiene credencial asociada.',
+                    'errors' => ['postulante' => ['El postulante no tiene una credencial para restaurar.']],
+                ], 422);
+            }
+
+            return back()->withErrors(['postulante' => 'El postulante no tiene una credencial para restaurar.']);
+        }
+
+        if ((bool) $postulante->persona->credencial->estado) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'La credencial del postulante ya esta activa.',
+                    'errors' => ['postulante' => ['La credencial del postulante ya esta activa.']],
+                ], 422);
+            }
+
+            return back()->withErrors(['postulante' => 'La credencial del postulante ya esta activa.']);
+        }
+
+        $postulante->persona->credencial->update([
+            'estado' => true,
+            'intentos_fallidos' => 0,
+            'fecha_bloqueo' => null,
+        ]);
+
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Postulante restaurado correctamente.']);
+        }
+
+        return redirect()->route('postulantes.index')->with('status', 'Postulante restaurado correctamente.');
     }
 
     private function validatedData(Request $request, ?Postulante $postulante = null): array

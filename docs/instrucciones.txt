@@ -1,0 +1,97 @@
+INSTRUCCIONES PARA CONTINUAR LA DOCUMENTACION DEL CICLO 1
+
+Archivo principal:
+- Escribir todo en docs/ciclo1.txt.
+- No crear otro archivo para los casos de uso.
+- No borrar redacciones anteriores salvo que el usuario lo pida.
+- Agregar cada nuevo caso de uso debajo del contenido existente.
+
+Estilo de redaccion aprobado:
+- Redactar por caso de uso y, dentro de cada caso, por opcion del CU.
+- Ejemplo de opciones: Buscar/Listar, Registrar, Modificar, Eliminar, Consultar, Restaurar, etc.
+- Usar lenguaje entre tecnico y natural.
+- No escribir demasiado sobre rutas HTTP; mencionar rutas solo si son necesarias.
+- Enfocarse en el flujo real del codigo.
+- No inventar pasos que no existan en el codigo.
+- No separar JavaScript como capa independiente; tratarlo como parte de la vista/interaccion de pantalla.
+- Tratar las vistas relacionadas como una sola capa de vista.
+- Cuando se mencione un metodo, indicar a que controller, servicio o modelo pertenece.
+  Ejemplo correcto: DocenteController::validatedData().
+  Ejemplo incompleto: validatedData().
+
+Estructura recomendada:
+
+============================================================
+CUXX - Nombre del Caso de Uso
+============================================================
+
+Redaccion por opciones del CUXX:
+
+Opcion: Nombre de la opcion
+
+Vista: ruta/de/la/vista.blade.php y/o vista parcial relacionada
+Explicar que muestra la vista, que datos ingresa o selecciona el usuario y que accion inicia.
+
+Controller: app/Http/Controllers/NombreController.php
+Metodo principal: NombreController::metodo()
+
+Flujo:
+Explicar en parrafos cortos que datos llegan al controller, que validaciones se hacen, que metodos auxiliares se llaman y que modelos se usan.
+
+Si el metodo llama a otro metodo del mismo controller:
+- Escribir NombreController::metodoAuxiliar().
+
+Si el metodo llama a un servicio:
+- Escribir Servicio::metodo().
+
+Si el metodo llama a un modelo:
+- Escribir Modelo::metodo().
+
+Modelos usados:
+- Modelo1: explicar para que se usa.
+- Modelo2: explicar para que se usa.
+
+Tablas afectadas:
+- tabla1: explicar si inserta, actualiza, consulta o desactiva.
+- tabla2: explicar si inserta, actualiza, consulta o desactiva.
+
+Tablas no modificadas:
+- tablaX: mencionar solo si es importante aclarar que no se borra o no se actualiza.
+
+Resultado:
+Explicar como termina la opcion: mensaje, redireccion, recarga de tabla, registro guardado, baja logica, etc.
+
+Reglas importantes:
+- Si el codigo hace baja logica, escribir "baja logica" y explicar que no borra registros.
+- Si una opcion dice "Eliminar" en el documento pero el codigo solo desactiva, aclararlo.
+- Si se guarda en varias tablas, explicar el orden.
+- Si hay transaccion DB::transaction(), mencionarlo.
+- Si se validan duplicados, indicar contra que tabla se valida.
+- Si se genera una credencial, indicar rol, estado, registro y contrasena inicial si el codigo lo muestra.
+- Si se registra bitacora, indicar tabla bitacora y servicio usado.
+
+Formato de ejemplo breve:
+
+Opcion: Registrar docente
+
+Vista: resources/views/docentes/index.blade.php y resources/views/docentes/partials/table.blade.php
+La vista recibe los datos personales y profesionales del docente.
+
+Controller: app/Http/Controllers/DocenteController.php
+Metodo principal: DocenteController::store()
+
+Flujo:
+Los datos llegan a DocenteController::store(). Primero se llama a DocenteController::validatedData() para validar campos obligatorios y duplicados. Luego se abre una transaccion. Dentro de la transaccion se crea Persona con DocenteController::personData(), luego Docente con DocenteController::teacherData(), y finalmente Credencial con Credencial::generateUniqueRegistro().
+
+Modelos usados:
+- Persona: guarda datos personales.
+- Docente: guarda datos profesionales.
+- Credencial: guarda acceso al sistema.
+
+Tablas afectadas:
+- persona: inserta.
+- docente: inserta.
+- credencial: inserta.
+
+Resultado:
+Se registra el docente, se genera su credencial y la vista muestra el mensaje con el numero de registro.

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrera;
+use App\Models\CarreraSemestre;
+use App\Models\Examen;
 use App\Models\ParametroAdmision;
 use App\Models\Semestre;
 use Illuminate\Http\JsonResponse;
@@ -9,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 /**
@@ -25,12 +29,13 @@ class ParametroAdmisionController extends Controller
         $search = $isAsync ? trim((string) $request->query('buscar')) : '';
         $semester = $isAsync ? (string) $request->query('semestre', '') : '';
         $semestres = Semestre::orderBy('nombre')->get();
+        $carreras = Carrera::orderBy('nombre')->get();
 
         if ($semester !== '' && ! $semestres->contains('id_semestre', (int) $semester)) {
             $semester = '';
         }
 
-        $parametros = ParametroAdmision::with('semestre')
+        $parametros = ParametroAdmision::with(['semestre', 'cuposCarrera.carrera', 'examenes'])
             ->when($search !== '', function ($query) use ($search): void {
                 $query->whereHas('semestre', fn ($semesterQuery) => $semesterQuery->where('nombre', 'like', "%{$search}%"));
             })
@@ -45,7 +50,7 @@ class ParametroAdmisionController extends Controller
             return view('parametros.partials.table', compact('parametros'));
         }
 
-        return view('parametros.index', compact('parametros', 'search', 'semester', 'semestres'));
+        return view('parametros.index', compact('parametros', 'search', 'semester', 'semestres', 'carreras'));
     }
 
     /**
@@ -60,14 +65,17 @@ class ParametroAdmisionController extends Controller
                 'nombre' => $data['semestre_nombre'],
             ]);
 
-            unset($data['semestre_nombre']);
-            $data['id_semestre'] = $semestre->id_semestre;
+            $coreData = $this->parameterData($data);
+            $coreData['id_semestre'] = $semestre->id_semestre;
 
-            return ParametroAdmision::create($data);
+            $parametro = ParametroAdmision::create($coreData);
+            $this->syncAdmissionRules($semestre->id_semestre, $data['cupos'], $data['ponderaciones']);
+
+            return $parametro;
         });
 
         if ($request->expectsJson()) {
-            return response()->json(['message' => 'Parametro configurado correctamente.', 'parametro' => $parametro->load('semestre')], 201);
+            return response()->json(['message' => 'Parametro configurado correctamente.', 'parametro' => $parametro->load(['semestre', 'cuposCarrera', 'examenes'])], 201);
         }
 
         return redirect()->route('parametros.index')->with('status', 'Parametro configurado correctamente.');
@@ -75,26 +83,45 @@ class ParametroAdmisionController extends Controller
 
     /**
      * CU07 - Modificar parametros existentes validando rangos y semestre unico.
+     *
+     * Si la fecha actual ya supero el inicio de inscripciones, no se permite
+     * modificar el monto del pago. Los demas parametros si pueden modificarse.
      */
     public function update(Request $request, ParametroAdmision $parametro): RedirectResponse|JsonResponse
     {
         $data = $this->validatedData($request, $parametro);
+
+        $montoBloqueado = $parametro->fecha_inicio_inscripcion
+            && now()->gt($parametro->fecha_inicio_inscripcion)
+            && isset($data['monto_pago'])
+            && (float) $data['monto_pago'] !== (float) $parametro->monto_pago;
+
+        if ($montoBloqueado) {
+            $data['monto_pago'] = $parametro->monto_pago;
+        }
 
         DB::transaction(function () use ($data, $parametro): void {
             $parametro->semestre?->update([
                 'nombre' => $data['semestre_nombre'],
             ]);
 
-            unset($data['semestre_nombre']);
-            $data['id_semestre'] = $parametro->id_semestre;
-            $parametro->update($data);
+            $coreData = $this->parameterData($data);
+            $coreData['id_semestre'] = $parametro->id_semestre;
+            $parametro->update($coreData);
+            $this->syncAdmissionRules($parametro->id_semestre, $data['cupos'], $data['ponderaciones']);
         });
 
-        if ($request->expectsJson()) {
-            return response()->json(['message' => 'Parametro actualizado correctamente.']);
+        $message = 'Parametro actualizado correctamente.';
+
+        if ($montoBloqueado) {
+            $message .= ' El monto del pago no se modifico porque las inscripciones ya iniciaron.';
         }
 
-        return redirect()->route('parametros.index')->with('status', 'Parametro actualizado correctamente.');
+        if ($request->expectsJson()) {
+            return response()->json(['message' => $message]);
+        }
+
+        return redirect()->route('parametros.index')->with('status', $message);
     }
 
     /**
@@ -133,6 +160,82 @@ class ParametroAdmisionController extends Controller
                 'max:20',
                 Rule::unique('semestre', 'nombre')->ignore($parametro?->id_semestre, 'id_semestre'),
             ],
+            'cupos' => ['required', 'array'],
+            'cupos.*.id_carrera' => ['required', 'integer', 'distinct', Rule::exists('carrera', 'id_carrera')],
+            'cupos.*.cantidad_cupos' => ['required', 'integer', 'min:0'],
+            'ponderaciones' => ['required', 'array', 'size:3'],
+            'ponderaciones.*.numero_examen' => ['required', 'integer', 'between:1,3', 'distinct'],
+            'ponderaciones.*.ponderacion' => ['required', 'numeric', 'between:0,100'],
         ]);
+
+        $careerIds = Carrera::query()->pluck('id_carrera')->sort()->values()->all();
+        $submittedCareerIds = collect($data['cupos'])
+            ->pluck('id_carrera')
+            ->map(fn ($id) => (int) $id)
+            ->sort()
+            ->values()
+            ->all();
+
+        if ($careerIds !== $submittedCareerIds) {
+            throw ValidationException::withMessages([
+                'cupos' => 'Debe configurar cupos para todas las carreras registradas.',
+            ]);
+        }
+
+        $totalPonderacion = collect($data['ponderaciones'])->sum(fn ($item) => (float) $item['ponderacion']);
+
+        if (round($totalPonderacion, 2) !== 100.00) {
+            throw ValidationException::withMessages([
+                'ponderaciones' => 'La suma de las ponderaciones debe ser 100%.',
+            ]);
+        }
+
+        return $data;
+    }
+
+    private function parameterData(array $data): array
+    {
+        return [
+            'fecha_inicio_inscripcion' => $data['fecha_inicio_inscripcion'],
+            'fecha_cierre_inscripcion' => $data['fecha_cierre_inscripcion'],
+            'fecha_cierre_notas' => $data['fecha_cierre_notas'] ?? null,
+            'monto_pago' => $data['monto_pago'],
+            'max_estudiante_grupo' => $data['max_estudiante_grupo'],
+            'nota_minima_aprobacion' => $data['nota_minima_aprobacion'],
+            'max_grupos_docente' => $data['max_grupos_docente'],
+            'tiempo_expiracion_pago' => $data['tiempo_expiracion_pago'],
+        ];
+    }
+
+    private function syncAdmissionRules(int $semesterId, array $cupos, array $ponderaciones): void
+    {
+        foreach ($cupos as $cupo) {
+            $existing = CarreraSemestre::where('id_semestre', $semesterId)
+                ->where('id_carrera', $cupo['id_carrera'])
+                ->first();
+
+            CarreraSemestre::updateOrCreate(
+                [
+                    'id_semestre' => $semesterId,
+                    'id_carrera' => $cupo['id_carrera'],
+                ],
+                [
+                    'cantidad_cupos' => $cupo['cantidad_cupos'],
+                    'cantidad_estudiantes' => $existing?->cantidad_estudiantes ?? 0,
+                ]
+            );
+        }
+
+        foreach ($ponderaciones as $ponderacion) {
+            Examen::updateOrCreate(
+                [
+                    'id_semestre' => $semesterId,
+                    'numero_examen' => $ponderacion['numero_examen'],
+                ],
+                [
+                    'ponderacion' => $ponderacion['ponderacion'],
+                ]
+            );
+        }
     }
 }
