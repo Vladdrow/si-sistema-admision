@@ -1,0 +1,961 @@
+id_postulante,colegio_procedencia,ciudad,estado_admision,codigo_libreta,codigo_titulo,id_carrera_primera_opc,id_carrera_segunda_opc
+41,Colegio Nacional Florida,Santa Cruz,Pendiente,LIB77665585,TIT77665585,1,2
+42,Unidad Educativa La Salle,Santa Cruz,Pendiente,LIB77665586,TIT77665586,2,3
+43,Colegio Santa Ana,Santa Cruz,Pendiente,LIB77665587,TIT77665587,3,4
+44,Unidad Educativa Cristo Rey,Santa Cruz,Pendiente,LIB77665588,TIT77665588,4,1
+45,Colegio San Agustin,Santa Cruz,Pendiente,LIB77665589,TIT77665589,1,2
+46,Unidad Educativa Juan Pablo II,Santa Cruz,Pendiente,LIB77665590,TIT77665590,2,3
+47,Colegio Domingo Savio,Santa Cruz,Pendiente,LIB77665591,TIT77665591,3,4
+48,Unidad Educativa Simon Bolivar,Santa Cruz,Pendiente,LIB77665592,TIT77665592,4,1
+49,Colegio Aleman Santa Cruz,Santa Cruz,Pendiente,LIB77665593,TIT77665593,1,2
+50,Unidad Educativa San Martin,Santa Cruz,Pendiente,LIB77665594,TIT77665594,2,3
+51,Colegio Nacional Florida,La Paz,Pendiente,LIB77665595,TIT77665595,3,4
+52,Unidad Educativa La Salle,La Paz,Pendiente,LIB77665596,TIT77665596,4,1
+53,Colegio Santa Ana,La Paz,Pendiente,LIB77665597,TIT77665597,1,2
+54,Unidad Educativa Cristo Rey,La Paz,Pendiente,LIB77665598,TIT77665598,2,3
+55,Colegio San Agustin,La Paz,Pendiente,LIB77665599,TIT77665599,3,4
+56,Unidad Educativa Juan Pablo II,La Paz,Pendiente,LIB77665600,TIT77665600,4,1
+57,Colegio Domingo Savio,La Paz,Pendiente,LIB77665601,TIT77665601,1,2
+58,Unidad Educativa Simon Bolivar,La Paz,Pendiente,LIB77665602,TIT77665602,2,3
+59,Colegio Aleman Santa Cruz,La Paz,Pendiente,LIB77665603,TIT77665603,3,4
+60,Unidad Educativa San Martin,La Paz,Pendiente,LIB77665604,TIT77665604,4,1
+61,Colegio Nacional Florida,Cochabamba,Pendiente,LIB77665605,TIT77665605,1,2
+62,Unidad Educativa La Salle,Cochabamba,Pendiente,LIB77665606,TIT77665606,2,3
+63,Colegio Santa Ana,Cochabamba,Pendiente,LIB77665607,TIT77665607,3,4
+64,Unidad Educativa Cristo Rey,Cochabamba,Pendiente,LIB77665608,TIT77665608,4,1
+65,Colegio San Agustin,Cochabamba,Pendiente,LIB77665609,TIT77665609,1,2
+66,Unidad Educativa Juan Pablo II,Cochabamba,Pendiente,LIB77665610,TIT77665610,2,3
+67,Colegio Domingo Savio,Cochabamba,Pendiente,LIB77665611,TIT77665611,3,4
+68,Unidad Educativa Simon Bolivar,Cochabamba,Pendiente,LIB77665612,TIT77665612,4,1
+69,Colegio Aleman Santa Cruz,Cochabamba,Pendiente,LIB77665613,TIT77665613,1,2
+70,Unidad Educativa San Martin,Cochabamba,Pendiente,LIB77665614,TIT77665614,2,3
+71,Colegio Nacional Florida,Sucre,Pendiente,LIB77665615,TIT77665615,3,4
+72,Unidad Educativa La Salle,Sucre,Pendiente,LIB77665616,TIT77665616,4,1
+73,Colegio Santa Ana,Sucre,Pendiente,LIB77665617,TIT77665617,1,2
+74,Unidad Educativa Cristo Rey,Sucre,Pendiente,LIB77665618,TIT77665618,2,3
+75,Colegio San Agustin,Sucre,Pendiente,LIB77665619,TIT77665619,3,4
+76,Unidad Educativa Juan Pablo II,Sucre,Pendiente,LIB77665620,TIT77665620,4,1
+77,Colegio Domingo Savio,Sucre,Pendiente,LIB77665621,TIT77665621,1,2
+78,Unidad Educativa Simon Bolivar,Sucre,Pendiente,LIB77665622,TIT77665622,2,3
+79,Colegio Aleman Santa Cruz,Sucre,Pendiente,LIB77665623,TIT77665623,3,4
+80,Unidad Educativa San Martin,Sucre,Pendiente,LIB77665624,TIT77665624,4,1
+81,Colegio Nacional Florida,Tarija,Pendiente,LIB77665625,TIT77665625,1,2
+82,Unidad Educativa La Salle,Tarija,Pendiente,LIB77665626,TIT77665626,2,3
+83,Colegio Santa Ana,Tarija,Pendiente,LIB77665627,TIT77665627,3,4
+84,Unidad Educativa Cristo Rey,Tarija,Pendiente,LIB77665628,TIT77665628,4,1
+85,Colegio San Agustin,Tarija,Pendiente,LIB77665629,TIT77665629,1,2
+86,Unidad Educativa Juan Pablo II,Tarija,Pendiente,LIB77665630,TIT77665630,2,3
+87,Colegio Domingo Savio,Tarija,Pendiente,LIB77665631,TIT77665631,3,4
+88,Unidad Educativa Simon Bolivar,Tarija,Pendiente,LIB77665632,TIT77665632,4,1
+89,Colegio Aleman Santa Cruz,Tarija,Pendiente,LIB77665633,TIT77665633,1,2
+90,Unidad Educativa San Martin,Tarija,Pendiente,LIB77665634,TIT77665634,2,3
+91,Colegio Nacional Florida,Oruro,Pendiente,LIB77665635,TIT77665635,3,4
+92,Unidad Educativa La Salle,Oruro,Pendiente,LIB77665636,TIT77665636,4,1
+93,Colegio Santa Ana,Oruro,Pendiente,LIB77665637,TIT77665637,1,2
+94,Unidad Educativa Cristo Rey,Oruro,Pendiente,LIB77665638,TIT77665638,2,3
+95,Colegio San Agustin,Oruro,Pendiente,LIB77665639,TIT77665639,3,4
+96,Unidad Educativa Juan Pablo II,Oruro,Pendiente,LIB77665640,TIT77665640,4,1
+97,Colegio Domingo Savio,Oruro,Pendiente,LIB77665641,TIT77665641,1,2
+98,Unidad Educativa Simon Bolivar,Oruro,Pendiente,LIB77665642,TIT77665642,2,3
+99,Colegio Aleman Santa Cruz,Oruro,Pendiente,LIB77665643,TIT77665643,3,4
+100,Unidad Educativa San Martin,Oruro,Pendiente,LIB77665644,TIT77665644,4,1
+101,Colegio Nacional Florida,Potosi,Pendiente,LIB77665645,TIT77665645,1,2
+102,Unidad Educativa La Salle,Potosi,Pendiente,LIB77665646,TIT77665646,2,3
+103,Colegio Santa Ana,Potosi,Pendiente,LIB77665647,TIT77665647,3,4
+104,Unidad Educativa Cristo Rey,Potosi,Pendiente,LIB77665648,TIT77665648,4,1
+105,Colegio San Agustin,Potosi,Pendiente,LIB77665649,TIT77665649,1,2
+106,Unidad Educativa Juan Pablo II,Potosi,Pendiente,LIB77665650,TIT77665650,2,3
+107,Colegio Domingo Savio,Potosi,Pendiente,LIB77665651,TIT77665651,3,4
+108,Unidad Educativa Simon Bolivar,Potosi,Pendiente,LIB77665652,TIT77665652,4,1
+109,Colegio Aleman Santa Cruz,Potosi,Pendiente,LIB77665653,TIT77665653,1,2
+110,Unidad Educativa San Martin,Potosi,Pendiente,LIB77665654,TIT77665654,2,3
+111,Colegio Nacional Florida,Trinidad,Pendiente,LIB77665655,TIT77665655,3,4
+112,Unidad Educativa La Salle,Trinidad,Pendiente,LIB77665656,TIT77665656,4,1
+113,Colegio Santa Ana,Trinidad,Pendiente,LIB77665657,TIT77665657,1,2
+114,Unidad Educativa Cristo Rey,Trinidad,Pendiente,LIB77665658,TIT77665658,2,3
+115,Colegio San Agustin,Trinidad,Pendiente,LIB77665659,TIT77665659,3,4
+116,Unidad Educativa Juan Pablo II,Trinidad,Pendiente,LIB77665660,TIT77665660,4,1
+117,Colegio Domingo Savio,Trinidad,Pendiente,LIB77665661,TIT77665661,1,2
+118,Unidad Educativa Simon Bolivar,Trinidad,Pendiente,LIB77665662,TIT77665662,2,3
+119,Colegio Aleman Santa Cruz,Trinidad,Pendiente,LIB77665663,TIT77665663,3,4
+120,Unidad Educativa San Martin,Trinidad,Pendiente,LIB77665664,TIT77665664,4,1
+121,Colegio Nacional Florida,Montero,Pendiente,LIB77665665,TIT77665665,1,2
+122,Unidad Educativa La Salle,Montero,Pendiente,LIB77665666,TIT77665666,2,3
+123,Colegio Santa Ana,Montero,Pendiente,LIB77665667,TIT77665667,3,4
+124,Unidad Educativa Cristo Rey,Montero,Pendiente,LIB77665668,TIT77665668,4,1
+125,Colegio San Agustin,Montero,Pendiente,LIB77665669,TIT77665669,1,2
+126,Unidad Educativa Juan Pablo II,Montero,Pendiente,LIB77665670,TIT77665670,2,3
+127,Colegio Domingo Savio,Montero,Pendiente,LIB77665671,TIT77665671,3,4
+128,Unidad Educativa Simon Bolivar,Montero,Pendiente,LIB77665672,TIT77665672,4,1
+129,Colegio Aleman Santa Cruz,Montero,Pendiente,LIB77665673,TIT77665673,1,2
+130,Unidad Educativa San Martin,Montero,Pendiente,LIB77665674,TIT77665674,2,3
+131,Colegio Nacional Florida,Warnes,Pendiente,LIB77665675,TIT77665675,3,4
+132,Unidad Educativa La Salle,Warnes,Pendiente,LIB77665676,TIT77665676,4,1
+133,Colegio Santa Ana,Warnes,Pendiente,LIB77665677,TIT77665677,1,2
+134,Unidad Educativa Cristo Rey,Warnes,Pendiente,LIB77665678,TIT77665678,2,3
+135,Colegio San Agustin,Warnes,Pendiente,LIB77665679,TIT77665679,3,4
+136,Unidad Educativa Juan Pablo II,Warnes,Pendiente,LIB77665680,TIT77665680,4,1
+137,Colegio Domingo Savio,Warnes,Pendiente,LIB77665681,TIT77665681,1,2
+138,Unidad Educativa Simon Bolivar,Warnes,Pendiente,LIB77665682,TIT77665682,2,3
+139,Colegio Aleman Santa Cruz,Warnes,Pendiente,LIB77665683,TIT77665683,3,4
+140,Unidad Educativa San Martin,Warnes,Pendiente,LIB77665684,TIT77665684,4,1
+141,Colegio Nacional Florida,Santa Cruz,Pendiente,LIB77665685,TIT77665685,1,2
+142,Unidad Educativa La Salle,Santa Cruz,Pendiente,LIB77665686,TIT77665686,2,3
+143,Colegio Santa Ana,Santa Cruz,Pendiente,LIB77665687,TIT77665687,3,4
+144,Unidad Educativa Cristo Rey,Santa Cruz,Pendiente,LIB77665688,TIT77665688,4,1
+145,Colegio San Agustin,Santa Cruz,Pendiente,LIB77665689,TIT77665689,1,2
+146,Unidad Educativa Juan Pablo II,Santa Cruz,Pendiente,LIB77665690,TIT77665690,2,3
+147,Colegio Domingo Savio,Santa Cruz,Pendiente,LIB77665691,TIT77665691,3,4
+148,Unidad Educativa Simon Bolivar,Santa Cruz,Pendiente,LIB77665692,TIT77665692,4,1
+149,Colegio Aleman Santa Cruz,Santa Cruz,Pendiente,LIB77665693,TIT77665693,1,2
+150,Unidad Educativa San Martin,Santa Cruz,Pendiente,LIB77665694,TIT77665694,2,3
+151,Colegio Nacional Florida,La Paz,Pendiente,LIB77665695,TIT77665695,3,4
+152,Unidad Educativa La Salle,La Paz,Pendiente,LIB77665696,TIT77665696,4,1
+153,Colegio Santa Ana,La Paz,Pendiente,LIB77665697,TIT77665697,1,2
+154,Unidad Educativa Cristo Rey,La Paz,Pendiente,LIB77665698,TIT77665698,2,3
+155,Colegio San Agustin,La Paz,Pendiente,LIB77665699,TIT77665699,3,4
+156,Unidad Educativa Juan Pablo II,La Paz,Pendiente,LIB77665700,TIT77665700,4,1
+157,Colegio Domingo Savio,La Paz,Pendiente,LIB77665701,TIT77665701,1,2
+158,Unidad Educativa Simon Bolivar,La Paz,Pendiente,LIB77665702,TIT77665702,2,3
+159,Colegio Aleman Santa Cruz,La Paz,Pendiente,LIB77665703,TIT77665703,3,4
+160,Unidad Educativa San Martin,La Paz,Pendiente,LIB77665704,TIT77665704,4,1
+161,Colegio Nacional Florida,Cochabamba,Pendiente,LIB77665705,TIT77665705,1,2
+162,Unidad Educativa La Salle,Cochabamba,Pendiente,LIB77665706,TIT77665706,2,3
+163,Colegio Santa Ana,Cochabamba,Pendiente,LIB77665707,TIT77665707,3,4
+164,Unidad Educativa Cristo Rey,Cochabamba,Pendiente,LIB77665708,TIT77665708,4,1
+165,Colegio San Agustin,Cochabamba,Pendiente,LIB77665709,TIT77665709,1,2
+166,Unidad Educativa Juan Pablo II,Cochabamba,Pendiente,LIB77665710,TIT77665710,2,3
+167,Colegio Domingo Savio,Cochabamba,Pendiente,LIB77665711,TIT77665711,3,4
+168,Unidad Educativa Simon Bolivar,Cochabamba,Pendiente,LIB77665712,TIT77665712,4,1
+169,Colegio Aleman Santa Cruz,Cochabamba,Pendiente,LIB77665713,TIT77665713,1,2
+170,Unidad Educativa San Martin,Cochabamba,Pendiente,LIB77665714,TIT77665714,2,3
+171,Colegio Nacional Florida,Sucre,Pendiente,LIB77665715,TIT77665715,3,4
+172,Unidad Educativa La Salle,Sucre,Pendiente,LIB77665716,TIT77665716,4,1
+173,Colegio Santa Ana,Sucre,Pendiente,LIB77665717,TIT77665717,1,2
+174,Unidad Educativa Cristo Rey,Sucre,Pendiente,LIB77665718,TIT77665718,2,3
+175,Colegio San Agustin,Sucre,Pendiente,LIB77665719,TIT77665719,3,4
+176,Unidad Educativa Juan Pablo II,Sucre,Pendiente,LIB77665720,TIT77665720,4,1
+177,Colegio Domingo Savio,Sucre,Pendiente,LIB77665721,TIT77665721,1,2
+178,Unidad Educativa Simon Bolivar,Sucre,Pendiente,LIB77665722,TIT77665722,2,3
+179,Colegio Aleman Santa Cruz,Sucre,Pendiente,LIB77665723,TIT77665723,3,4
+180,Unidad Educativa San Martin,Sucre,Pendiente,LIB77665724,TIT77665724,4,1
+181,Colegio Nacional Florida,Tarija,Pendiente,LIB77665725,TIT77665725,1,2
+182,Unidad Educativa La Salle,Tarija,Pendiente,LIB77665726,TIT77665726,2,3
+183,Colegio Santa Ana,Tarija,Pendiente,LIB77665727,TIT77665727,3,4
+184,Unidad Educativa Cristo Rey,Tarija,Pendiente,LIB77665728,TIT77665728,4,1
+185,Colegio San Agustin,Tarija,Pendiente,LIB77665729,TIT77665729,1,2
+186,Unidad Educativa Juan Pablo II,Tarija,Pendiente,LIB77665730,TIT77665730,2,3
+187,Colegio Domingo Savio,Tarija,Pendiente,LIB77665731,TIT77665731,3,4
+188,Unidad Educativa Simon Bolivar,Tarija,Pendiente,LIB77665732,TIT77665732,4,1
+189,Colegio Aleman Santa Cruz,Tarija,Pendiente,LIB77665733,TIT77665733,1,2
+190,Unidad Educativa San Martin,Tarija,Pendiente,LIB77665734,TIT77665734,2,3
+191,Colegio Nacional Florida,Oruro,Pendiente,LIB77665735,TIT77665735,3,4
+192,Unidad Educativa La Salle,Oruro,Pendiente,LIB77665736,TIT77665736,4,1
+193,Colegio Santa Ana,Oruro,Pendiente,LIB77665737,TIT77665737,1,2
+194,Unidad Educativa Cristo Rey,Oruro,Pendiente,LIB77665738,TIT77665738,2,3
+195,Colegio San Agustin,Oruro,Pendiente,LIB77665739,TIT77665739,3,4
+196,Unidad Educativa Juan Pablo II,Oruro,Pendiente,LIB77665740,TIT77665740,4,1
+197,Colegio Domingo Savio,Oruro,Pendiente,LIB77665741,TIT77665741,1,2
+198,Unidad Educativa Simon Bolivar,Oruro,Pendiente,LIB77665742,TIT77665742,2,3
+199,Colegio Aleman Santa Cruz,Oruro,Pendiente,LIB77665743,TIT77665743,3,4
+200,Unidad Educativa San Martin,Oruro,Pendiente,LIB77665744,TIT77665744,4,1
+201,Colegio Nacional Florida,Potosi,Pendiente,LIB77665745,TIT77665745,1,2
+202,Unidad Educativa La Salle,Potosi,Pendiente,LIB77665746,TIT77665746,2,3
+203,Colegio Santa Ana,Potosi,Pendiente,LIB77665747,TIT77665747,3,4
+204,Unidad Educativa Cristo Rey,Potosi,Pendiente,LIB77665748,TIT77665748,4,1
+205,Colegio San Agustin,Potosi,Pendiente,LIB77665749,TIT77665749,1,2
+206,Unidad Educativa Juan Pablo II,Potosi,Pendiente,LIB77665750,TIT77665750,2,3
+207,Colegio Domingo Savio,Potosi,Pendiente,LIB77665751,TIT77665751,3,4
+208,Unidad Educativa Simon Bolivar,Potosi,Pendiente,LIB77665752,TIT77665752,4,1
+209,Colegio Aleman Santa Cruz,Potosi,Pendiente,LIB77665753,TIT77665753,1,2
+210,Unidad Educativa San Martin,Potosi,Pendiente,LIB77665754,TIT77665754,2,3
+211,Colegio Nacional Florida,Trinidad,Pendiente,LIB77665755,TIT77665755,3,4
+212,Unidad Educativa La Salle,Trinidad,Pendiente,LIB77665756,TIT77665756,4,1
+213,Colegio Santa Ana,Trinidad,Pendiente,LIB77665757,TIT77665757,1,2
+214,Unidad Educativa Cristo Rey,Trinidad,Pendiente,LIB77665758,TIT77665758,2,3
+215,Colegio San Agustin,Trinidad,Pendiente,LIB77665759,TIT77665759,3,4
+216,Unidad Educativa Juan Pablo II,Trinidad,Pendiente,LIB77665760,TIT77665760,4,1
+217,Colegio Domingo Savio,Trinidad,Pendiente,LIB77665761,TIT77665761,1,2
+218,Unidad Educativa Simon Bolivar,Trinidad,Pendiente,LIB77665762,TIT77665762,2,3
+219,Colegio Aleman Santa Cruz,Trinidad,Pendiente,LIB77665763,TIT77665763,3,4
+220,Unidad Educativa San Martin,Trinidad,Pendiente,LIB77665764,TIT77665764,4,1
+221,Colegio Nacional Florida,Montero,Pendiente,LIB77665765,TIT77665765,1,2
+222,Unidad Educativa La Salle,Montero,Pendiente,LIB77665766,TIT77665766,2,3
+223,Colegio Santa Ana,Montero,Pendiente,LIB77665767,TIT77665767,3,4
+224,Unidad Educativa Cristo Rey,Montero,Pendiente,LIB77665768,TIT77665768,4,1
+225,Colegio San Agustin,Montero,Pendiente,LIB77665769,TIT77665769,1,2
+226,Unidad Educativa Juan Pablo II,Montero,Pendiente,LIB77665770,TIT77665770,2,3
+227,Colegio Domingo Savio,Montero,Pendiente,LIB77665771,TIT77665771,3,4
+228,Unidad Educativa Simon Bolivar,Montero,Pendiente,LIB77665772,TIT77665772,4,1
+229,Colegio Aleman Santa Cruz,Montero,Pendiente,LIB77665773,TIT77665773,1,2
+230,Unidad Educativa San Martin,Montero,Pendiente,LIB77665774,TIT77665774,2,3
+231,Colegio Nacional Florida,Warnes,Pendiente,LIB77665775,TIT77665775,3,4
+232,Unidad Educativa La Salle,Warnes,Pendiente,LIB77665776,TIT77665776,4,1
+233,Colegio Santa Ana,Warnes,Pendiente,LIB77665777,TIT77665777,1,2
+234,Unidad Educativa Cristo Rey,Warnes,Pendiente,LIB77665778,TIT77665778,2,3
+235,Colegio San Agustin,Warnes,Pendiente,LIB77665779,TIT77665779,3,4
+236,Unidad Educativa Juan Pablo II,Warnes,Pendiente,LIB77665780,TIT77665780,4,1
+237,Colegio Domingo Savio,Warnes,Pendiente,LIB77665781,TIT77665781,1,2
+238,Unidad Educativa Simon Bolivar,Warnes,Pendiente,LIB77665782,TIT77665782,2,3
+239,Colegio Aleman Santa Cruz,Warnes,Pendiente,LIB77665783,TIT77665783,3,4
+240,Unidad Educativa San Martin,Warnes,Pendiente,LIB77665784,TIT77665784,4,1
+241,Colegio Nacional Florida,Santa Cruz,Pendiente,LIB77665785,TIT77665785,1,2
+242,Unidad Educativa La Salle,Santa Cruz,Pendiente,LIB77665786,TIT77665786,2,3
+243,Colegio Santa Ana,Santa Cruz,Pendiente,LIB77665787,TIT77665787,3,4
+244,Unidad Educativa Cristo Rey,Santa Cruz,Pendiente,LIB77665788,TIT77665788,4,1
+245,Colegio San Agustin,Santa Cruz,Pendiente,LIB77665789,TIT77665789,1,2
+246,Unidad Educativa Juan Pablo II,Santa Cruz,Pendiente,LIB77665790,TIT77665790,2,3
+247,Colegio Domingo Savio,Santa Cruz,Pendiente,LIB77665791,TIT77665791,3,4
+248,Unidad Educativa Simon Bolivar,Santa Cruz,Pendiente,LIB77665792,TIT77665792,4,1
+249,Colegio Aleman Santa Cruz,Santa Cruz,Pendiente,LIB77665793,TIT77665793,1,2
+250,Unidad Educativa San Martin,Santa Cruz,Pendiente,LIB77665794,TIT77665794,2,3
+251,Colegio Nacional Florida,La Paz,Pendiente,LIB77665795,TIT77665795,3,4
+252,Unidad Educativa La Salle,La Paz,Pendiente,LIB77665796,TIT77665796,4,1
+253,Colegio Santa Ana,La Paz,Pendiente,LIB77665797,TIT77665797,1,2
+254,Unidad Educativa Cristo Rey,La Paz,Pendiente,LIB77665798,TIT77665798,2,3
+255,Colegio San Agustin,La Paz,Pendiente,LIB77665799,TIT77665799,3,4
+256,Unidad Educativa Juan Pablo II,La Paz,Pendiente,LIB77665800,TIT77665800,4,1
+257,Colegio Domingo Savio,La Paz,Pendiente,LIB77665801,TIT77665801,1,2
+258,Unidad Educativa Simon Bolivar,La Paz,Pendiente,LIB77665802,TIT77665802,2,3
+259,Colegio Aleman Santa Cruz,La Paz,Pendiente,LIB77665803,TIT77665803,3,4
+260,Unidad Educativa San Martin,La Paz,Pendiente,LIB77665804,TIT77665804,4,1
+261,Colegio Nacional Florida,Cochabamba,Pendiente,LIB77665805,TIT77665805,1,2
+262,Unidad Educativa La Salle,Cochabamba,Pendiente,LIB77665806,TIT77665806,2,3
+263,Colegio Santa Ana,Cochabamba,Pendiente,LIB77665807,TIT77665807,3,4
+264,Unidad Educativa Cristo Rey,Cochabamba,Pendiente,LIB77665808,TIT77665808,4,1
+265,Colegio San Agustin,Cochabamba,Pendiente,LIB77665809,TIT77665809,1,2
+266,Unidad Educativa Juan Pablo II,Cochabamba,Pendiente,LIB77665810,TIT77665810,2,3
+267,Colegio Domingo Savio,Cochabamba,Pendiente,LIB77665811,TIT77665811,3,4
+268,Unidad Educativa Simon Bolivar,Cochabamba,Pendiente,LIB77665812,TIT77665812,4,1
+269,Colegio Aleman Santa Cruz,Cochabamba,Pendiente,LIB77665813,TIT77665813,1,2
+270,Unidad Educativa San Martin,Cochabamba,Pendiente,LIB77665814,TIT77665814,2,3
+271,Colegio Nacional Florida,Sucre,Pendiente,LIB77665815,TIT77665815,3,4
+272,Unidad Educativa La Salle,Sucre,Pendiente,LIB77665816,TIT77665816,4,1
+273,Colegio Santa Ana,Sucre,Pendiente,LIB77665817,TIT77665817,1,2
+274,Unidad Educativa Cristo Rey,Sucre,Pendiente,LIB77665818,TIT77665818,2,3
+275,Colegio San Agustin,Sucre,Pendiente,LIB77665819,TIT77665819,3,4
+276,Unidad Educativa Juan Pablo II,Sucre,Pendiente,LIB77665820,TIT77665820,4,1
+277,Colegio Domingo Savio,Sucre,Pendiente,LIB77665821,TIT77665821,1,2
+278,Unidad Educativa Simon Bolivar,Sucre,Pendiente,LIB77665822,TIT77665822,2,3
+279,Colegio Aleman Santa Cruz,Sucre,Pendiente,LIB77665823,TIT77665823,3,4
+280,Unidad Educativa San Martin,Sucre,Pendiente,LIB77665824,TIT77665824,4,1
+281,Colegio Nacional Florida,Tarija,Pendiente,LIB77665825,TIT77665825,1,2
+282,Unidad Educativa La Salle,Tarija,Pendiente,LIB77665826,TIT77665826,2,3
+283,Colegio Santa Ana,Tarija,Pendiente,LIB77665827,TIT77665827,3,4
+284,Unidad Educativa Cristo Rey,Tarija,Pendiente,LIB77665828,TIT77665828,4,1
+285,Colegio San Agustin,Tarija,Pendiente,LIB77665829,TIT77665829,1,2
+286,Unidad Educativa Juan Pablo II,Tarija,Pendiente,LIB77665830,TIT77665830,2,3
+287,Colegio Domingo Savio,Tarija,Pendiente,LIB77665831,TIT77665831,3,4
+288,Unidad Educativa Simon Bolivar,Tarija,Pendiente,LIB77665832,TIT77665832,4,1
+289,Colegio Aleman Santa Cruz,Tarija,Pendiente,LIB77665833,TIT77665833,1,2
+290,Unidad Educativa San Martin,Tarija,Pendiente,LIB77665834,TIT77665834,2,3
+291,Colegio Nacional Florida,Oruro,Pendiente,LIB77665835,TIT77665835,3,4
+292,Unidad Educativa La Salle,Oruro,Pendiente,LIB77665836,TIT77665836,4,1
+293,Colegio Santa Ana,Oruro,Pendiente,LIB77665837,TIT77665837,1,2
+294,Unidad Educativa Cristo Rey,Oruro,Pendiente,LIB77665838,TIT77665838,2,3
+295,Colegio San Agustin,Oruro,Pendiente,LIB77665839,TIT77665839,3,4
+296,Unidad Educativa Juan Pablo II,Oruro,Pendiente,LIB77665840,TIT77665840,4,1
+297,Colegio Domingo Savio,Oruro,Pendiente,LIB77665841,TIT77665841,1,2
+298,Unidad Educativa Simon Bolivar,Oruro,Pendiente,LIB77665842,TIT77665842,2,3
+299,Colegio Aleman Santa Cruz,Oruro,Pendiente,LIB77665843,TIT77665843,3,4
+300,Unidad Educativa San Martin,Oruro,Pendiente,LIB77665844,TIT77665844,4,1
+301,Colegio Nacional Florida,Potosi,Pendiente,LIB77665845,TIT77665845,1,2
+302,Unidad Educativa La Salle,Potosi,Pendiente,LIB77665846,TIT77665846,2,3
+303,Colegio Santa Ana,Potosi,Pendiente,LIB77665847,TIT77665847,3,4
+304,Unidad Educativa Cristo Rey,Potosi,Pendiente,LIB77665848,TIT77665848,4,1
+305,Colegio San Agustin,Potosi,Pendiente,LIB77665849,TIT77665849,1,2
+306,Unidad Educativa Juan Pablo II,Potosi,Pendiente,LIB77665850,TIT77665850,2,3
+307,Colegio Domingo Savio,Potosi,Pendiente,LIB77665851,TIT77665851,3,4
+308,Unidad Educativa Simon Bolivar,Potosi,Pendiente,LIB77665852,TIT77665852,4,1
+309,Colegio Aleman Santa Cruz,Potosi,Pendiente,LIB77665853,TIT77665853,1,2
+310,Unidad Educativa San Martin,Potosi,Pendiente,LIB77665854,TIT77665854,2,3
+311,Colegio Nacional Florida,Trinidad,Pendiente,LIB77665855,TIT77665855,3,4
+312,Unidad Educativa La Salle,Trinidad,Pendiente,LIB77665856,TIT77665856,4,1
+313,Colegio Santa Ana,Trinidad,Pendiente,LIB77665857,TIT77665857,1,2
+314,Unidad Educativa Cristo Rey,Trinidad,Pendiente,LIB77665858,TIT77665858,2,3
+315,Colegio San Agustin,Trinidad,Pendiente,LIB77665859,TIT77665859,3,4
+316,Unidad Educativa Juan Pablo II,Trinidad,Pendiente,LIB77665860,TIT77665860,4,1
+317,Colegio Domingo Savio,Trinidad,Pendiente,LIB77665861,TIT77665861,1,2
+318,Unidad Educativa Simon Bolivar,Trinidad,Pendiente,LIB77665862,TIT77665862,2,3
+319,Colegio Aleman Santa Cruz,Trinidad,Pendiente,LIB77665863,TIT77665863,3,4
+320,Unidad Educativa San Martin,Trinidad,Pendiente,LIB77665864,TIT77665864,4,1
+321,Colegio Nacional Florida,Montero,Pendiente,LIB77665865,TIT77665865,1,2
+322,Unidad Educativa La Salle,Montero,Pendiente,LIB77665866,TIT77665866,2,3
+323,Colegio Santa Ana,Montero,Pendiente,LIB77665867,TIT77665867,3,4
+324,Unidad Educativa Cristo Rey,Montero,Pendiente,LIB77665868,TIT77665868,4,1
+325,Colegio San Agustin,Montero,Pendiente,LIB77665869,TIT77665869,1,2
+326,Unidad Educativa Juan Pablo II,Montero,Pendiente,LIB77665870,TIT77665870,2,3
+327,Colegio Domingo Savio,Montero,Pendiente,LIB77665871,TIT77665871,3,4
+328,Unidad Educativa Simon Bolivar,Montero,Pendiente,LIB77665872,TIT77665872,4,1
+329,Colegio Aleman Santa Cruz,Montero,Pendiente,LIB77665873,TIT77665873,1,2
+330,Unidad Educativa San Martin,Montero,Pendiente,LIB77665874,TIT77665874,2,3
+331,Colegio Nacional Florida,Warnes,Pendiente,LIB77665875,TIT77665875,3,4
+332,Unidad Educativa La Salle,Warnes,Pendiente,LIB77665876,TIT77665876,4,1
+333,Colegio Santa Ana,Warnes,Pendiente,LIB77665877,TIT77665877,1,2
+334,Unidad Educativa Cristo Rey,Warnes,Pendiente,LIB77665878,TIT77665878,2,3
+335,Colegio San Agustin,Warnes,Pendiente,LIB77665879,TIT77665879,3,4
+336,Unidad Educativa Juan Pablo II,Warnes,Pendiente,LIB77665880,TIT77665880,4,1
+337,Colegio Domingo Savio,Warnes,Pendiente,LIB77665881,TIT77665881,1,2
+338,Unidad Educativa Simon Bolivar,Warnes,Pendiente,LIB77665882,TIT77665882,2,3
+339,Colegio Aleman Santa Cruz,Warnes,Pendiente,LIB77665883,TIT77665883,3,4
+340,Unidad Educativa San Martin,Warnes,Pendiente,LIB77665884,TIT77665884,4,1
+341,Colegio Nacional Florida,Santa Cruz,Pendiente,LIB77665885,TIT77665885,1,2
+342,Unidad Educativa La Salle,Santa Cruz,Pendiente,LIB77665886,TIT77665886,2,3
+343,Colegio Santa Ana,Santa Cruz,Pendiente,LIB77665887,TIT77665887,3,4
+344,Unidad Educativa Cristo Rey,Santa Cruz,Pendiente,LIB77665888,TIT77665888,4,1
+345,Colegio San Agustin,Santa Cruz,Pendiente,LIB77665889,TIT77665889,1,2
+346,Unidad Educativa Juan Pablo II,Santa Cruz,Pendiente,LIB77665890,TIT77665890,2,3
+347,Colegio Domingo Savio,Santa Cruz,Pendiente,LIB77665891,TIT77665891,3,4
+348,Unidad Educativa Simon Bolivar,Santa Cruz,Pendiente,LIB77665892,TIT77665892,4,1
+349,Colegio Aleman Santa Cruz,Santa Cruz,Pendiente,LIB77665893,TIT77665893,1,2
+350,Unidad Educativa San Martin,Santa Cruz,Pendiente,LIB77665894,TIT77665894,2,3
+351,Colegio Nacional Florida,La Paz,Pendiente,LIB77665895,TIT77665895,3,4
+352,Unidad Educativa La Salle,La Paz,Pendiente,LIB77665896,TIT77665896,4,1
+353,Colegio Santa Ana,La Paz,Pendiente,LIB77665897,TIT77665897,1,2
+354,Unidad Educativa Cristo Rey,La Paz,Pendiente,LIB77665898,TIT77665898,2,3
+355,Colegio San Agustin,La Paz,Pendiente,LIB77665899,TIT77665899,3,4
+356,Unidad Educativa Juan Pablo II,La Paz,Pendiente,LIB77665900,TIT77665900,4,1
+357,Colegio Domingo Savio,La Paz,Pendiente,LIB77665901,TIT77665901,1,2
+358,Unidad Educativa Simon Bolivar,La Paz,Pendiente,LIB77665902,TIT77665902,2,3
+359,Colegio Aleman Santa Cruz,La Paz,Pendiente,LIB77665903,TIT77665903,3,4
+360,Unidad Educativa San Martin,La Paz,Pendiente,LIB77665904,TIT77665904,4,1
+361,Colegio Nacional Florida,Cochabamba,Pendiente,LIB77665905,TIT77665905,1,2
+362,Unidad Educativa La Salle,Cochabamba,Pendiente,LIB77665906,TIT77665906,2,3
+363,Colegio Santa Ana,Cochabamba,Pendiente,LIB77665907,TIT77665907,3,4
+364,Unidad Educativa Cristo Rey,Cochabamba,Pendiente,LIB77665908,TIT77665908,4,1
+365,Colegio San Agustin,Cochabamba,Pendiente,LIB77665909,TIT77665909,1,2
+366,Unidad Educativa Juan Pablo II,Cochabamba,Pendiente,LIB77665910,TIT77665910,2,3
+367,Colegio Domingo Savio,Cochabamba,Pendiente,LIB77665911,TIT77665911,3,4
+368,Unidad Educativa Simon Bolivar,Cochabamba,Pendiente,LIB77665912,TIT77665912,4,1
+369,Colegio Aleman Santa Cruz,Cochabamba,Pendiente,LIB77665913,TIT77665913,1,2
+370,Unidad Educativa San Martin,Cochabamba,Pendiente,LIB77665914,TIT77665914,2,3
+371,Colegio Nacional Florida,Sucre,Pendiente,LIB77665915,TIT77665915,3,4
+372,Unidad Educativa La Salle,Sucre,Pendiente,LIB77665916,TIT77665916,4,1
+373,Colegio Santa Ana,Sucre,Pendiente,LIB77665917,TIT77665917,1,2
+374,Unidad Educativa Cristo Rey,Sucre,Pendiente,LIB77665918,TIT77665918,2,3
+375,Colegio San Agustin,Sucre,Pendiente,LIB77665919,TIT77665919,3,4
+376,Unidad Educativa Juan Pablo II,Sucre,Pendiente,LIB77665920,TIT77665920,4,1
+377,Colegio Domingo Savio,Sucre,Pendiente,LIB77665921,TIT77665921,1,2
+378,Unidad Educativa Simon Bolivar,Sucre,Pendiente,LIB77665922,TIT77665922,2,3
+379,Colegio Aleman Santa Cruz,Sucre,Pendiente,LIB77665923,TIT77665923,3,4
+380,Unidad Educativa San Martin,Sucre,Pendiente,LIB77665924,TIT77665924,4,1
+381,Colegio Nacional Florida,Tarija,Pendiente,LIB77665925,TIT77665925,1,2
+382,Unidad Educativa La Salle,Tarija,Pendiente,LIB77665926,TIT77665926,2,3
+383,Colegio Santa Ana,Tarija,Pendiente,LIB77665927,TIT77665927,3,4
+384,Unidad Educativa Cristo Rey,Tarija,Pendiente,LIB77665928,TIT77665928,4,1
+385,Colegio San Agustin,Tarija,Pendiente,LIB77665929,TIT77665929,1,2
+386,Unidad Educativa Juan Pablo II,Tarija,Pendiente,LIB77665930,TIT77665930,2,3
+387,Colegio Domingo Savio,Tarija,Pendiente,LIB77665931,TIT77665931,3,4
+388,Unidad Educativa Simon Bolivar,Tarija,Pendiente,LIB77665932,TIT77665932,4,1
+389,Colegio Aleman Santa Cruz,Tarija,Pendiente,LIB77665933,TIT77665933,1,2
+390,Unidad Educativa San Martin,Tarija,Pendiente,LIB77665934,TIT77665934,2,3
+391,Colegio Nacional Florida,Oruro,Pendiente,LIB77665935,TIT77665935,3,4
+392,Unidad Educativa La Salle,Oruro,Pendiente,LIB77665936,TIT77665936,4,1
+393,Colegio Santa Ana,Oruro,Pendiente,LIB77665937,TIT77665937,1,2
+394,Unidad Educativa Cristo Rey,Oruro,Pendiente,LIB77665938,TIT77665938,2,3
+395,Colegio San Agustin,Oruro,Pendiente,LIB77665939,TIT77665939,3,4
+396,Unidad Educativa Juan Pablo II,Oruro,Pendiente,LIB77665940,TIT77665940,4,1
+397,Colegio Domingo Savio,Oruro,Pendiente,LIB77665941,TIT77665941,1,2
+398,Unidad Educativa Simon Bolivar,Oruro,Pendiente,LIB77665942,TIT77665942,2,3
+399,Colegio Aleman Santa Cruz,Oruro,Pendiente,LIB77665943,TIT77665943,3,4
+400,Unidad Educativa San Martin,Oruro,Pendiente,LIB77665944,TIT77665944,4,1
+401,Colegio Nacional Florida,Potosi,Pendiente,LIB77665945,TIT77665945,1,2
+402,Unidad Educativa La Salle,Potosi,Pendiente,LIB77665946,TIT77665946,2,3
+403,Colegio Santa Ana,Potosi,Pendiente,LIB77665947,TIT77665947,3,4
+404,Unidad Educativa Cristo Rey,Potosi,Pendiente,LIB77665948,TIT77665948,4,1
+405,Colegio San Agustin,Potosi,Pendiente,LIB77665949,TIT77665949,1,2
+406,Unidad Educativa Juan Pablo II,Potosi,Pendiente,LIB77665950,TIT77665950,2,3
+407,Colegio Domingo Savio,Potosi,Pendiente,LIB77665951,TIT77665951,3,4
+408,Unidad Educativa Simon Bolivar,Potosi,Pendiente,LIB77665952,TIT77665952,4,1
+409,Colegio Aleman Santa Cruz,Potosi,Pendiente,LIB77665953,TIT77665953,1,2
+410,Unidad Educativa San Martin,Potosi,Pendiente,LIB77665954,TIT77665954,2,3
+411,Colegio Nacional Florida,Trinidad,Pendiente,LIB77665955,TIT77665955,3,4
+412,Unidad Educativa La Salle,Trinidad,Pendiente,LIB77665956,TIT77665956,4,1
+413,Colegio Santa Ana,Trinidad,Pendiente,LIB77665957,TIT77665957,1,2
+414,Unidad Educativa Cristo Rey,Trinidad,Pendiente,LIB77665958,TIT77665958,2,3
+415,Colegio San Agustin,Trinidad,Pendiente,LIB77665959,TIT77665959,3,4
+416,Unidad Educativa Juan Pablo II,Trinidad,Pendiente,LIB77665960,TIT77665960,4,1
+417,Colegio Domingo Savio,Trinidad,Pendiente,LIB77665961,TIT77665961,1,2
+418,Unidad Educativa Simon Bolivar,Trinidad,Pendiente,LIB77665962,TIT77665962,2,3
+419,Colegio Aleman Santa Cruz,Trinidad,Pendiente,LIB77665963,TIT77665963,3,4
+420,Unidad Educativa San Martin,Trinidad,Pendiente,LIB77665964,TIT77665964,4,1
+421,Colegio Nacional Florida,Montero,Pendiente,LIB77665965,TIT77665965,1,2
+422,Unidad Educativa La Salle,Montero,Pendiente,LIB77665966,TIT77665966,2,3
+423,Colegio Santa Ana,Montero,Pendiente,LIB77665967,TIT77665967,3,4
+424,Unidad Educativa Cristo Rey,Montero,Pendiente,LIB77665968,TIT77665968,4,1
+425,Colegio San Agustin,Montero,Pendiente,LIB77665969,TIT77665969,1,2
+426,Unidad Educativa Juan Pablo II,Montero,Pendiente,LIB77665970,TIT77665970,2,3
+427,Colegio Domingo Savio,Montero,Pendiente,LIB77665971,TIT77665971,3,4
+428,Unidad Educativa Simon Bolivar,Montero,Pendiente,LIB77665972,TIT77665972,4,1
+429,Colegio Aleman Santa Cruz,Montero,Pendiente,LIB77665973,TIT77665973,1,2
+430,Unidad Educativa San Martin,Montero,Pendiente,LIB77665974,TIT77665974,2,3
+431,Colegio Nacional Florida,Warnes,Pendiente,LIB77665975,TIT77665975,3,4
+432,Unidad Educativa La Salle,Warnes,Pendiente,LIB77665976,TIT77665976,4,1
+433,Colegio Santa Ana,Warnes,Pendiente,LIB77665977,TIT77665977,1,2
+434,Unidad Educativa Cristo Rey,Warnes,Pendiente,LIB77665978,TIT77665978,2,3
+435,Colegio San Agustin,Warnes,Pendiente,LIB77665979,TIT77665979,3,4
+436,Unidad Educativa Juan Pablo II,Warnes,Pendiente,LIB77665980,TIT77665980,4,1
+437,Colegio Domingo Savio,Warnes,Pendiente,LIB77665981,TIT77665981,1,2
+438,Unidad Educativa Simon Bolivar,Warnes,Pendiente,LIB77665982,TIT77665982,2,3
+439,Colegio Aleman Santa Cruz,Warnes,Pendiente,LIB77665983,TIT77665983,3,4
+440,Unidad Educativa San Martin,Warnes,Pendiente,LIB77665984,TIT77665984,4,1
+441,Colegio Nacional Florida,Santa Cruz,Pendiente,LIB77665985,TIT77665985,1,2
+442,Unidad Educativa La Salle,Santa Cruz,Pendiente,LIB77665986,TIT77665986,2,3
+443,Colegio Santa Ana,Santa Cruz,Pendiente,LIB77665987,TIT77665987,3,4
+444,Unidad Educativa Cristo Rey,Santa Cruz,Pendiente,LIB77665988,TIT77665988,4,1
+445,Colegio San Agustin,Santa Cruz,Pendiente,LIB77665989,TIT77665989,1,2
+446,Unidad Educativa Juan Pablo II,Santa Cruz,Pendiente,LIB77665990,TIT77665990,2,3
+447,Colegio Domingo Savio,Santa Cruz,Pendiente,LIB77665991,TIT77665991,3,4
+448,Unidad Educativa Simon Bolivar,Santa Cruz,Pendiente,LIB77665992,TIT77665992,4,1
+449,Colegio Aleman Santa Cruz,Santa Cruz,Pendiente,LIB77665993,TIT77665993,1,2
+450,Unidad Educativa San Martin,Santa Cruz,Pendiente,LIB77665994,TIT77665994,2,3
+451,Colegio Nacional Florida,La Paz,Pendiente,LIB77665995,TIT77665995,3,4
+452,Unidad Educativa La Salle,La Paz,Pendiente,LIB77665996,TIT77665996,4,1
+453,Colegio Santa Ana,La Paz,Pendiente,LIB77665997,TIT77665997,1,2
+454,Unidad Educativa Cristo Rey,La Paz,Pendiente,LIB77665998,TIT77665998,2,3
+455,Colegio San Agustin,La Paz,Pendiente,LIB77665999,TIT77665999,3,4
+456,Unidad Educativa Juan Pablo II,La Paz,Pendiente,LIB77666000,TIT77666000,4,1
+457,Colegio Domingo Savio,La Paz,Pendiente,LIB77666001,TIT77666001,1,2
+458,Unidad Educativa Simon Bolivar,La Paz,Pendiente,LIB77666002,TIT77666002,2,3
+459,Colegio Aleman Santa Cruz,La Paz,Pendiente,LIB77666003,TIT77666003,3,4
+460,Unidad Educativa San Martin,La Paz,Pendiente,LIB77666004,TIT77666004,4,1
+461,Colegio Nacional Florida,Cochabamba,Pendiente,LIB77666005,TIT77666005,1,2
+462,Unidad Educativa La Salle,Cochabamba,Pendiente,LIB77666006,TIT77666006,2,3
+463,Colegio Santa Ana,Cochabamba,Pendiente,LIB77666007,TIT77666007,3,4
+464,Unidad Educativa Cristo Rey,Cochabamba,Pendiente,LIB77666008,TIT77666008,4,1
+465,Colegio San Agustin,Cochabamba,Pendiente,LIB77666009,TIT77666009,1,2
+466,Unidad Educativa Juan Pablo II,Cochabamba,Pendiente,LIB77666010,TIT77666010,2,3
+467,Colegio Domingo Savio,Cochabamba,Pendiente,LIB77666011,TIT77666011,3,4
+468,Unidad Educativa Simon Bolivar,Cochabamba,Pendiente,LIB77666012,TIT77666012,4,1
+469,Colegio Aleman Santa Cruz,Cochabamba,Pendiente,LIB77666013,TIT77666013,1,2
+470,Unidad Educativa San Martin,Cochabamba,Pendiente,LIB77666014,TIT77666014,2,3
+471,Colegio Nacional Florida,Sucre,Pendiente,LIB77666015,TIT77666015,3,4
+472,Unidad Educativa La Salle,Sucre,Pendiente,LIB77666016,TIT77666016,4,1
+473,Colegio Santa Ana,Sucre,Pendiente,LIB77666017,TIT77666017,1,2
+474,Unidad Educativa Cristo Rey,Sucre,Pendiente,LIB77666018,TIT77666018,2,3
+475,Colegio San Agustin,Sucre,Pendiente,LIB77666019,TIT77666019,3,4
+476,Unidad Educativa Juan Pablo II,Sucre,Pendiente,LIB77666020,TIT77666020,4,1
+477,Colegio Domingo Savio,Sucre,Pendiente,LIB77666021,TIT77666021,1,2
+478,Unidad Educativa Simon Bolivar,Sucre,Pendiente,LIB77666022,TIT77666022,2,3
+479,Colegio Aleman Santa Cruz,Sucre,Pendiente,LIB77666023,TIT77666023,3,4
+480,Unidad Educativa San Martin,Sucre,Pendiente,LIB77666024,TIT77666024,4,1
+481,Colegio Nacional Florida,Tarija,Pendiente,LIB77666025,TIT77666025,1,2
+482,Unidad Educativa La Salle,Tarija,Pendiente,LIB77666026,TIT77666026,2,3
+483,Colegio Santa Ana,Tarija,Pendiente,LIB77666027,TIT77666027,3,4
+484,Unidad Educativa Cristo Rey,Tarija,Pendiente,LIB77666028,TIT77666028,4,1
+485,Colegio San Agustin,Tarija,Pendiente,LIB77666029,TIT77666029,1,2
+486,Unidad Educativa Juan Pablo II,Tarija,Pendiente,LIB77666030,TIT77666030,2,3
+487,Colegio Domingo Savio,Tarija,Pendiente,LIB77666031,TIT77666031,3,4
+488,Unidad Educativa Simon Bolivar,Tarija,Pendiente,LIB77666032,TIT77666032,4,1
+489,Colegio Aleman Santa Cruz,Tarija,Pendiente,LIB77666033,TIT77666033,1,2
+490,Unidad Educativa San Martin,Tarija,Pendiente,LIB77666034,TIT77666034,2,3
+491,Colegio Nacional Florida,Oruro,Pendiente,LIB77666035,TIT77666035,3,4
+492,Unidad Educativa La Salle,Oruro,Pendiente,LIB77666036,TIT77666036,4,1
+493,Colegio Santa Ana,Oruro,Pendiente,LIB77666037,TIT77666037,1,2
+494,Unidad Educativa Cristo Rey,Oruro,Pendiente,LIB77666038,TIT77666038,2,3
+495,Colegio San Agustin,Oruro,Pendiente,LIB77666039,TIT77666039,3,4
+496,Unidad Educativa Juan Pablo II,Oruro,Pendiente,LIB77666040,TIT77666040,4,1
+497,Colegio Domingo Savio,Oruro,Pendiente,LIB77666041,TIT77666041,1,2
+498,Unidad Educativa Simon Bolivar,Oruro,Pendiente,LIB77666042,TIT77666042,2,3
+499,Colegio Aleman Santa Cruz,Oruro,Pendiente,LIB77666043,TIT77666043,3,4
+500,Unidad Educativa San Martin,Oruro,Pendiente,LIB77666044,TIT77666044,4,1
+501,Colegio Nacional Florida,Potosi,Pendiente,LIB77666045,TIT77666045,1,2
+502,Unidad Educativa La Salle,Potosi,Pendiente,LIB77666046,TIT77666046,2,3
+503,Colegio Santa Ana,Potosi,Pendiente,LIB77666047,TIT77666047,3,4
+504,Unidad Educativa Cristo Rey,Potosi,Pendiente,LIB77666048,TIT77666048,4,1
+505,Colegio San Agustin,Potosi,Pendiente,LIB77666049,TIT77666049,1,2
+506,Unidad Educativa Juan Pablo II,Potosi,Pendiente,LIB77666050,TIT77666050,2,3
+507,Colegio Domingo Savio,Potosi,Pendiente,LIB77666051,TIT77666051,3,4
+508,Unidad Educativa Simon Bolivar,Potosi,Pendiente,LIB77666052,TIT77666052,4,1
+509,Colegio Aleman Santa Cruz,Potosi,Pendiente,LIB77666053,TIT77666053,1,2
+510,Unidad Educativa San Martin,Potosi,Pendiente,LIB77666054,TIT77666054,2,3
+511,Colegio Nacional Florida,Trinidad,Pendiente,LIB77666055,TIT77666055,3,4
+512,Unidad Educativa La Salle,Trinidad,Pendiente,LIB77666056,TIT77666056,4,1
+513,Colegio Santa Ana,Trinidad,Pendiente,LIB77666057,TIT77666057,1,2
+514,Unidad Educativa Cristo Rey,Trinidad,Pendiente,LIB77666058,TIT77666058,2,3
+515,Colegio San Agustin,Trinidad,Pendiente,LIB77666059,TIT77666059,3,4
+516,Unidad Educativa Juan Pablo II,Trinidad,Pendiente,LIB77666060,TIT77666060,4,1
+517,Colegio Domingo Savio,Trinidad,Pendiente,LIB77666061,TIT77666061,1,2
+518,Unidad Educativa Simon Bolivar,Trinidad,Pendiente,LIB77666062,TIT77666062,2,3
+519,Colegio Aleman Santa Cruz,Trinidad,Pendiente,LIB77666063,TIT77666063,3,4
+520,Unidad Educativa San Martin,Trinidad,Pendiente,LIB77666064,TIT77666064,4,1
+521,Colegio Nacional Florida,Montero,Pendiente,LIB77666065,TIT77666065,1,2
+522,Unidad Educativa La Salle,Montero,Pendiente,LIB77666066,TIT77666066,2,3
+523,Colegio Santa Ana,Montero,Pendiente,LIB77666067,TIT77666067,3,4
+524,Unidad Educativa Cristo Rey,Montero,Pendiente,LIB77666068,TIT77666068,4,1
+525,Colegio San Agustin,Montero,Pendiente,LIB77666069,TIT77666069,1,2
+526,Unidad Educativa Juan Pablo II,Montero,Pendiente,LIB77666070,TIT77666070,2,3
+527,Colegio Domingo Savio,Montero,Pendiente,LIB77666071,TIT77666071,3,4
+528,Unidad Educativa Simon Bolivar,Montero,Pendiente,LIB77666072,TIT77666072,4,1
+529,Colegio Aleman Santa Cruz,Montero,Pendiente,LIB77666073,TIT77666073,1,2
+530,Unidad Educativa San Martin,Montero,Pendiente,LIB77666074,TIT77666074,2,3
+531,Colegio Nacional Florida,Warnes,Pendiente,LIB77666075,TIT77666075,3,4
+532,Unidad Educativa La Salle,Warnes,Pendiente,LIB77666076,TIT77666076,4,1
+533,Colegio Santa Ana,Warnes,Pendiente,LIB77666077,TIT77666077,1,2
+534,Unidad Educativa Cristo Rey,Warnes,Pendiente,LIB77666078,TIT77666078,2,3
+535,Colegio San Agustin,Warnes,Pendiente,LIB77666079,TIT77666079,3,4
+536,Unidad Educativa Juan Pablo II,Warnes,Pendiente,LIB77666080,TIT77666080,4,1
+537,Colegio Domingo Savio,Warnes,Pendiente,LIB77666081,TIT77666081,1,2
+538,Unidad Educativa Simon Bolivar,Warnes,Pendiente,LIB77666082,TIT77666082,2,3
+539,Colegio Aleman Santa Cruz,Warnes,Pendiente,LIB77666083,TIT77666083,3,4
+540,Unidad Educativa San Martin,Warnes,Pendiente,LIB77666084,TIT77666084,4,1
+541,Colegio Nacional Florida,Santa Cruz,Pendiente,LIB77666085,TIT77666085,1,2
+542,Unidad Educativa La Salle,Santa Cruz,Pendiente,LIB77666086,TIT77666086,2,3
+543,Colegio Santa Ana,Santa Cruz,Pendiente,LIB77666087,TIT77666087,3,4
+544,Unidad Educativa Cristo Rey,Santa Cruz,Pendiente,LIB77666088,TIT77666088,4,1
+545,Colegio San Agustin,Santa Cruz,Pendiente,LIB77666089,TIT77666089,1,2
+546,Unidad Educativa Juan Pablo II,Santa Cruz,Pendiente,LIB77666090,TIT77666090,2,3
+547,Colegio Domingo Savio,Santa Cruz,Pendiente,LIB77666091,TIT77666091,3,4
+548,Unidad Educativa Simon Bolivar,Santa Cruz,Pendiente,LIB77666092,TIT77666092,4,1
+549,Colegio Aleman Santa Cruz,Santa Cruz,Pendiente,LIB77666093,TIT77666093,1,2
+550,Unidad Educativa San Martin,Santa Cruz,Pendiente,LIB77666094,TIT77666094,2,3
+551,Colegio Nacional Florida,La Paz,Pendiente,LIB77666095,TIT77666095,3,4
+552,Unidad Educativa La Salle,La Paz,Pendiente,LIB77666096,TIT77666096,4,1
+553,Colegio Santa Ana,La Paz,Pendiente,LIB77666097,TIT77666097,1,2
+554,Unidad Educativa Cristo Rey,La Paz,Pendiente,LIB77666098,TIT77666098,2,3
+555,Colegio San Agustin,La Paz,Pendiente,LIB77666099,TIT77666099,3,4
+556,Unidad Educativa Juan Pablo II,La Paz,Pendiente,LIB77666100,TIT77666100,4,1
+557,Colegio Domingo Savio,La Paz,Pendiente,LIB77666101,TIT77666101,1,2
+558,Unidad Educativa Simon Bolivar,La Paz,Pendiente,LIB77666102,TIT77666102,2,3
+559,Colegio Aleman Santa Cruz,La Paz,Pendiente,LIB77666103,TIT77666103,3,4
+560,Unidad Educativa San Martin,La Paz,Pendiente,LIB77666104,TIT77666104,4,1
+561,Colegio Nacional Florida,Cochabamba,Pendiente,LIB77666105,TIT77666105,1,2
+562,Unidad Educativa La Salle,Cochabamba,Pendiente,LIB77666106,TIT77666106,2,3
+563,Colegio Santa Ana,Cochabamba,Pendiente,LIB77666107,TIT77666107,3,4
+564,Unidad Educativa Cristo Rey,Cochabamba,Pendiente,LIB77666108,TIT77666108,4,1
+565,Colegio San Agustin,Cochabamba,Pendiente,LIB77666109,TIT77666109,1,2
+566,Unidad Educativa Juan Pablo II,Cochabamba,Pendiente,LIB77666110,TIT77666110,2,3
+567,Colegio Domingo Savio,Cochabamba,Pendiente,LIB77666111,TIT77666111,3,4
+568,Unidad Educativa Simon Bolivar,Cochabamba,Pendiente,LIB77666112,TIT77666112,4,1
+569,Colegio Aleman Santa Cruz,Cochabamba,Pendiente,LIB77666113,TIT77666113,1,2
+570,Unidad Educativa San Martin,Cochabamba,Pendiente,LIB77666114,TIT77666114,2,3
+571,Colegio Nacional Florida,Sucre,Pendiente,LIB77666115,TIT77666115,3,4
+572,Unidad Educativa La Salle,Sucre,Pendiente,LIB77666116,TIT77666116,4,1
+573,Colegio Santa Ana,Sucre,Pendiente,LIB77666117,TIT77666117,1,2
+574,Unidad Educativa Cristo Rey,Sucre,Pendiente,LIB77666118,TIT77666118,2,3
+575,Colegio San Agustin,Sucre,Pendiente,LIB77666119,TIT77666119,3,4
+576,Unidad Educativa Juan Pablo II,Sucre,Pendiente,LIB77666120,TIT77666120,4,1
+577,Colegio Domingo Savio,Sucre,Pendiente,LIB77666121,TIT77666121,1,2
+578,Unidad Educativa Simon Bolivar,Sucre,Pendiente,LIB77666122,TIT77666122,2,3
+579,Colegio Aleman Santa Cruz,Sucre,Pendiente,LIB77666123,TIT77666123,3,4
+580,Unidad Educativa San Martin,Sucre,Pendiente,LIB77666124,TIT77666124,4,1
+581,Colegio Nacional Florida,Tarija,Pendiente,LIB77666125,TIT77666125,1,2
+582,Unidad Educativa La Salle,Tarija,Pendiente,LIB77666126,TIT77666126,2,3
+583,Colegio Santa Ana,Tarija,Pendiente,LIB77666127,TIT77666127,3,4
+584,Unidad Educativa Cristo Rey,Tarija,Pendiente,LIB77666128,TIT77666128,4,1
+585,Colegio San Agustin,Tarija,Pendiente,LIB77666129,TIT77666129,1,2
+586,Unidad Educativa Juan Pablo II,Tarija,Pendiente,LIB77666130,TIT77666130,2,3
+587,Colegio Domingo Savio,Tarija,Pendiente,LIB77666131,TIT77666131,3,4
+588,Unidad Educativa Simon Bolivar,Tarija,Pendiente,LIB77666132,TIT77666132,4,1
+589,Colegio Aleman Santa Cruz,Tarija,Pendiente,LIB77666133,TIT77666133,1,2
+590,Unidad Educativa San Martin,Tarija,Pendiente,LIB77666134,TIT77666134,2,3
+591,Colegio Nacional Florida,Oruro,Pendiente,LIB77666135,TIT77666135,3,4
+592,Unidad Educativa La Salle,Oruro,Pendiente,LIB77666136,TIT77666136,4,1
+593,Colegio Santa Ana,Oruro,Pendiente,LIB77666137,TIT77666137,1,2
+594,Unidad Educativa Cristo Rey,Oruro,Pendiente,LIB77666138,TIT77666138,2,3
+595,Colegio San Agustin,Oruro,Pendiente,LIB77666139,TIT77666139,3,4
+596,Unidad Educativa Juan Pablo II,Oruro,Pendiente,LIB77666140,TIT77666140,4,1
+597,Colegio Domingo Savio,Oruro,Pendiente,LIB77666141,TIT77666141,1,2
+598,Unidad Educativa Simon Bolivar,Oruro,Pendiente,LIB77666142,TIT77666142,2,3
+599,Colegio Aleman Santa Cruz,Oruro,Pendiente,LIB77666143,TIT77666143,3,4
+600,Unidad Educativa San Martin,Oruro,Pendiente,LIB77666144,TIT77666144,4,1
+601,Colegio Nacional Florida,Potosi,Pendiente,LIB77666145,TIT77666145,1,2
+602,Unidad Educativa La Salle,Potosi,Pendiente,LIB77666146,TIT77666146,2,3
+603,Colegio Santa Ana,Potosi,Pendiente,LIB77666147,TIT77666147,3,4
+604,Unidad Educativa Cristo Rey,Potosi,Pendiente,LIB77666148,TIT77666148,4,1
+605,Colegio San Agustin,Potosi,Pendiente,LIB77666149,TIT77666149,1,2
+606,Unidad Educativa Juan Pablo II,Potosi,Pendiente,LIB77666150,TIT77666150,2,3
+607,Colegio Domingo Savio,Potosi,Pendiente,LIB77666151,TIT77666151,3,4
+608,Unidad Educativa Simon Bolivar,Potosi,Pendiente,LIB77666152,TIT77666152,4,1
+609,Colegio Aleman Santa Cruz,Potosi,Pendiente,LIB77666153,TIT77666153,1,2
+610,Unidad Educativa San Martin,Potosi,Pendiente,LIB77666154,TIT77666154,2,3
+611,Colegio Nacional Florida,Trinidad,Pendiente,LIB77666155,TIT77666155,3,4
+612,Unidad Educativa La Salle,Trinidad,Pendiente,LIB77666156,TIT77666156,4,1
+613,Colegio Santa Ana,Trinidad,Pendiente,LIB77666157,TIT77666157,1,2
+614,Unidad Educativa Cristo Rey,Trinidad,Pendiente,LIB77666158,TIT77666158,2,3
+615,Colegio San Agustin,Trinidad,Pendiente,LIB77666159,TIT77666159,3,4
+616,Unidad Educativa Juan Pablo II,Trinidad,Pendiente,LIB77666160,TIT77666160,4,1
+617,Colegio Domingo Savio,Trinidad,Pendiente,LIB77666161,TIT77666161,1,2
+618,Unidad Educativa Simon Bolivar,Trinidad,Pendiente,LIB77666162,TIT77666162,2,3
+619,Colegio Aleman Santa Cruz,Trinidad,Pendiente,LIB77666163,TIT77666163,3,4
+620,Unidad Educativa San Martin,Trinidad,Pendiente,LIB77666164,TIT77666164,4,1
+621,Colegio Nacional Florida,Montero,Pendiente,LIB77666165,TIT77666165,1,2
+622,Unidad Educativa La Salle,Montero,Pendiente,LIB77666166,TIT77666166,2,3
+623,Colegio Santa Ana,Montero,Pendiente,LIB77666167,TIT77666167,3,4
+624,Unidad Educativa Cristo Rey,Montero,Pendiente,LIB77666168,TIT77666168,4,1
+625,Colegio San Agustin,Montero,Pendiente,LIB77666169,TIT77666169,1,2
+626,Unidad Educativa Juan Pablo II,Montero,Pendiente,LIB77666170,TIT77666170,2,3
+627,Colegio Domingo Savio,Montero,Pendiente,LIB77666171,TIT77666171,3,4
+628,Unidad Educativa Simon Bolivar,Montero,Pendiente,LIB77666172,TIT77666172,4,1
+629,Colegio Aleman Santa Cruz,Montero,Pendiente,LIB77666173,TIT77666173,1,2
+630,Unidad Educativa San Martin,Montero,Pendiente,LIB77666174,TIT77666174,2,3
+631,Colegio Nacional Florida,Warnes,Pendiente,LIB77666175,TIT77666175,3,4
+632,Unidad Educativa La Salle,Warnes,Pendiente,LIB77666176,TIT77666176,4,1
+633,Colegio Santa Ana,Warnes,Pendiente,LIB77666177,TIT77666177,1,2
+634,Unidad Educativa Cristo Rey,Warnes,Pendiente,LIB77666178,TIT77666178,2,3
+635,Colegio San Agustin,Warnes,Pendiente,LIB77666179,TIT77666179,3,4
+636,Unidad Educativa Juan Pablo II,Warnes,Pendiente,LIB77666180,TIT77666180,4,1
+637,Colegio Domingo Savio,Warnes,Pendiente,LIB77666181,TIT77666181,1,2
+638,Unidad Educativa Simon Bolivar,Warnes,Pendiente,LIB77666182,TIT77666182,2,3
+639,Colegio Aleman Santa Cruz,Warnes,Pendiente,LIB77666183,TIT77666183,3,4
+640,Unidad Educativa San Martin,Warnes,Pendiente,LIB77666184,TIT77666184,4,1
+641,Colegio Nacional Florida,Santa Cruz,Pendiente,LIB77666185,TIT77666185,1,2
+642,Unidad Educativa La Salle,Santa Cruz,Pendiente,LIB77666186,TIT77666186,2,3
+643,Colegio Santa Ana,Santa Cruz,Pendiente,LIB77666187,TIT77666187,3,4
+644,Unidad Educativa Cristo Rey,Santa Cruz,Pendiente,LIB77666188,TIT77666188,4,1
+645,Colegio San Agustin,Santa Cruz,Pendiente,LIB77666189,TIT77666189,1,2
+646,Unidad Educativa Juan Pablo II,Santa Cruz,Pendiente,LIB77666190,TIT77666190,2,3
+647,Colegio Domingo Savio,Santa Cruz,Pendiente,LIB77666191,TIT77666191,3,4
+648,Unidad Educativa Simon Bolivar,Santa Cruz,Pendiente,LIB77666192,TIT77666192,4,1
+649,Colegio Aleman Santa Cruz,Santa Cruz,Pendiente,LIB77666193,TIT77666193,1,2
+650,Unidad Educativa San Martin,Santa Cruz,Pendiente,LIB77666194,TIT77666194,2,3
+651,Colegio Nacional Florida,La Paz,Pendiente,LIB77666195,TIT77666195,3,4
+652,Unidad Educativa La Salle,La Paz,Pendiente,LIB77666196,TIT77666196,4,1
+653,Colegio Santa Ana,La Paz,Pendiente,LIB77666197,TIT77666197,1,2
+654,Unidad Educativa Cristo Rey,La Paz,Pendiente,LIB77666198,TIT77666198,2,3
+655,Colegio San Agustin,La Paz,Pendiente,LIB77666199,TIT77666199,3,4
+656,Unidad Educativa Juan Pablo II,La Paz,Pendiente,LIB77666200,TIT77666200,4,1
+657,Colegio Domingo Savio,La Paz,Pendiente,LIB77666201,TIT77666201,1,2
+658,Unidad Educativa Simon Bolivar,La Paz,Pendiente,LIB77666202,TIT77666202,2,3
+659,Colegio Aleman Santa Cruz,La Paz,Pendiente,LIB77666203,TIT77666203,3,4
+660,Unidad Educativa San Martin,La Paz,Pendiente,LIB77666204,TIT77666204,4,1
+661,Colegio Nacional Florida,Cochabamba,Pendiente,LIB77666205,TIT77666205,1,2
+662,Unidad Educativa La Salle,Cochabamba,Pendiente,LIB77666206,TIT77666206,2,3
+663,Colegio Santa Ana,Cochabamba,Pendiente,LIB77666207,TIT77666207,3,4
+664,Unidad Educativa Cristo Rey,Cochabamba,Pendiente,LIB77666208,TIT77666208,4,1
+665,Colegio San Agustin,Cochabamba,Pendiente,LIB77666209,TIT77666209,1,2
+666,Unidad Educativa Juan Pablo II,Cochabamba,Pendiente,LIB77666210,TIT77666210,2,3
+667,Colegio Domingo Savio,Cochabamba,Pendiente,LIB77666211,TIT77666211,3,4
+668,Unidad Educativa Simon Bolivar,Cochabamba,Pendiente,LIB77666212,TIT77666212,4,1
+669,Colegio Aleman Santa Cruz,Cochabamba,Pendiente,LIB77666213,TIT77666213,1,2
+670,Unidad Educativa San Martin,Cochabamba,Pendiente,LIB77666214,TIT77666214,2,3
+671,Colegio Nacional Florida,Sucre,Pendiente,LIB77666215,TIT77666215,3,4
+672,Unidad Educativa La Salle,Sucre,Pendiente,LIB77666216,TIT77666216,4,1
+673,Colegio Santa Ana,Sucre,Pendiente,LIB77666217,TIT77666217,1,2
+674,Unidad Educativa Cristo Rey,Sucre,Pendiente,LIB77666218,TIT77666218,2,3
+675,Colegio San Agustin,Sucre,Pendiente,LIB77666219,TIT77666219,3,4
+676,Unidad Educativa Juan Pablo II,Sucre,Pendiente,LIB77666220,TIT77666220,4,1
+677,Colegio Domingo Savio,Sucre,Pendiente,LIB77666221,TIT77666221,1,2
+678,Unidad Educativa Simon Bolivar,Sucre,Pendiente,LIB77666222,TIT77666222,2,3
+679,Colegio Aleman Santa Cruz,Sucre,Pendiente,LIB77666223,TIT77666223,3,4
+680,Unidad Educativa San Martin,Sucre,Pendiente,LIB77666224,TIT77666224,4,1
+681,Colegio Nacional Florida,Tarija,Pendiente,LIB77666225,TIT77666225,1,2
+682,Unidad Educativa La Salle,Tarija,Pendiente,LIB77666226,TIT77666226,2,3
+683,Colegio Santa Ana,Tarija,Pendiente,LIB77666227,TIT77666227,3,4
+684,Unidad Educativa Cristo Rey,Tarija,Pendiente,LIB77666228,TIT77666228,4,1
+685,Colegio San Agustin,Tarija,Pendiente,LIB77666229,TIT77666229,1,2
+686,Unidad Educativa Juan Pablo II,Tarija,Pendiente,LIB77666230,TIT77666230,2,3
+687,Colegio Domingo Savio,Tarija,Pendiente,LIB77666231,TIT77666231,3,4
+688,Unidad Educativa Simon Bolivar,Tarija,Pendiente,LIB77666232,TIT77666232,4,1
+689,Colegio Aleman Santa Cruz,Tarija,Pendiente,LIB77666233,TIT77666233,1,2
+690,Unidad Educativa San Martin,Tarija,Pendiente,LIB77666234,TIT77666234,2,3
+691,Colegio Nacional Florida,Oruro,Pendiente,LIB77666235,TIT77666235,3,4
+692,Unidad Educativa La Salle,Oruro,Pendiente,LIB77666236,TIT77666236,4,1
+693,Colegio Santa Ana,Oruro,Pendiente,LIB77666237,TIT77666237,1,2
+694,Unidad Educativa Cristo Rey,Oruro,Pendiente,LIB77666238,TIT77666238,2,3
+695,Colegio San Agustin,Oruro,Pendiente,LIB77666239,TIT77666239,3,4
+696,Unidad Educativa Juan Pablo II,Oruro,Pendiente,LIB77666240,TIT77666240,4,1
+697,Colegio Domingo Savio,Oruro,Pendiente,LIB77666241,TIT77666241,1,2
+698,Unidad Educativa Simon Bolivar,Oruro,Pendiente,LIB77666242,TIT77666242,2,3
+699,Colegio Aleman Santa Cruz,Oruro,Pendiente,LIB77666243,TIT77666243,3,4
+700,Unidad Educativa San Martin,Oruro,Pendiente,LIB77666244,TIT77666244,4,1
+701,Colegio Nacional Florida,Potosi,Pendiente,LIB77666245,TIT77666245,1,2
+702,Unidad Educativa La Salle,Potosi,Pendiente,LIB77666246,TIT77666246,2,3
+703,Colegio Santa Ana,Potosi,Pendiente,LIB77666247,TIT77666247,3,4
+704,Unidad Educativa Cristo Rey,Potosi,Pendiente,LIB77666248,TIT77666248,4,1
+705,Colegio San Agustin,Potosi,Pendiente,LIB77666249,TIT77666249,1,2
+706,Unidad Educativa Juan Pablo II,Potosi,Pendiente,LIB77666250,TIT77666250,2,3
+707,Colegio Domingo Savio,Potosi,Pendiente,LIB77666251,TIT77666251,3,4
+708,Unidad Educativa Simon Bolivar,Potosi,Pendiente,LIB77666252,TIT77666252,4,1
+709,Colegio Aleman Santa Cruz,Potosi,Pendiente,LIB77666253,TIT77666253,1,2
+710,Unidad Educativa San Martin,Potosi,Pendiente,LIB77666254,TIT77666254,2,3
+711,Colegio Nacional Florida,Trinidad,Pendiente,LIB77666255,TIT77666255,3,4
+712,Unidad Educativa La Salle,Trinidad,Pendiente,LIB77666256,TIT77666256,4,1
+713,Colegio Santa Ana,Trinidad,Pendiente,LIB77666257,TIT77666257,1,2
+714,Unidad Educativa Cristo Rey,Trinidad,Pendiente,LIB77666258,TIT77666258,2,3
+715,Colegio San Agustin,Trinidad,Pendiente,LIB77666259,TIT77666259,3,4
+716,Unidad Educativa Juan Pablo II,Trinidad,Pendiente,LIB77666260,TIT77666260,4,1
+717,Colegio Domingo Savio,Trinidad,Pendiente,LIB77666261,TIT77666261,1,2
+718,Unidad Educativa Simon Bolivar,Trinidad,Pendiente,LIB77666262,TIT77666262,2,3
+719,Colegio Aleman Santa Cruz,Trinidad,Pendiente,LIB77666263,TIT77666263,3,4
+720,Unidad Educativa San Martin,Trinidad,Pendiente,LIB77666264,TIT77666264,4,1
+721,Colegio Nacional Florida,Montero,Pendiente,LIB77666265,TIT77666265,1,2
+722,Unidad Educativa La Salle,Montero,Pendiente,LIB77666266,TIT77666266,2,3
+723,Colegio Santa Ana,Montero,Pendiente,LIB77666267,TIT77666267,3,4
+724,Unidad Educativa Cristo Rey,Montero,Pendiente,LIB77666268,TIT77666268,4,1
+725,Colegio San Agustin,Montero,Pendiente,LIB77666269,TIT77666269,1,2
+726,Unidad Educativa Juan Pablo II,Montero,Pendiente,LIB77666270,TIT77666270,2,3
+727,Colegio Domingo Savio,Montero,Pendiente,LIB77666271,TIT77666271,3,4
+728,Unidad Educativa Simon Bolivar,Montero,Pendiente,LIB77666272,TIT77666272,4,1
+729,Colegio Aleman Santa Cruz,Montero,Pendiente,LIB77666273,TIT77666273,1,2
+730,Unidad Educativa San Martin,Montero,Pendiente,LIB77666274,TIT77666274,2,3
+731,Colegio Nacional Florida,Warnes,Pendiente,LIB77666275,TIT77666275,3,4
+732,Unidad Educativa La Salle,Warnes,Pendiente,LIB77666276,TIT77666276,4,1
+733,Colegio Santa Ana,Warnes,Pendiente,LIB77666277,TIT77666277,1,2
+734,Unidad Educativa Cristo Rey,Warnes,Pendiente,LIB77666278,TIT77666278,2,3
+735,Colegio San Agustin,Warnes,Pendiente,LIB77666279,TIT77666279,3,4
+736,Unidad Educativa Juan Pablo II,Warnes,Pendiente,LIB77666280,TIT77666280,4,1
+737,Colegio Domingo Savio,Warnes,Pendiente,LIB77666281,TIT77666281,1,2
+738,Unidad Educativa Simon Bolivar,Warnes,Pendiente,LIB77666282,TIT77666282,2,3
+739,Colegio Aleman Santa Cruz,Warnes,Pendiente,LIB77666283,TIT77666283,3,4
+740,Unidad Educativa San Martin,Warnes,Pendiente,LIB77666284,TIT77666284,4,1
+741,Colegio Nacional Florida,Santa Cruz,Pendiente,LIB77666285,TIT77666285,1,2
+742,Unidad Educativa La Salle,Santa Cruz,Pendiente,LIB77666286,TIT77666286,2,3
+743,Colegio Santa Ana,Santa Cruz,Pendiente,LIB77666287,TIT77666287,3,4
+744,Unidad Educativa Cristo Rey,Santa Cruz,Pendiente,LIB77666288,TIT77666288,4,1
+745,Colegio San Agustin,Santa Cruz,Pendiente,LIB77666289,TIT77666289,1,2
+746,Unidad Educativa Juan Pablo II,Santa Cruz,Pendiente,LIB77666290,TIT77666290,2,3
+747,Colegio Domingo Savio,Santa Cruz,Pendiente,LIB77666291,TIT77666291,3,4
+748,Unidad Educativa Simon Bolivar,Santa Cruz,Pendiente,LIB77666292,TIT77666292,4,1
+749,Colegio Aleman Santa Cruz,Santa Cruz,Pendiente,LIB77666293,TIT77666293,1,2
+750,Unidad Educativa San Martin,Santa Cruz,Pendiente,LIB77666294,TIT77666294,2,3
+751,Colegio Nacional Florida,La Paz,Pendiente,LIB77666295,TIT77666295,3,4
+752,Unidad Educativa La Salle,La Paz,Pendiente,LIB77666296,TIT77666296,4,1
+753,Colegio Santa Ana,La Paz,Pendiente,LIB77666297,TIT77666297,1,2
+754,Unidad Educativa Cristo Rey,La Paz,Pendiente,LIB77666298,TIT77666298,2,3
+755,Colegio San Agustin,La Paz,Pendiente,LIB77666299,TIT77666299,3,4
+756,Unidad Educativa Juan Pablo II,La Paz,Pendiente,LIB77666300,TIT77666300,4,1
+757,Colegio Domingo Savio,La Paz,Pendiente,LIB77666301,TIT77666301,1,2
+758,Unidad Educativa Simon Bolivar,La Paz,Pendiente,LIB77666302,TIT77666302,2,3
+759,Colegio Aleman Santa Cruz,La Paz,Pendiente,LIB77666303,TIT77666303,3,4
+760,Unidad Educativa San Martin,La Paz,Pendiente,LIB77666304,TIT77666304,4,1
+761,Colegio Nacional Florida,Cochabamba,Pendiente,LIB77666305,TIT77666305,1,2
+762,Unidad Educativa La Salle,Cochabamba,Pendiente,LIB77666306,TIT77666306,2,3
+763,Colegio Santa Ana,Cochabamba,Pendiente,LIB77666307,TIT77666307,3,4
+764,Unidad Educativa Cristo Rey,Cochabamba,Pendiente,LIB77666308,TIT77666308,4,1
+765,Colegio San Agustin,Cochabamba,Pendiente,LIB77666309,TIT77666309,1,2
+766,Unidad Educativa Juan Pablo II,Cochabamba,Pendiente,LIB77666310,TIT77666310,2,3
+767,Colegio Domingo Savio,Cochabamba,Pendiente,LIB77666311,TIT77666311,3,4
+768,Unidad Educativa Simon Bolivar,Cochabamba,Pendiente,LIB77666312,TIT77666312,4,1
+769,Colegio Aleman Santa Cruz,Cochabamba,Pendiente,LIB77666313,TIT77666313,1,2
+770,Unidad Educativa San Martin,Cochabamba,Pendiente,LIB77666314,TIT77666314,2,3
+771,Colegio Nacional Florida,Sucre,Pendiente,LIB77666315,TIT77666315,3,4
+772,Unidad Educativa La Salle,Sucre,Pendiente,LIB77666316,TIT77666316,4,1
+773,Colegio Santa Ana,Sucre,Pendiente,LIB77666317,TIT77666317,1,2
+774,Unidad Educativa Cristo Rey,Sucre,Pendiente,LIB77666318,TIT77666318,2,3
+775,Colegio San Agustin,Sucre,Pendiente,LIB77666319,TIT77666319,3,4
+776,Unidad Educativa Juan Pablo II,Sucre,Pendiente,LIB77666320,TIT77666320,4,1
+777,Colegio Domingo Savio,Sucre,Pendiente,LIB77666321,TIT77666321,1,2
+778,Unidad Educativa Simon Bolivar,Sucre,Pendiente,LIB77666322,TIT77666322,2,3
+779,Colegio Aleman Santa Cruz,Sucre,Pendiente,LIB77666323,TIT77666323,3,4
+780,Unidad Educativa San Martin,Sucre,Pendiente,LIB77666324,TIT77666324,4,1
+781,Colegio Nacional Florida,Tarija,Pendiente,LIB77666325,TIT77666325,1,2
+782,Unidad Educativa La Salle,Tarija,Pendiente,LIB77666326,TIT77666326,2,3
+783,Colegio Santa Ana,Tarija,Pendiente,LIB77666327,TIT77666327,3,4
+784,Unidad Educativa Cristo Rey,Tarija,Pendiente,LIB77666328,TIT77666328,4,1
+785,Colegio San Agustin,Tarija,Pendiente,LIB77666329,TIT77666329,1,2
+786,Unidad Educativa Juan Pablo II,Tarija,Pendiente,LIB77666330,TIT77666330,2,3
+787,Colegio Domingo Savio,Tarija,Pendiente,LIB77666331,TIT77666331,3,4
+788,Unidad Educativa Simon Bolivar,Tarija,Pendiente,LIB77666332,TIT77666332,4,1
+789,Colegio Aleman Santa Cruz,Tarija,Pendiente,LIB77666333,TIT77666333,1,2
+790,Unidad Educativa San Martin,Tarija,Pendiente,LIB77666334,TIT77666334,2,3
+791,Colegio Nacional Florida,Oruro,Pendiente,LIB77666335,TIT77666335,3,4
+792,Unidad Educativa La Salle,Oruro,Pendiente,LIB77666336,TIT77666336,4,1
+793,Colegio Santa Ana,Oruro,Pendiente,LIB77666337,TIT77666337,1,2
+794,Unidad Educativa Cristo Rey,Oruro,Pendiente,LIB77666338,TIT77666338,2,3
+795,Colegio San Agustin,Oruro,Pendiente,LIB77666339,TIT77666339,3,4
+796,Unidad Educativa Juan Pablo II,Oruro,Pendiente,LIB77666340,TIT77666340,4,1
+797,Colegio Domingo Savio,Oruro,Pendiente,LIB77666341,TIT77666341,1,2
+798,Unidad Educativa Simon Bolivar,Oruro,Pendiente,LIB77666342,TIT77666342,2,3
+799,Colegio Aleman Santa Cruz,Oruro,Pendiente,LIB77666343,TIT77666343,3,4
+800,Unidad Educativa San Martin,Oruro,Pendiente,LIB77666344,TIT77666344,4,1
+801,Colegio Nacional Florida,Potosi,Pendiente,LIB77666345,TIT77666345,1,2
+802,Unidad Educativa La Salle,Potosi,Pendiente,LIB77666346,TIT77666346,2,3
+803,Colegio Santa Ana,Potosi,Pendiente,LIB77666347,TIT77666347,3,4
+804,Unidad Educativa Cristo Rey,Potosi,Pendiente,LIB77666348,TIT77666348,4,1
+805,Colegio San Agustin,Potosi,Pendiente,LIB77666349,TIT77666349,1,2
+806,Unidad Educativa Juan Pablo II,Potosi,Pendiente,LIB77666350,TIT77666350,2,3
+807,Colegio Domingo Savio,Potosi,Pendiente,LIB77666351,TIT77666351,3,4
+808,Unidad Educativa Simon Bolivar,Potosi,Pendiente,LIB77666352,TIT77666352,4,1
+809,Colegio Aleman Santa Cruz,Potosi,Pendiente,LIB77666353,TIT77666353,1,2
+810,Unidad Educativa San Martin,Potosi,Pendiente,LIB77666354,TIT77666354,2,3
+811,Colegio Nacional Florida,Trinidad,Pendiente,LIB77666355,TIT77666355,3,4
+812,Unidad Educativa La Salle,Trinidad,Pendiente,LIB77666356,TIT77666356,4,1
+813,Colegio Santa Ana,Trinidad,Pendiente,LIB77666357,TIT77666357,1,2
+814,Unidad Educativa Cristo Rey,Trinidad,Pendiente,LIB77666358,TIT77666358,2,3
+815,Colegio San Agustin,Trinidad,Pendiente,LIB77666359,TIT77666359,3,4
+816,Unidad Educativa Juan Pablo II,Trinidad,Pendiente,LIB77666360,TIT77666360,4,1
+817,Colegio Domingo Savio,Trinidad,Pendiente,LIB77666361,TIT77666361,1,2
+818,Unidad Educativa Simon Bolivar,Trinidad,Pendiente,LIB77666362,TIT77666362,2,3
+819,Colegio Aleman Santa Cruz,Trinidad,Pendiente,LIB77666363,TIT77666363,3,4
+820,Unidad Educativa San Martin,Trinidad,Pendiente,LIB77666364,TIT77666364,4,1
+821,Colegio Nacional Florida,Montero,Pendiente,LIB77666365,TIT77666365,1,2
+822,Unidad Educativa La Salle,Montero,Pendiente,LIB77666366,TIT77666366,2,3
+823,Colegio Santa Ana,Montero,Pendiente,LIB77666367,TIT77666367,3,4
+824,Unidad Educativa Cristo Rey,Montero,Pendiente,LIB77666368,TIT77666368,4,1
+825,Colegio San Agustin,Montero,Pendiente,LIB77666369,TIT77666369,1,2
+826,Unidad Educativa Juan Pablo II,Montero,Pendiente,LIB77666370,TIT77666370,2,3
+827,Colegio Domingo Savio,Montero,Pendiente,LIB77666371,TIT77666371,3,4
+828,Unidad Educativa Simon Bolivar,Montero,Pendiente,LIB77666372,TIT77666372,4,1
+829,Colegio Aleman Santa Cruz,Montero,Pendiente,LIB77666373,TIT77666373,1,2
+830,Unidad Educativa San Martin,Montero,Pendiente,LIB77666374,TIT77666374,2,3
+831,Colegio Nacional Florida,Warnes,Pendiente,LIB77666375,TIT77666375,3,4
+832,Unidad Educativa La Salle,Warnes,Pendiente,LIB77666376,TIT77666376,4,1
+833,Colegio Santa Ana,Warnes,Pendiente,LIB77666377,TIT77666377,1,2
+834,Unidad Educativa Cristo Rey,Warnes,Pendiente,LIB77666378,TIT77666378,2,3
+835,Colegio San Agustin,Warnes,Pendiente,LIB77666379,TIT77666379,3,4
+836,Unidad Educativa Juan Pablo II,Warnes,Pendiente,LIB77666380,TIT77666380,4,1
+837,Colegio Domingo Savio,Warnes,Pendiente,LIB77666381,TIT77666381,1,2
+838,Unidad Educativa Simon Bolivar,Warnes,Pendiente,LIB77666382,TIT77666382,2,3
+839,Colegio Aleman Santa Cruz,Warnes,Pendiente,LIB77666383,TIT77666383,3,4
+840,Unidad Educativa San Martin,Warnes,Pendiente,LIB77666384,TIT77666384,4,1
+841,Colegio Nacional Florida,Santa Cruz,Pendiente,LIB77666385,TIT77666385,1,2
+842,Unidad Educativa La Salle,Santa Cruz,Pendiente,LIB77666386,TIT77666386,2,3
+843,Colegio Santa Ana,Santa Cruz,Pendiente,LIB77666387,TIT77666387,3,4
+844,Unidad Educativa Cristo Rey,Santa Cruz,Pendiente,LIB77666388,TIT77666388,4,1
+845,Colegio San Agustin,Santa Cruz,Pendiente,LIB77666389,TIT77666389,1,2
+846,Unidad Educativa Juan Pablo II,Santa Cruz,Pendiente,LIB77666390,TIT77666390,2,3
+847,Colegio Domingo Savio,Santa Cruz,Pendiente,LIB77666391,TIT77666391,3,4
+848,Unidad Educativa Simon Bolivar,Santa Cruz,Pendiente,LIB77666392,TIT77666392,4,1
+849,Colegio Aleman Santa Cruz,Santa Cruz,Pendiente,LIB77666393,TIT77666393,1,2
+850,Unidad Educativa San Martin,Santa Cruz,Pendiente,LIB77666394,TIT77666394,2,3
+851,Colegio Nacional Florida,La Paz,Pendiente,LIB77666395,TIT77666395,3,4
+852,Unidad Educativa La Salle,La Paz,Pendiente,LIB77666396,TIT77666396,4,1
+853,Colegio Santa Ana,La Paz,Pendiente,LIB77666397,TIT77666397,1,2
+854,Unidad Educativa Cristo Rey,La Paz,Pendiente,LIB77666398,TIT77666398,2,3
+855,Colegio San Agustin,La Paz,Pendiente,LIB77666399,TIT77666399,3,4
+856,Unidad Educativa Juan Pablo II,La Paz,Pendiente,LIB77666400,TIT77666400,4,1
+857,Colegio Domingo Savio,La Paz,Pendiente,LIB77666401,TIT77666401,1,2
+858,Unidad Educativa Simon Bolivar,La Paz,Pendiente,LIB77666402,TIT77666402,2,3
+859,Colegio Aleman Santa Cruz,La Paz,Pendiente,LIB77666403,TIT77666403,3,4
+860,Unidad Educativa San Martin,La Paz,Pendiente,LIB77666404,TIT77666404,4,1
+861,Colegio Nacional Florida,Cochabamba,Pendiente,LIB77666405,TIT77666405,1,2
+862,Unidad Educativa La Salle,Cochabamba,Pendiente,LIB77666406,TIT77666406,2,3
+863,Colegio Santa Ana,Cochabamba,Pendiente,LIB77666407,TIT77666407,3,4
+864,Unidad Educativa Cristo Rey,Cochabamba,Pendiente,LIB77666408,TIT77666408,4,1
+865,Colegio San Agustin,Cochabamba,Pendiente,LIB77666409,TIT77666409,1,2
+866,Unidad Educativa Juan Pablo II,Cochabamba,Pendiente,LIB77666410,TIT77666410,2,3
+867,Colegio Domingo Savio,Cochabamba,Pendiente,LIB77666411,TIT77666411,3,4
+868,Unidad Educativa Simon Bolivar,Cochabamba,Pendiente,LIB77666412,TIT77666412,4,1
+869,Colegio Aleman Santa Cruz,Cochabamba,Pendiente,LIB77666413,TIT77666413,1,2
+870,Unidad Educativa San Martin,Cochabamba,Pendiente,LIB77666414,TIT77666414,2,3
+871,Colegio Nacional Florida,Sucre,Pendiente,LIB77666415,TIT77666415,3,4
+872,Unidad Educativa La Salle,Sucre,Pendiente,LIB77666416,TIT77666416,4,1
+873,Colegio Santa Ana,Sucre,Pendiente,LIB77666417,TIT77666417,1,2
+874,Unidad Educativa Cristo Rey,Sucre,Pendiente,LIB77666418,TIT77666418,2,3
+875,Colegio San Agustin,Sucre,Pendiente,LIB77666419,TIT77666419,3,4
+876,Unidad Educativa Juan Pablo II,Sucre,Pendiente,LIB77666420,TIT77666420,4,1
+877,Colegio Domingo Savio,Sucre,Pendiente,LIB77666421,TIT77666421,1,2
+878,Unidad Educativa Simon Bolivar,Sucre,Pendiente,LIB77666422,TIT77666422,2,3
+879,Colegio Aleman Santa Cruz,Sucre,Pendiente,LIB77666423,TIT77666423,3,4
+880,Unidad Educativa San Martin,Sucre,Pendiente,LIB77666424,TIT77666424,4,1
+881,Colegio Nacional Florida,Tarija,Pendiente,LIB77666425,TIT77666425,1,2
+882,Unidad Educativa La Salle,Tarija,Pendiente,LIB77666426,TIT77666426,2,3
+883,Colegio Santa Ana,Tarija,Pendiente,LIB77666427,TIT77666427,3,4
+884,Unidad Educativa Cristo Rey,Tarija,Pendiente,LIB77666428,TIT77666428,4,1
+885,Colegio San Agustin,Tarija,Pendiente,LIB77666429,TIT77666429,1,2
+886,Unidad Educativa Juan Pablo II,Tarija,Pendiente,LIB77666430,TIT77666430,2,3
+887,Colegio Domingo Savio,Tarija,Pendiente,LIB77666431,TIT77666431,3,4
+888,Unidad Educativa Simon Bolivar,Tarija,Pendiente,LIB77666432,TIT77666432,4,1
+889,Colegio Aleman Santa Cruz,Tarija,Pendiente,LIB77666433,TIT77666433,1,2
+890,Unidad Educativa San Martin,Tarija,Pendiente,LIB77666434,TIT77666434,2,3
+891,Colegio Nacional Florida,Oruro,Pendiente,LIB77666435,TIT77666435,3,4
+892,Unidad Educativa La Salle,Oruro,Pendiente,LIB77666436,TIT77666436,4,1
+893,Colegio Santa Ana,Oruro,Pendiente,LIB77666437,TIT77666437,1,2
+894,Unidad Educativa Cristo Rey,Oruro,Pendiente,LIB77666438,TIT77666438,2,3
+895,Colegio San Agustin,Oruro,Pendiente,LIB77666439,TIT77666439,3,4
+896,Unidad Educativa Juan Pablo II,Oruro,Pendiente,LIB77666440,TIT77666440,4,1
+897,Colegio Domingo Savio,Oruro,Pendiente,LIB77666441,TIT77666441,1,2
+898,Unidad Educativa Simon Bolivar,Oruro,Pendiente,LIB77666442,TIT77666442,2,3
+899,Colegio Aleman Santa Cruz,Oruro,Pendiente,LIB77666443,TIT77666443,3,4
+900,Unidad Educativa San Martin,Oruro,Pendiente,LIB77666444,TIT77666444,4,1
+901,Colegio Nacional Florida,Potosi,Pendiente,LIB77666445,TIT77666445,1,2
+902,Unidad Educativa La Salle,Potosi,Pendiente,LIB77666446,TIT77666446,2,3
+903,Colegio Santa Ana,Potosi,Pendiente,LIB77666447,TIT77666447,3,4
+904,Unidad Educativa Cristo Rey,Potosi,Pendiente,LIB77666448,TIT77666448,4,1
+905,Colegio San Agustin,Potosi,Pendiente,LIB77666449,TIT77666449,1,2
+906,Unidad Educativa Juan Pablo II,Potosi,Pendiente,LIB77666450,TIT77666450,2,3
+907,Colegio Domingo Savio,Potosi,Pendiente,LIB77666451,TIT77666451,3,4
+908,Unidad Educativa Simon Bolivar,Potosi,Pendiente,LIB77666452,TIT77666452,4,1
+909,Colegio Aleman Santa Cruz,Potosi,Pendiente,LIB77666453,TIT77666453,1,2
+910,Unidad Educativa San Martin,Potosi,Pendiente,LIB77666454,TIT77666454,2,3
+911,Colegio Nacional Florida,Trinidad,Pendiente,LIB77666455,TIT77666455,3,4
+912,Unidad Educativa La Salle,Trinidad,Pendiente,LIB77666456,TIT77666456,4,1
+913,Colegio Santa Ana,Trinidad,Pendiente,LIB77666457,TIT77666457,1,2
+914,Unidad Educativa Cristo Rey,Trinidad,Pendiente,LIB77666458,TIT77666458,2,3
+915,Colegio San Agustin,Trinidad,Pendiente,LIB77666459,TIT77666459,3,4
+916,Unidad Educativa Juan Pablo II,Trinidad,Pendiente,LIB77666460,TIT77666460,4,1
+917,Colegio Domingo Savio,Trinidad,Pendiente,LIB77666461,TIT77666461,1,2
+918,Unidad Educativa Simon Bolivar,Trinidad,Pendiente,LIB77666462,TIT77666462,2,3
+919,Colegio Aleman Santa Cruz,Trinidad,Pendiente,LIB77666463,TIT77666463,3,4
+920,Unidad Educativa San Martin,Trinidad,Pendiente,LIB77666464,TIT77666464,4,1
+921,Colegio Nacional Florida,Montero,Pendiente,LIB77666465,TIT77666465,1,2
+922,Unidad Educativa La Salle,Montero,Pendiente,LIB77666466,TIT77666466,2,3
+923,Colegio Santa Ana,Montero,Pendiente,LIB77666467,TIT77666467,3,4
+924,Unidad Educativa Cristo Rey,Montero,Pendiente,LIB77666468,TIT77666468,4,1
+925,Colegio San Agustin,Montero,Pendiente,LIB77666469,TIT77666469,1,2
+926,Unidad Educativa Juan Pablo II,Montero,Pendiente,LIB77666470,TIT77666470,2,3
+927,Colegio Domingo Savio,Montero,Pendiente,LIB77666471,TIT77666471,3,4
+928,Unidad Educativa Simon Bolivar,Montero,Pendiente,LIB77666472,TIT77666472,4,1
+929,Colegio Aleman Santa Cruz,Montero,Pendiente,LIB77666473,TIT77666473,1,2
+930,Unidad Educativa San Martin,Montero,Pendiente,LIB77666474,TIT77666474,2,3
+931,Colegio Nacional Florida,Warnes,Pendiente,LIB77666475,TIT77666475,3,4
+932,Unidad Educativa La Salle,Warnes,Pendiente,LIB77666476,TIT77666476,4,1
+933,Colegio Santa Ana,Warnes,Pendiente,LIB77666477,TIT77666477,1,2
+934,Unidad Educativa Cristo Rey,Warnes,Pendiente,LIB77666478,TIT77666478,2,3
+935,Colegio San Agustin,Warnes,Pendiente,LIB77666479,TIT77666479,3,4
+936,Unidad Educativa Juan Pablo II,Warnes,Pendiente,LIB77666480,TIT77666480,4,1
+937,Colegio Domingo Savio,Warnes,Pendiente,LIB77666481,TIT77666481,1,2
+938,Unidad Educativa Simon Bolivar,Warnes,Pendiente,LIB77666482,TIT77666482,2,3
+939,Colegio Aleman Santa Cruz,Warnes,Pendiente,LIB77666483,TIT77666483,3,4
+940,Unidad Educativa San Martin,Warnes,Pendiente,LIB77666484,TIT77666484,4,1
+941,Colegio Nacional Florida,Santa Cruz,Pendiente,LIB77666485,TIT77666485,1,2
+942,Unidad Educativa La Salle,Santa Cruz,Pendiente,LIB77666486,TIT77666486,2,3
+943,Colegio Santa Ana,Santa Cruz,Pendiente,LIB77666487,TIT77666487,3,4
+944,Unidad Educativa Cristo Rey,Santa Cruz,Pendiente,LIB77666488,TIT77666488,4,1
+945,Colegio San Agustin,Santa Cruz,Pendiente,LIB77666489,TIT77666489,1,2
+946,Unidad Educativa Juan Pablo II,Santa Cruz,Pendiente,LIB77666490,TIT77666490,2,3
+947,Colegio Domingo Savio,Santa Cruz,Pendiente,LIB77666491,TIT77666491,3,4
+948,Unidad Educativa Simon Bolivar,Santa Cruz,Pendiente,LIB77666492,TIT77666492,4,1
+949,Colegio Aleman Santa Cruz,Santa Cruz,Pendiente,LIB77666493,TIT77666493,1,2
+950,Unidad Educativa San Martin,Santa Cruz,Pendiente,LIB77666494,TIT77666494,2,3
+951,Colegio Nacional Florida,La Paz,Pendiente,LIB77666495,TIT77666495,3,4
+952,Unidad Educativa La Salle,La Paz,Pendiente,LIB77666496,TIT77666496,4,1
+953,Colegio Santa Ana,La Paz,Pendiente,LIB77666497,TIT77666497,1,2
+954,Unidad Educativa Cristo Rey,La Paz,Pendiente,LIB77666498,TIT77666498,2,3
+955,Colegio San Agustin,La Paz,Pendiente,LIB77666499,TIT77666499,3,4
+956,Unidad Educativa Juan Pablo II,La Paz,Pendiente,LIB77666500,TIT77666500,4,1
+957,Colegio Domingo Savio,La Paz,Pendiente,LIB77666501,TIT77666501,1,2
+958,Unidad Educativa Simon Bolivar,La Paz,Pendiente,LIB77666502,TIT77666502,2,3
+959,Colegio Aleman Santa Cruz,La Paz,Pendiente,LIB77666503,TIT77666503,3,4
+960,Unidad Educativa San Martin,La Paz,Pendiente,LIB77666504,TIT77666504,4,1
+961,Colegio Nacional Florida,Cochabamba,Pendiente,LIB77666505,TIT77666505,1,2
+962,Unidad Educativa La Salle,Cochabamba,Pendiente,LIB77666506,TIT77666506,2,3
+963,Colegio Santa Ana,Cochabamba,Pendiente,LIB77666507,TIT77666507,3,4
+964,Unidad Educativa Cristo Rey,Cochabamba,Pendiente,LIB77666508,TIT77666508,4,1
+965,Colegio San Agustin,Cochabamba,Pendiente,LIB77666509,TIT77666509,1,2
+966,Unidad Educativa Juan Pablo II,Cochabamba,Pendiente,LIB77666510,TIT77666510,2,3
+967,Colegio Domingo Savio,Cochabamba,Pendiente,LIB77666511,TIT77666511,3,4
+968,Unidad Educativa Simon Bolivar,Cochabamba,Pendiente,LIB77666512,TIT77666512,4,1
+969,Colegio Aleman Santa Cruz,Cochabamba,Pendiente,LIB77666513,TIT77666513,1,2
+970,Unidad Educativa San Martin,Cochabamba,Pendiente,LIB77666514,TIT77666514,2,3
+971,Colegio Nacional Florida,Sucre,Pendiente,LIB77666515,TIT77666515,3,4
+972,Unidad Educativa La Salle,Sucre,Pendiente,LIB77666516,TIT77666516,4,1
+973,Colegio Santa Ana,Sucre,Pendiente,LIB77666517,TIT77666517,1,2
+974,Unidad Educativa Cristo Rey,Sucre,Pendiente,LIB77666518,TIT77666518,2,3
+975,Colegio San Agustin,Sucre,Pendiente,LIB77666519,TIT77666519,3,4
+976,Unidad Educativa Juan Pablo II,Sucre,Pendiente,LIB77666520,TIT77666520,4,1
+977,Colegio Domingo Savio,Sucre,Pendiente,LIB77666521,TIT77666521,1,2
+978,Unidad Educativa Simon Bolivar,Sucre,Pendiente,LIB77666522,TIT77666522,2,3
+979,Colegio Aleman Santa Cruz,Sucre,Pendiente,LIB77666523,TIT77666523,3,4
+980,Unidad Educativa San Martin,Sucre,Pendiente,LIB77666524,TIT77666524,4,1
+981,Colegio Nacional Florida,Tarija,Pendiente,LIB77666525,TIT77666525,1,2
+982,Unidad Educativa La Salle,Tarija,Pendiente,LIB77666526,TIT77666526,2,3
+983,Colegio Santa Ana,Tarija,Pendiente,LIB77666527,TIT77666527,3,4
+984,Unidad Educativa Cristo Rey,Tarija,Pendiente,LIB77666528,TIT77666528,4,1
+985,Colegio San Agustin,Tarija,Pendiente,LIB77666529,TIT77666529,1,2
+986,Unidad Educativa Juan Pablo II,Tarija,Pendiente,LIB77666530,TIT77666530,2,3
+987,Colegio Domingo Savio,Tarija,Pendiente,LIB77666531,TIT77666531,3,4
+988,Unidad Educativa Simon Bolivar,Tarija,Pendiente,LIB77666532,TIT77666532,4,1
+989,Colegio Aleman Santa Cruz,Tarija,Pendiente,LIB77666533,TIT77666533,1,2
+990,Unidad Educativa San Martin,Tarija,Pendiente,LIB77666534,TIT77666534,2,3
+991,Colegio Nacional Florida,Oruro,Pendiente,LIB77666535,TIT77666535,3,4
+992,Unidad Educativa La Salle,Oruro,Pendiente,LIB77666536,TIT77666536,4,1
+993,Colegio Santa Ana,Oruro,Pendiente,LIB77666537,TIT77666537,1,2
+994,Unidad Educativa Cristo Rey,Oruro,Pendiente,LIB77666538,TIT77666538,2,3
+995,Colegio San Agustin,Oruro,Pendiente,LIB77666539,TIT77666539,3,4
+996,Unidad Educativa Juan Pablo II,Oruro,Pendiente,LIB77666540,TIT77666540,4,1
+997,Colegio Domingo Savio,Oruro,Pendiente,LIB77666541,TIT77666541,1,2
+998,Unidad Educativa Simon Bolivar,Oruro,Pendiente,LIB77666542,TIT77666542,2,3
+999,Colegio Aleman Santa Cruz,Oruro,Pendiente,LIB77666543,TIT77666543,3,4
+1000,Unidad Educativa San Martin,Oruro,Pendiente,LIB77666544,TIT77666544,4,1

@@ -33,6 +33,12 @@
             </x-slot:actions>
         </x-filter-panel>
 
+        <div class="export-bar">
+            <span>Exportar resultados con los filtros actuales:</span>
+            <a href="{{ route('bitacora.export', ['formato' => 'csv', 'buscar' => $search, 'modulo' => $module, 'accion' => $action]) }}" class="button secondary" data-export="csv">CSV (Excel)</a>
+            <a href="{{ route('bitacora.export', ['formato' => 'pdf', 'buscar' => $search, 'modulo' => $module, 'accion' => $action]) }}" class="button secondary" data-export="pdf" target="_blank">PDF (imprimir)</a>
+        </div>
+
         <div data-results>
             @include('bitacora.partials.table', ['registros' => $registros])
         </div>

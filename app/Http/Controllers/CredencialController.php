@@ -7,6 +7,7 @@ use App\Models\Persona;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
@@ -77,44 +78,62 @@ class CredencialController extends Controller
 
     /**
      * CU01 - Registrar credencial para una persona existente sin acceso.
+     *
+     * El registro y la contrasena se generan automaticamente: registro de
+     * 10 digitos y contrasena igual al CI de la persona (si no se provee otra).
+     * El rol se infiere del tipo de persona; el estado inicia activo.
      */
     public function store(Request $request): RedirectResponse|JsonResponse
     {
         $data = $request->validate([
             'id_persona' => ['required', 'integer', Rule::exists('persona', 'id_persona'), Rule::unique('credencial', 'id_persona')],
-            'registro' => ['required', 'string', 'max:15', Rule::unique('credencial', 'registro')],
-            'rol' => ['required', 'in:Administrador,PersonalAdministrativo,Docente,Postulante'],
-            'estado' => ['required', 'boolean'],
             'correo' => ['required', 'email', 'max:50', Rule::unique('persona', 'correo')->ignore($request->integer('id_persona'), 'id_persona')],
-            'nueva_contrasena' => ['required', 'string', 'min:8', 'confirmed'],
+            'nueva_contrasena' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
 
         $persona = Persona::with(['docente', 'postulante', 'personalAdministrativo'])->findOrFail($data['id_persona']);
-        $this->ensureCompatibleRole($persona, $data['rol']);
 
-        $isActive = $data['estado'] === '1' || $data['estado'] === 1 || $data['estado'] === true;
+        $rol = match (true) {
+            (bool) $persona->docente => 'Docente',
+            (bool) $persona->postulante => 'Postulante',
+            (bool) $persona->personalAdministrativo => 'PersonalAdministrativo',
+            default => 'Administrador',
+        };
 
-        $credencial = Credencial::create([
-            'id_persona' => $data['id_persona'],
-            'registro' => $data['registro'],
-            'rol' => $data['rol'],
-            'estado' => $isActive,
-            'contrasena' => Hash::make($data['nueva_contrasena']),
-            'intentos_fallidos' => 0,
-        ]);
+        $registro = Credencial::generateUniqueRegistro();
+        $contrasena = ! empty($data['nueva_contrasena'])
+            ? Hash::make($data['nueva_contrasena'])
+            : Hash::make($persona->ci);
 
-        $persona->update([
-            'correo' => $data['correo'],
-        ]);
+        $credencial = DB::transaction(function () use ($data, $persona, $registro, $rol, $contrasena): Credencial {
+            $this->syncCredencialSerialSequence();
+
+            $credencial = Credencial::create([
+                'id_persona' => $data['id_persona'],
+                'registro' => $registro,
+                'rol' => $rol,
+                'estado' => true,
+                'contrasena' => $contrasena,
+                'intentos_fallidos' => 0,
+            ]);
+
+            $persona->update([
+                'correo' => $data['correo'],
+            ]);
+
+            return $credencial;
+        });
+
+        $message = "Credencial registrada correctamente. Numero de registro: {$registro}. Contrasena: su CI.";
 
         if ($request->expectsJson()) {
             return response()->json([
-                'message' => 'Credencial registrada.',
+                'message' => $message,
                 'credencial' => $this->payload($credencial->fresh('persona')),
             ], 201);
         }
 
-        return redirect()->route('credenciales.index')->with('status', 'Credencial registrada.');
+        return redirect()->route('credenciales.index')->with('status', $message);
     }
 
     /**
@@ -128,16 +147,11 @@ class CredencialController extends Controller
         $data = $request->validate([
             'rol' => ['required', 'in:Administrador,PersonalAdministrativo,Docente,Postulante'],
             'estado' => ['required', 'boolean'],
-            'correo' => [
-                'required',
-                'email',
-                'max:50',
-                Rule::unique('persona', 'correo')->ignore($credencial->id_persona, 'id_persona'),
-            ],
+            'correo' => ['required', 'email', 'max:50', Rule::unique('persona', 'correo')->ignore($credencial->id_persona, 'id_persona')],
             'nueva_contrasena' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $isActive = $data['estado'] === '1' || $data['estado'] === 1 || $data['estado'] === true;
+        $isActive = (bool) $data['estado'];
         $this->ensureCompatibleRole($credencial->persona, $data['rol']);
 
         if ($credencial->is($request->user()) && (!$isActive || $data['rol'] !== 'Administrador')) {
@@ -149,6 +163,19 @@ class CredencialController extends Controller
             }
 
             return back()->withErrors(['estado' => 'No puede quitarse su propio acceso de administrador.']);
+        }
+
+        if ($credencial->rol === 'Administrador' && (bool) $credencial->estado
+            && ($data['rol'] !== 'Administrador' || ! $isActive)
+            && Credencial::where('rol', 'Administrador')->where('estado', true)->count() <= 1) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'No se puede modificar la credencial del unico Administrador del sistema.',
+                    'errors' => ['rol' => ['No se puede quitar el acceso al unico Administrador del sistema.']],
+                ], 422);
+            }
+
+            return back()->withErrors(['rol' => 'No se puede quitar el acceso al unico Administrador del sistema.']);
         }
 
         $credencial->rol = $data['rol'];
@@ -194,7 +221,7 @@ class CredencialController extends Controller
         }
 
         // Si ya estaba inactiva, la baja logica ya fue aplicada.
-        if ($credencial->estado === 0 || $credencial->estado === false) {
+        if (! $credencial->estado) {
             if ($request->expectsJson()) {
                 return response()->json([
                     'message' => 'La credencial ya está inactiva.',
@@ -205,8 +232,21 @@ class CredencialController extends Controller
             return back()->withErrors(['credencial' => 'La credencial ya está inactiva.']);
         }
 
+        // CU01 exige que no se elimine al unico Administrador activo del sistema.
+        if ($credencial->rol === 'Administrador'
+            && Credencial::where('rol', 'Administrador')->where('estado', true)->count() <= 1) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'No se puede eliminar la credencial del unico Administrador del sistema.',
+                    'errors' => ['credencial' => ['No se puede eliminar al unico Administrador del sistema.']],
+                ], 422);
+            }
+
+            return back()->withErrors(['credencial' => 'No se puede eliminar al unico Administrador del sistema.']);
+        }
+
         // Baja logica: cambiar estado a inactivo sin borrar el historial.
-        $credencial->update(['estado' => 0]);
+        $credencial->update(['estado' => false]);
 
         if ($request->expectsJson()) {
             return response()->json(['message' => 'Credencial desactivada correctamente.']);
@@ -233,7 +273,7 @@ class CredencialController extends Controller
         }
 
         $credencial->update([
-            'estado' => 1,
+            'estado' => true,
             'intentos_fallidos' => 0,
             'fecha_bloqueo' => null,
         ]);
@@ -281,5 +321,10 @@ class CredencialController extends Controller
                 'rol' => "El rol seleccionado no corresponde a la persona. Debe ser {$expectedRole}.",
             ]);
         }
+    }
+
+    private function syncCredencialSerialSequence(): void
+    {
+        DB::statement("SELECT setval(pg_get_serial_sequence('credencial', 'id_credencial'), COALESCE(MAX(id_credencial), 1), MAX(id_credencial) IS NOT NULL) FROM credencial");
     }
 }

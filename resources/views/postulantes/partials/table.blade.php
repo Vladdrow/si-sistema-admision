@@ -1,9 +1,13 @@
 <x-data-table
-    :columns="['Postulante', 'Contacto', 'Estado', 'Codigos', 'Carreras', 'Acciones']"
+    :columns="['Registro', 'Postulante', 'Contacto', 'Est. Adm.', 'Codigos', 'Carreras', 'Acceso', 'Acciones']"
     :paginator="$postulantes"
     empty="No se encontraron postulantes."
 >
     @foreach ($postulantes as $postulante)
+        @php
+            $credencial = $postulante->persona?->credencial;
+            $activo = (bool) ($credencial?->estado ?? false);
+        @endphp
         <tr
             class="applicant-row"
             data-id="{{ $postulante->id_postulante }}"
@@ -26,7 +30,11 @@
             data-id-carrera-admitido="{{ $postulante->id_carrera_admitido }}"
             data-update-url="{{ route('postulantes.update', $postulante->id_postulante) }}"
             data-delete-url="{{ route('postulantes.destroy', $postulante->id_postulante) }}"
+            data-restore-url="{{ route('postulantes.restore', $postulante->id_postulante) }}"
         >
+            <td data-label="Registro">
+                <span class="muted">{{ $credencial?->registro ?? 'Sin registro' }}</span>
+            </td>
             <td data-label="Postulante">
                 <span class="person-line">
                     <strong>{{ $postulante->persona?->nombre_completo ?? 'Sin nombre' }}</strong>
@@ -39,7 +47,7 @@
                     <span class="muted">{{ $postulante->ciudad ?? 'Sin ciudad' }}</span>
                 </span>
             </td>
-            <td data-label="Estado"><span class="badge neutral">{{ $postulante->estado_admision }}</span></td>
+            <td data-label="Est. Adm."><span class="badge neutral">{{ $postulante->estado_admision }}</span></td>
             <td data-label="Codigos">
                 <span class="person-line">
                     <span>Libreta: {{ $postulante->codigo_libreta }}</span>
@@ -52,10 +60,17 @@
                     <span class="muted">{{ $postulante->carreraSegunda?->nombre ?? 'Segunda opcion sin definir' }}</span>
                 </span>
             </td>
+            <td data-label="Acceso">
+                <span class="badge {{ $activo ? 'ok' : 'off' }}">{{ $activo ? 'Activo' : 'Inactivo' }}</span>
+            </td>
             <td data-label="Acciones">
                 <div class="actions">
                     <button class="secondary" type="button" data-person-action="edit">Modificar</button>
-                    <button class="danger" type="button" data-person-action="delete">Eliminar</button>
+                    @if ($activo)
+                        <button class="danger" type="button" data-person-action="delete">Desactivar</button>
+                    @else
+                        <button class="secondary" type="button" data-person-action="restore">Restaurar</button>
+                    @endif
                 </div>
             </td>
         </tr>

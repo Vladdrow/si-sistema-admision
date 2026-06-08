@@ -11,7 +11,7 @@
             <div class="template-workbench-header">
                 <div>
                     <h2 id="simple-modal-title">Nuevo parametro</h2>
-                    <p class="subtitle" id="simple-modal-subtitle">Configure el semestre, fechas y limites del proceso.</p>
+                    <p class="subtitle" id="simple-modal-subtitle">Configure el semestre, fechas, cupos, ponderaciones y limites del proceso.</p>
                 </div>
                 <button class="ghost" type="button" data-simple-close>Limpiar</button>
             </div>
@@ -55,6 +55,71 @@
                         <input id="param-expiracion" name="tiempo_expiracion_pago" type="number" min="1" required data-simple-field="tiempoExpiracionPago">
                     </div>
                 </div>
+
+                <div class="parameter-rules-grid">
+                    <section class="parameter-rule">
+                        <div class="section-header">
+                            <h3>Cupos por carrera</h3>
+                        </div>
+                        <div class="parameter-rule-list">
+                            <div class="parameter-rule-row parameter-career-row parameter-rule-head">
+                                <span>Carrera</span>
+                                <span>Cupos</span>
+                                <span>Actuales</span>
+                            </div>
+                            @foreach ($carreras as $carrera)
+                                <div class="parameter-rule-row parameter-career-row">
+                                    <span>{{ $carrera->nombre }}</span>
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        step="1"
+                                        required
+                                        data-cupo-input
+                                        data-career-id="{{ $carrera->id_carrera }}"
+                                        data-default-value="0"
+                                        aria-label="Cupos para {{ $carrera->nombre }}"
+                                    >
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        step="1"
+                                        required
+                                        data-current-students-input
+                                        data-career-id="{{ $carrera->id_carrera }}"
+                                        data-default-value="0"
+                                        aria-label="Cantidad actual de estudiantes para {{ $carrera->nombre }}"
+                                    >
+                                </div>
+                            @endforeach
+                        </div>
+                    </section>
+
+                    <section class="parameter-rule">
+                        <div class="section-header">
+                            <h3>Ponderaciones</h3>
+                        </div>
+                        <div class="parameter-rule-list">
+                            @foreach ([1 => 30, 2 => 30, 3 => 40] as $numeroExamen => $default)
+                                <div class="parameter-rule-row">
+                                    <span>Examen {{ $numeroExamen }}</span>
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        max="100"
+                                        step="0.01"
+                                        required
+                                        data-ponderacion-input
+                                        data-exam-number="{{ $numeroExamen }}"
+                                        data-default-value="{{ $default }}"
+                                        aria-label="Ponderacion examen {{ $numeroExamen }}"
+                                    >
+                                </div>
+                            @endforeach
+                        </div>
+                    </section>
+                </div>
+
                 <div class="template-workbench-footer">
                     <button class="secondary" type="button" data-simple-close>Limpiar</button>
                     <button type="submit" id="save-simple">Guardar parametro</button>

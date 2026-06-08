@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Docente extends Model
 {
@@ -34,5 +36,20 @@ class Docente extends Model
     public function persona(): BelongsTo
     {
         return $this->belongsTo(Persona::class, 'id_docente', 'id_persona');
+    }
+
+    public function certificaciones(): HasMany
+    {
+        return $this->hasMany(CertificacionDocente::class, 'id_docente', 'id_docente');
+    }
+
+    public function materiasHabilitadas(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Materia::class,
+            'docente_materia_habilitada',
+            'id_docente',
+            'id_materia'
+        );
     }
 }

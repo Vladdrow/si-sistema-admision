@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Materia;
 use App\Models\PlantillaHorario;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -14,7 +15,7 @@ use Illuminate\View\View;
  * CU10 - Gestionar Plantilla de Horario.
  *
  * Crea, modifica, elimina y consulta plantillas reutilizables para grupos.
- * Cada plantilla guarda turno y bloques por dia/hora/modalidad, sin docentes ni aulas.
+ * Cada plantilla guarda turno y bloques por dia/hora/materia/modalidad, sin docentes ni aulas.
  */
 class PlantillaHorarioController extends Controller
 {
@@ -29,7 +30,9 @@ class PlantillaHorarioController extends Controller
             $shift = '';
         }
 
-        $plantillas = PlantillaHorario::with('detalles')
+        $materias = Materia::orderBy('nombre')->get();
+
+        $plantillas = PlantillaHorario::with('detalles.materia')
             ->withCount('detalles')
             ->when($search !== '', fn ($query) => $query->where('nombre', 'like', "%{$search}%"))
             ->when($shift !== '', fn ($query) => $query->where('turno', $shift))
@@ -41,7 +44,7 @@ class PlantillaHorarioController extends Controller
             return view('plantillas.partials.table', compact('plantillas'));
         }
 
-        return view('plantillas.index', compact('plantillas', 'search', 'shift', 'shifts'));
+        return view('plantillas.index', compact('plantillas', 'search', 'shift', 'shifts', 'materias'));
     }
 
     /**
@@ -52,6 +55,8 @@ class PlantillaHorarioController extends Controller
         $data = $this->validatedData($request);
 
         DB::transaction(function () use ($data): void {
+            $this->syncPlantillaSerialSequences();
+
             $plantilla = PlantillaHorario::create([
                 'nombre' => $data['nombre'],
                 'turno' => $data['turno'],
@@ -92,9 +97,28 @@ class PlantillaHorarioController extends Controller
 
     /**
      * CU10 - Eliminar la plantilla y sus detalles asociados.
+     *
+     * No se permite eliminar si la plantilla esta siendo utilizada por
+     * algun grupo a traves de grupo_horario.
      */
     public function destroy(Request $request, PlantillaHorario $plantilla): RedirectResponse|JsonResponse
     {
+        $enUso = DB::table('grupo_horario')
+            ->join('detalle_plantilla_horario', 'detalle_plantilla_horario.id_detalle', '=', 'grupo_horario.id_detalle')
+            ->where('detalle_plantilla_horario.id_plantilla', $plantilla->id_plantilla)
+            ->exists();
+
+        if ($enUso) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'No se puede eliminar la plantilla porque esta siendo utilizada por al menos un grupo.',
+                    'errors' => ['plantilla' => ['No se puede eliminar una plantilla que esta siendo utilizada por un grupo.']],
+                ], 422);
+            }
+
+            return back()->withErrors(['plantilla' => 'No se puede eliminar una plantilla que esta siendo utilizada por un grupo.']);
+        }
+
         $plantilla->delete();
 
         if ($request->expectsJson()) {
@@ -113,6 +137,7 @@ class PlantillaHorarioController extends Controller
             'detalles.*.dia' => ['required_with:detalles', 'integer', 'between:1,7'],
             'detalles.*.hora_inicio' => ['required_with:detalles', 'date_format:H:i'],
             'detalles.*.hora_fin' => ['required_with:detalles', 'date_format:H:i'],
+            'detalles.*.id_materia' => ['required_with:detalles', 'integer', 'exists:materia,id_materia'],
             'detalles.*.modalidad' => ['required_with:detalles', 'in:Presencial,Virtual'],
         ]);
 
@@ -177,7 +202,14 @@ class PlantillaHorarioController extends Controller
                 'hora_inicio' => $detail['hora_inicio'],
                 'hora_fin' => $detail['hora_fin'],
                 'modalidad' => $detail['modalidad'],
+                'id_materia' => $detail['id_materia'],
             ]);
         }
+    }
+
+    private function syncPlantillaSerialSequences(): void
+    {
+        DB::statement("SELECT setval(pg_get_serial_sequence('plantilla_horario', 'id_plantilla'), COALESCE(MAX(id_plantilla), 1), MAX(id_plantilla) IS NOT NULL) FROM plantilla_horario");
+        DB::statement("SELECT setval(pg_get_serial_sequence('detalle_plantilla_horario', 'id_detalle'), COALESCE(MAX(id_detalle), 1), MAX(id_detalle) IS NOT NULL) FROM detalle_plantilla_horario");
     }
 }

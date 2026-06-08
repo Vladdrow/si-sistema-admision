@@ -18,11 +18,17 @@ class DetallePlantillaHorario extends Model
         'hora_inicio',
         'hora_fin',
         'modalidad',
+        'id_materia',
         'id_plantilla',
     ];
 
     public function plantilla(): BelongsTo
     {
         return $this->belongsTo(PlantillaHorario::class, 'id_plantilla', 'id_plantilla');
+    }
+
+    public function materia(): BelongsTo
+    {
+        return $this->belongsTo(Materia::class, 'id_materia', 'id_materia');
     }
 }

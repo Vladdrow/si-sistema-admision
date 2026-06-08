@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Credencial;
+use App\Services\BitacoraLogger;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,10 @@ use Throwable;
  */
 class PasswordController extends Controller
 {
+    public function __construct(private readonly BitacoraLogger $bitacora)
+    {
+    }
+
     public function edit(): View
     {
         return view('password.edit');
@@ -55,6 +60,8 @@ class PasswordController extends Controller
             'codigo_recuperacion' => $code,
             'fecha_expiracion_codigo' => now()->addMinutes(15),
         ])->save();
+
+        $this->bitacora->registrar($request, $credencial, 'Solicitar recuperacion', 'Contrasena', 'Solicito un codigo de recuperacion de contrasena.');
 
         if (! $credencial->persona?->correo) {
             return back()
@@ -127,6 +134,8 @@ class PasswordController extends Controller
             'intentos_fallidos' => 0,
             'fecha_bloqueo' => null,
         ])->save();
+
+        $this->bitacora->registrar($request, $credencial, 'Restablecer contrasena', 'Contrasena', 'Restablecio su contrasena mediante codigo de recuperacion.');
 
         if (Auth::check()) {
             return redirect()->route('password.edit')->with('status', 'Contrasena recuperada correctamente.');

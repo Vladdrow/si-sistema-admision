@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Gestionar Personal Administrativo')
-@section('subtitle', 'Registra, lista, modifica y elimina personal administrativo.')
+@section('subtitle', 'Registra, lista, modifica, desactiva y restaura personal administrativo. Al registrar se genera automaticamente un numero de registro y la contrasena sera el CI.')
 
 @section('content')
     <div class="panel">
@@ -35,7 +35,7 @@
 
         <x-filter-panel :action="route('personal.index')">
             <div>
-                <label for="buscar">Buscar por nombre, CI, correo o cargo</label>
+                <label for="buscar">Buscar por nombre, CI, correo, registro o cargo</label>
                 <input id="buscar" name="buscar" value="{{ $search }}" data-filter-field placeholder="Ej. Lopez, secretaria">
             </div>
             <div>
@@ -45,6 +45,14 @@
                     @foreach ($positions as $item)
                         <option value="{{ $item }}" @selected($position === $item)>{{ $item }}</option>
                     @endforeach
+                </select>
+            </div>
+            <div>
+                <label for="estado">Estado</label>
+                <select id="estado" name="estado" data-filter-field>
+                    <option value="1" @selected($status === '1')>Activos</option>
+                    <option value="0" @selected($status === '0')>Inactivos</option>
+                    <option value="" @selected($status === '')>Todos</option>
                 </select>
             </div>
             <x-slot:actions>

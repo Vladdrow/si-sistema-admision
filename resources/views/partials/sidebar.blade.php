@@ -19,7 +19,7 @@
                     'title' => 'Inicio',
                     'items' => [
                         ['label' => 'Panel principal', 'route' => 'dashboard', 'active' => 'dashboard', 'icon' => 'grid'],
-                        ['label' => 'Mi horario', 'route' => 'dashboard', 'fragment' => 'mi-horario', 'active' => 'dashboard', 'icon' => 'clock'],
+                        ['label' => 'Mi horario', 'route' => 'horarios.index', 'active' => 'horarios.*', 'icon' => 'clock'],
                         ['label' => 'Materias y notas', 'route' => 'dashboard', 'fragment' => 'mis-notas', 'active' => 'dashboard', 'icon' => 'grade'],
                         ['label' => 'Gestionar contrasena', 'route' => 'password.edit', 'active' => 'password.*', 'icon' => 'key'],
                     ],
@@ -30,8 +30,9 @@
                     'title' => 'Inicio',
                     'items' => [
                         ['label' => 'Panel principal', 'route' => 'dashboard', 'active' => 'dashboard', 'icon' => 'grid'],
-                        ['label' => 'Mi horario', 'route' => 'dashboard', 'fragment' => 'mi-horario', 'active' => 'dashboard', 'icon' => 'clock'],
+                        ['label' => 'Mi horario', 'route' => 'horarios.index', 'active' => 'horarios.*', 'icon' => 'clock'],
                         ['label' => 'Mis grupos', 'route' => 'dashboard', 'fragment' => 'mis-grupos', 'active' => 'dashboard', 'icon' => 'users'],
+                        ['label' => 'Gestionar notas', 'route' => 'notas.index', 'active' => 'notas.*', 'icon' => 'grade'],
                         ['label' => 'Gestionar contrasena', 'route' => 'password.edit', 'active' => 'password.*', 'icon' => 'key'],
                     ],
                 ],
@@ -49,17 +50,18 @@
                     'items' => [
                         ['label' => 'Postulantes', 'route' => 'postulantes.index', 'active' => 'postulantes.*', 'icon' => 'user'],
                         ['label' => 'Docentes', 'route' => 'docentes.index', 'active' => 'docentes.*', 'icon' => 'teacher'],
-                        ['label' => 'Pagos', 'url' => '#', 'icon' => 'cash'],
+                        ['label' => 'Pagos', 'route' => 'pagos.index', 'active' => 'pagos.*', 'icon' => 'cash'],
                     ],
                 ],
                 [
                     'title' => 'Academico',
                     'items' => [
-                        ['label' => 'Grupos', 'url' => '#', 'icon' => 'users'],
+                        ['label' => 'Grupos', 'route' => 'grupos.index', 'active' => 'grupos.*', 'icon' => 'users'],
                         ['label' => 'Plantillas de horario', 'route' => 'plantillas.index', 'active' => 'plantillas.*', 'icon' => 'calendar'],
-                        ['label' => 'Horarios', 'url' => '#', 'icon' => 'clock'],
-                        ['label' => 'Notas', 'url' => '#', 'icon' => 'grade'],
-                        ['label' => 'Admision', 'url' => '#', 'icon' => 'check'],
+                        ['label' => 'Horarios', 'route' => 'horarios.index', 'active' => 'horarios.*', 'icon' => 'clock'],
+                        ['label' => 'Notas', 'route' => 'notas.consulta', 'active' => 'notas.consulta*', 'icon' => 'grade'],
+                        ['label' => 'Admision', 'route' => 'admision.index', 'active' => 'admision.*', 'icon' => 'check'],
+                        ['label' => 'Reportes', 'route' => 'reportes.index', 'active' => 'reportes.*', 'icon' => 'chart'],
                     ],
                 ],
             ],

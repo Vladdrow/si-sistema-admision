@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Gestionar Docentes')
-@section('subtitle', 'Registra, lista, modifica y elimina docentes desde una sola pantalla.')
+@section('subtitle', 'Registra, lista, modifica, desactiva y restaura docentes. Al registrar se genera automaticamente un numero de registro y la contrasena sera el CI.')
 
 @section('content')
     <div class="panel">
@@ -58,15 +58,38 @@
                         </div>
                         <div class="field">
                             <label for="teacher-direccion">Direccion</label>
-                            <input id="teacher-direccion" name="direccion" maxlength="70">
+                            <input id="teacher-direccion" name="direccion" maxlength="100">
                         </div>
                         <div class="field">
                             <label for="teacher-titulo-profesional">Titulo profesional</label>
-                            <input id="teacher-titulo-profesional" name="titulo_profesional" maxlength="50" required>
+                            <select id="teacher-titulo-profesional" name="titulo_profesional" required>
+                                @foreach ($titulos as $titulo)
+                                    <option value="{{ $titulo }}">{{ $titulo }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="field">
                             <label for="teacher-codigo-rda">Codigo RDA</label>
                             <input id="teacher-codigo-rda" name="codigo_rda" maxlength="15" required>
+                        </div>
+                        <div class="field">
+                            <label>Materias habilitadas</label>
+                            <div class="check-grid">
+                                @foreach ($materias as $materia)
+                                    <label>
+                                        <input type="checkbox" name="materias_habilitadas[]" value="{{ $materia->id_materia }}" data-teacher-subject>
+                                        {{ $materia->nombre }}
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="teacher-certificacion-institucion">Certificacion</label>
+                            <input id="teacher-certificacion-institucion" name="certificacion_institucion" maxlength="80" placeholder="Ej. Cambridge English">
+                        </div>
+                        <div class="field">
+                            <label for="teacher-certificacion-nivel">Nivel certificacion</label>
+                            <input id="teacher-certificacion-nivel" name="certificacion_nivel" maxlength="20" placeholder="Ej. B2">
                         </div>
                         <div class="field checkbox-field">
                             <label>
@@ -89,7 +112,7 @@
 
         <x-filter-panel :action="route('docentes.index')">
             <div>
-                <label for="buscar">Buscar por nombre, CI, correo, titulo o RDA</label>
+                <label for="buscar">Buscar por nombre, CI, correo, registro, titulo o RDA</label>
                 <input id="buscar" name="buscar" value="{{ $search }}" data-filter-field placeholder="Ej. Perez, 34567890 o RDA-001">
             </div>
             <div>
@@ -98,6 +121,14 @@
                     <option value="">Todos</option>
                     <option value="maestria" @selected($degree === 'maestria')>Con maestria</option>
                     <option value="diplomado" @selected($degree === 'diplomado')>Con diplomado</option>
+                </select>
+            </div>
+            <div>
+                <label for="estado">Estado</label>
+                <select id="estado" name="estado" data-filter-field>
+                    <option value="1" @selected($status === '1')>Activos</option>
+                    <option value="0" @selected($status === '0')>Inactivos</option>
+                    <option value="" @selected($status === '')>Todos</option>
                 </select>
             </div>
             <x-slot:actions>

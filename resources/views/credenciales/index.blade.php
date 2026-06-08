@@ -41,7 +41,7 @@
                                     data-correo="{{ $persona->correo }}"
                                     data-rol="{{ $rolSugerido }}"
                                 >
-                                    {{ $persona->nombre_completo }} - {{ $persona->ci }}
+                                    {{ $persona->nombre_completo }}
                                 </option>
                             @endforeach
                         </select>
@@ -49,7 +49,7 @@
 
                     <div class="field">
                         <label for="credential-registro">Registro</label>
-                        <input id="credential-registro" name="registro" maxlength="15" required>
+                        <input id="credential-registro" name="registro" maxlength="15" disabled placeholder="Se genera automaticamente">
                     </div>
 
                     <div class="field">
@@ -86,7 +86,7 @@
 
                     <div class="field">
                         <label for="credential-password">Nueva contrasena</label>
-                        <input id="credential-password" name="nueva_contrasena" type="password" autocomplete="new-password" placeholder="Obligatoria al registrar">
+                        <input id="credential-password" name="nueva_contrasena" type="password" autocomplete="new-password" placeholder="Dejar vacio para usar el CI">
                     </div>
 
                     <div class="field">

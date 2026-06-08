@@ -62,6 +62,14 @@
                         <input id="template-detail-duration-custom" type="number" min="1" max="720" step="1" data-template-input="duracion_custom" placeholder="Ej. 75">
                     </div>
                     <div class="field">
+                        <label for="template-detail-subject">Materia</label>
+                        <select id="template-detail-subject" data-template-input="id_materia">
+                            @foreach ($materias as $materia)
+                                <option value="{{ $materia->id_materia }}">{{ $materia->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="field">
                         <label for="template-detail-mode">Modalidad</label>
                         <select id="template-detail-mode" data-template-input="modalidad">
                             <option value="Presencial">Presencial</option>

@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Bitacora;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * CU18 - Consultar Bitacora.
  *
  * Permite al administrador revisar eventos del sistema con filtros por texto,
- * modulo y accion. La vista parcial se reutiliza para busquedas asincronas.
+ * modulo y accion, y exportar los resultados a CSV o PDF.
  */
 class BitacoraController extends Controller
 {
@@ -43,7 +44,58 @@ class BitacoraController extends Controller
             $action = '';
         }
 
-        $registros = Bitacora::with('persona')
+        $registros = $this->buildQuery($search, $module, $action)
+            ->paginate(15)
+            ->withQueryString();
+
+        if ($isAsync) {
+            return view('bitacora.partials.table', compact('registros'));
+        }
+
+        return view('bitacora.index', compact('registros', 'search', 'module', 'action', 'modules', 'actions'));
+    }
+
+    /**
+     * CU18 - Exportar bitacora en formato CSV o PDF respetando los filtros.
+     */
+    public function export(Request $request): StreamedResponse|View
+    {
+        $search = trim((string) $request->query('buscar', ''));
+        $module = (string) $request->query('modulo', '');
+        $action = (string) $request->query('accion', '');
+        $format = (string) $request->query('formato', 'csv');
+
+        $registros = $this->buildQuery($search, $module, $action)->get();
+
+        if ($format === 'pdf') {
+            return view('bitacora.export-pdf', compact('registros', 'search', 'module', 'action'));
+        }
+
+        return response()->streamDownload(function () use ($registros): void {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF");
+
+            fputcsv($handle, ['Fecha', 'Usuario', 'CI', 'Accion', 'Modulo', 'Descripcion', 'IP']);
+
+            foreach ($registros as $registro) {
+                fputcsv($handle, [
+                    $registro->fecha_hora?->format('d/m/Y H:i:s'),
+                    $registro->persona?->nombre_completo ?? 'Sin usuario',
+                    $registro->persona?->ci,
+                    $registro->accion,
+                    $registro->modulo,
+                    $registro->descripcion ?? '',
+                    $registro->ip_origen ?? '',
+                ]);
+            }
+
+            fclose($handle);
+        }, 'bitacora.csv', ['Content-Type' => 'text/csv; charset=UTF-8']);
+    }
+
+    private function buildQuery(string $search, string $module, string $action): \Illuminate\Database\Eloquent\Builder
+    {
+        return Bitacora::with('persona')
             ->when($search !== '', function ($query) use ($search): void {
                 $query->where(function ($query) use ($search): void {
                     $query->where('descripcion', 'like', "%{$search}%")
@@ -62,14 +114,6 @@ class BitacoraController extends Controller
             ->when($action !== '', function ($query) use ($action): void {
                 $query->where('accion', $action);
             })
-            ->latest('fecha_hora')
-            ->paginate(15)
-            ->withQueryString();
-
-        if ($isAsync) {
-            return view('bitacora.partials.table', compact('registros'));
-        }
-
-        return view('bitacora.index', compact('registros', 'search', 'module', 'action', 'modules', 'actions'));
+            ->latest('fecha_hora');
     }
 }

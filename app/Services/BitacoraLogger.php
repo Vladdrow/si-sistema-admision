@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Bitacora;
 use App\Models\Credencial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class BitacoraLogger
@@ -16,6 +17,8 @@ class BitacoraLogger
         }
 
         try {
+            $this->syncBitacoraSerialSequence();
+
             Bitacora::create([
                 'accion' => substr($accion, 0, 50),
                 'modulo' => substr($modulo, 0, 50),
@@ -30,5 +33,10 @@ class BitacoraLogger
                 'modulo' => $modulo,
             ]);
         }
+    }
+
+    private function syncBitacoraSerialSequence(): void
+    {
+        DB::statement("SELECT setval(pg_get_serial_sequence('bitacora', 'id_bitacora'), COALESCE(MAX(id_bitacora), 1), MAX(id_bitacora) IS NOT NULL) FROM bitacora");
     }
 }
