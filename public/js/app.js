@@ -177,9 +177,9 @@ const setupCredentials = () => {
         fields.persona.disabled = false;
         fields.persona.required = true;
         fields.personField.hidden = false;
-        fields.password.required = false;
-        fields.passwordConfirmation.required = false;
-        fields.password.placeholder = 'Dejar vacio para usar el CI';
+        fields.password.required = true;
+        fields.passwordConfirmation.required = true;
+        fields.password.placeholder = 'Min. 8, mayuscula, numero y especial';
         fields.title.textContent = 'Registrar credencial';
         fields.subtitle.textContent = 'Seleccione una persona sin credencial o modifique una existente desde la tabla.';
         fields.ci.value = '';
@@ -323,8 +323,8 @@ const setupCredentials = () => {
         fields.correo.value = option.dataset.correo || '';
         fields.rol.value = option.dataset.rol || 'Postulante';
         fields.rol.disabled = true;
-        fields.password.value = option.dataset.ci || '';
-        fields.passwordConfirmation.value = option.dataset.ci || '';
+        fields.password.value = '';
+        fields.passwordConfirmation.value = '';
     });
 
     form.addEventListener('submit', async (event) => {
@@ -919,6 +919,50 @@ const setupSimpleCrud = () => {
         })),
     });
 
+    const validateAdmissionParameter = () => {
+        if (modal.dataset.kind !== 'parametro') {
+            return '';
+        }
+
+        if (!activeRow && modal.dataset.activeSemester === '1') {
+            return 'No se puede registrar otro parametro mientras exista un semestre activo.';
+        }
+
+        const semestreNombre = fields.semestreNombre?.value?.trim() || '';
+
+        if (!/^[12]-[0-9]{4}$/.test(semestreNombre)) {
+            return 'El semestre debe tener el formato 1-2026 o 2-2026.';
+        }
+
+        const inicio = fields.fechaInicioInscripcion?.value ? new Date(fields.fechaInicioInscripcion.value) : null;
+        const cierre = fields.fechaCierreInscripcion?.value ? new Date(fields.fechaCierreInscripcion.value) : null;
+        const cierreNotas = fields.fechaCierreNotas?.value ? new Date(fields.fechaCierreNotas.value) : null;
+
+        if (inicio && cierre && inicio >= cierre) {
+            return 'La fecha de inicio de inscripciones debe ser anterior a la fecha de cierre de inscripciones.';
+        }
+
+        if (cierre && cierreNotas && cierre >= cierreNotas) {
+            return 'La fecha de cierre de inscripciones debe ser anterior a la fecha de cierre de notas.';
+        }
+
+        const totalPonderacion = ponderacionInputs.reduce((total, input) => total + Number(input.value || 0), 0);
+
+        if (Math.round(totalPonderacion * 100) / 100 !== 100) {
+            return `La suma de las ponderaciones debe ser 100%. Actualmente suma ${totalPonderacion}%.`;
+        }
+
+        return '';
+    };
+
+    const hasStarted = (row) => {
+        if (!row?.dataset.fechaInicioInscripcion) {
+            return false;
+        }
+
+        return new Date() >= new Date(row.dataset.fechaInicioInscripcion);
+    };
+
     const openModal = (row = null, readOnly = false) => {
         activeRow = readOnly ? null : row;
         clearMessage(modalMessage);
@@ -941,6 +985,11 @@ const setupSimpleCrud = () => {
 
         Object.keys(fields).forEach((name) => setValue(name, row?.dataset[name] || ''));
         fillAdmissionRules(row);
+
+        if (!readOnly && row && hasStarted(row) && fields.montoPago) {
+            fields.montoPago.disabled = true;
+        }
+
         modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
         fields.semestreNombre?.focus();
     };
@@ -1016,6 +1065,15 @@ const setupSimpleCrud = () => {
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         clearMessage(modalMessage);
+
+        const validationMessage = validateAdmissionParameter();
+
+        if (validationMessage) {
+            showMessage(modalMessage, validationMessage, 'error');
+            showMessage(pageMessage, validationMessage, 'error');
+            return;
+        }
+
         saveButton.disabled = true;
 
         try {

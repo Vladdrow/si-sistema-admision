@@ -1,22 +1,22 @@
 <?php
 
-use App\Http\Controllers\AdmisionController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BitacoraController;
-use App\Http\Controllers\CredencialController;
-use App\Http\Controllers\DocenteController;
+use App\Http\Controllers\Academico\AdmisionController;
+use App\Http\Controllers\Academico\GrupoController;
+use App\Http\Controllers\Academico\HorarioController;
+use App\Http\Controllers\Academico\NotaController;
+use App\Http\Controllers\Academico\PlantillaHorarioController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\GrupoController;
-use App\Http\Controllers\HorarioController;
-use App\Http\Controllers\NotaController;
-use App\Http\Controllers\PagoController;
-use App\Http\Controllers\ParametroAdmisionController;
-use App\Http\Controllers\PasswordController;
-use App\Http\Controllers\PersonalAdministrativoController;
-use App\Http\Controllers\PlantillaHorarioController;
-use App\Http\Controllers\PostulanteController;
-use App\Http\Controllers\ReporteController;
-use App\Http\Controllers\RegistroPostulanteController;
+use App\Http\Controllers\Personas\DocenteController;
+use App\Http\Controllers\Personas\PagoController;
+use App\Http\Controllers\Personas\PersonalAdministrativoController;
+use App\Http\Controllers\Personas\PostulanteController;
+use App\Http\Controllers\Personas\RegistroPostulanteController;
+use App\Http\Controllers\Seguridad\AuthController;
+use App\Http\Controllers\Seguridad\BitacoraController;
+use App\Http\Controllers\Seguridad\CredencialController;
+use App\Http\Controllers\Seguridad\ParametroAdmisionController;
+use App\Http\Controllers\Seguridad\PasswordController;
+use App\Http\Controllers\Seguridad\ReporteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
