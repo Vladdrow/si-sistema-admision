@@ -294,45 +294,24 @@ CREATE INDEX idx_persona_correo ON persona(correo);
 CREATE INDEX idx_persona_apellidos ON persona(apellido_paterno, apellido_materno);
 
 
-\COPY semestre(id_semestre,nombre,estado)
-    FROM 'database/datos/01_semestre.csv' DELIMITER ',' CSV HEADER;
-\COPY carrera(id_carrera,codigo,nombre)
-    FROM 'database/datos/02_carrera.csv' DELIMITER ',' CSV HEADER;
-\COPY materia(id_materia,codigo,nombre)
-    FROM 'database/datos/03_materia.csv' DELIMITER ',' CSV HEADER;
-\COPY aula(id_aula,nombre,capacidad,ubicacion)
-    FROM 'database/datos/04_aula.csv' DELIMITER ',' CSV HEADER;
-\COPY parametro_admision(id_parametro,fecha_inicio_inscripcion,fecha_cierre_inscripcion,fecha_cierre_notas,monto_pago,max_estudiante_grupo,nota_minima_aprobacion,max_grupos_docente,tiempo_expiracion_pago,id_semestre)
-    FROM 'database/datos/05_parametro_admision.csv' DELIMITER ',' CSV HEADER;
-\COPY carrera_semestre(id_carrera_semestre,cantidad_cupos,cantidad_estudiantes,id_carrera,id_semestre)
-    FROM 'database/datos/06_carrera_semestre.csv' DELIMITER ',' CSV HEADER;
-\COPY examen(id_examen,numero_examen,ponderacion,id_semestre)
-    FROM 'database/datos/07_examen.csv' DELIMITER ',' CSV HEADER;
-\COPY persona(id_persona,ci,nombres,apellido_paterno,apellido_materno,fecha_nacimiento,sexo,direccion,telefono,correo)
-    FROM 'database/datos/08_persona.csv' DELIMITER ',' CSV HEADER;
-\COPY docente(id_docente,titulo_profesional,tiene_maestria,tiene_diplomado,codigo_rda)
-    FROM 'database/datos/09_docente.csv' DELIMITER ',' CSV HEADER;
-\COPY personal_administrativo(id_personal,cargo)
-    FROM 'database/datos/10_personal_administrativo.csv' DELIMITER ',' CSV HEADER;
-\COPY postulante(id_postulante,colegio_procedencia,ciudad,estado_admision,codigo_libreta,codigo_titulo,id_carrera_primera_opc,id_carrera_segunda_opc)
-    FROM 'database/datos/11_postulante.csv' DELIMITER ',' CSV HEADER;
-\COPY credencial(id_credencial,registro,contrasena,rol,id_persona)
-    FROM 'database/datos/12_credencial.csv' DELIMITER ',' CSV HEADER;
-\COPY grupo(id_grupo,nombre_grupo,cantidad_estudiantes,id_semestre)
-    FROM 'database/datos/13_grupo.csv' DELIMITER ',' CSV HEADER;
-\COPY plantilla_horario(id_plantilla,nombre,turno)
-    FROM 'database/datos/14_plantilla_horario.csv' DELIMITER ',' CSV HEADER;
-\COPY detalle_plantilla_horario(id_detalle,dia,hora_inicio,hora_fin,modalidad,id_materia,id_plantilla)
-    FROM 'database/datos/15_detalle_plantilla_horario.csv' DELIMITER ',' CSV HEADER;
-\COPY grupo_horario(id_grupo_horario,fecha_asignacion,id_grupo,id_detalle,id_docente,id_aula)
-    FROM 'database/datos/16_grupo_horario.csv' DELIMITER ',' CSV HEADER;
-\COPY postulante_grupo(id_postulante_grupo,fecha_asignacion,id_grupo,id_postulante)
-    FROM 'database/datos/17_postulante_grupo.csv' DELIMITER ',' CSV HEADER;
-\COPY pago(id_pago,monto,fecha_pago,estado,numero_transaccion,codigo_orden,metodo_pago,id_postulante)
-    FROM 'database/datos/18_pago.csv' DELIMITER ',' CSV HEADER;
-\COPY nota(id_nota,nota,fecha_registro,id_postulante,id_docente,id_materia,id_examen)
-    FROM 'database/datos/19_nota.csv' DELIMITER ',' CSV HEADER;
-\COPY certificacion_docente(id_certificacion,institucion,nivel,id_docente)
-    FROM 'database/datos/21_certificacion_docente.csv' DELIMITER ',' CSV HEADER;
-\COPY docente_materia_habilitada(id_docente,id_materia)
-    FROM 'database/datos/22_docente_materia_habilitada.csv' DELIMITER ',' CSV HEADER;
+\COPY semestre(id_semestre,nombre,estado) FROM 'database/datos/01_semestre.csv' DELIMITER ',' CSV HEADER;
+\COPY carrera(id_carrera,codigo,nombre) FROM 'database/datos/02_carrera.csv' DELIMITER ',' CSV HEADER;
+\COPY materia(id_materia,codigo,nombre) FROM 'database/datos/03_materia.csv' DELIMITER ',' CSV HEADER;
+\COPY aula(id_aula,nombre,capacidad,ubicacion) FROM 'database/datos/04_aula.csv' DELIMITER ',' CSV HEADER;
+\COPY parametro_admision(id_parametro,fecha_inicio_inscripcion,fecha_cierre_inscripcion,fecha_cierre_notas,monto_pago,max_estudiante_grupo,nota_minima_aprobacion,max_grupos_docente,tiempo_expiracion_pago,id_semestre) FROM 'database/datos/05_parametro_admision.csv' DELIMITER ',' CSV HEADER;
+\COPY carrera_semestre(id_carrera_semestre,cantidad_cupos,cantidad_estudiantes,id_carrera,id_semestre) FROM 'database/datos/06_carrera_semestre.csv' DELIMITER ',' CSV HEADER;
+\COPY examen(id_examen,numero_examen,ponderacion,id_semestre) FROM 'database/datos/07_examen.csv' DELIMITER ',' CSV HEADER;
+\COPY persona(id_persona,ci,nombres,apellido_paterno,apellido_materno,fecha_nacimiento,sexo,direccion,telefono,correo) FROM 'database/datos/08_persona.csv' DELIMITER ',' CSV HEADER;
+\COPY docente(id_docente,titulo_profesional,tiene_maestria,tiene_diploºmado,codigo_rda) FROM 'database/datos/09_docente.csv' DELIMITER ',' CSV HEADER;
+\COPY personal_administrativo(id_personal,cargo) FROM 'database/datos/10_personal_administrativo.csv' DELIMITER ',' CSV HEADER;
+\COPY postulante(id_postulante,colegio_procedencia,ciudad,estado_admision,codigo_libreta,codigo_titulo,id_carrera_primera_opc,id_carrera_segunda_opc) FROM 'database/datos/11_postulante.csv' DELIMITER ',' CSV HEADER;
+\COPY credencial(id_credencial,registro,contrasena,rol,id_persona) FROM 'database/datos/12_credencial.csv' DELIMITER ',' CSV HEADER;
+\COPY grupo(id_grupo,nombre_grupo,cantidad_estudiantes,id_semestre) FROM 'database/datos/13_grupo.csv' DELIMITER ',' CSV HEADER;
+\COPY plantilla_horario(id_plantilla,nombre,turno) FROM 'database/datos/14_plantilla_horario.csv' DELIMITER ',' CSV HEADER;
+\COPY detalle_plantilla_horario(id_detalle,dia,hora_inicio,hora_fin,modalidad,id_materia,id_plantilla) FROM 'database/datos/15_detalle_plantilla_horario.csv' DELIMITER ',' CSV HEADER;
+\COPY grupo_horario(id_grupo_horario,fecha_asignacion,id_grupo,id_detalle,id_docente,id_aula) FROM 'database/datos/16_grupo_horario.csv' DELIMITER ',' CSV HEADER;
+\COPY postulante_grupo(id_postulante_grupo,fecha_asignacion,id_grupo,id_postulante) FROM 'database/datos/17_postulante_grupo.csv' DELIMITER ',' CSV HEADER;
+\COPY pago(id_pago,monto,fecha_pago,estado,numero_transaccion,codigo_orden,metodo_pago,id_postulante) FROM 'database/datos/18_pago.csv' DELIMITER ',' CSV HEADER;
+\COPY nota(id_nota,nota,fecha_registro,id_postulante,id_docente,id_materia,id_examen) FROM 'database/datos/19_nota.csv' DELIMITER ',' CSV HEADER;
+\COPY certificacion_docente(id_certificacion,institucion,nivel,id_docente) FROM 'database/datos/21_certificacion_docente.csv' DELIMITER ',' CSV HEADER;
+\COPY docente_materia_habilitada(id_docente,id_materia) FROM 'database/datos/22_docente_materia_habilitada.csv' DELIMITER ',' CSV HEADER;
