@@ -87,6 +87,7 @@ class PlantillaHorarioController extends Controller
                 'turno' => $data['turno'],
             ]);
 
+            $this->syncPlantillaSerialSequences();
             $this->syncDetails($plantilla, $data['detalles'] ?? []);
         });
 
