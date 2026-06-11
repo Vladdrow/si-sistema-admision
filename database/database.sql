@@ -302,7 +302,7 @@ CREATE INDEX idx_persona_apellidos ON persona(apellido_paterno, apellido_materno
 \COPY carrera_semestre(id_carrera_semestre,cantidad_cupos,cantidad_estudiantes,id_carrera,id_semestre) FROM 'database/datos/06_carrera_semestre.csv' DELIMITER ',' CSV HEADER;
 \COPY examen(id_examen,numero_examen,ponderacion,id_semestre) FROM 'database/datos/07_examen.csv' DELIMITER ',' CSV HEADER;
 \COPY persona(id_persona,ci,nombres,apellido_paterno,apellido_materno,fecha_nacimiento,sexo,direccion,telefono,correo) FROM 'database/datos/08_persona.csv' DELIMITER ',' CSV HEADER;
-\COPY docente(id_docente,titulo_profesional,tiene_maestria,tiene_diploºmado,codigo_rda) FROM 'database/datos/09_docente.csv' DELIMITER ',' CSV HEADER;
+\COPY docente(id_docente,titulo_profesional,tiene_maestria,tiene_diplomado,codigo_rda) FROM 'database/datos/09_docente.csv' DELIMITER ',' CSV HEADER;
 \COPY personal_administrativo(id_personal,cargo) FROM 'database/datos/10_personal_administrativo.csv' DELIMITER ',' CSV HEADER;
 \COPY postulante(id_postulante,colegio_procedencia,ciudad,estado_admision,codigo_libreta,codigo_titulo,id_carrera_primera_opc,id_carrera_segunda_opc) FROM 'database/datos/11_postulante.csv' DELIMITER ',' CSV HEADER;
 \COPY credencial(id_credencial,registro,contrasena,rol,id_persona) FROM 'database/datos/12_credencial.csv' DELIMITER ',' CSV HEADER;
