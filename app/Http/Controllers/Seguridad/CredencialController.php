@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 /**
@@ -137,24 +136,21 @@ class CredencialController extends Controller
     }
 
     /**
-     * CU01 - Modificar rol, estado, correo o reiniciar contrasena.
+     * CU01 - Modificar estado, correo o reiniciar contrasena.
      */
     public function update(Request $request, Credencial $credencial): RedirectResponse|JsonResponse
     {
         $credencial->load('persona');
-        $credencial->persona?->load(['docente', 'postulante', 'personalAdministrativo']);
 
         $data = $request->validate([
-            'rol' => ['required', 'in:Administrador,PersonalAdministrativo,Docente,Postulante'],
             'estado' => ['required', 'boolean'],
             'correo' => ['required', 'email', 'max:50', Rule::unique('persona', 'correo')->ignore($credencial->id_persona, 'id_persona')],
             'nueva_contrasena' => $this->passwordRules(nullable: true),
         ], $this->passwordMessages());
 
         $isActive = (bool) $data['estado'];
-        $this->ensureCompatibleRole($credencial->persona, $data['rol']);
 
-        if ($credencial->is($request->user()) && (!$isActive || $data['rol'] !== 'Administrador')) {
+        if ($credencial->is($request->user()) && (! $isActive || $credencial->rol !== 'Administrador')) {
             if ($request->expectsJson()) {
                 return response()->json([
                     'message' => 'No puede quitarse su propio acceso de administrador.',
@@ -166,7 +162,7 @@ class CredencialController extends Controller
         }
 
         if ($credencial->rol === 'Administrador' && (bool) $credencial->estado
-            && ($data['rol'] !== 'Administrador' || ! $isActive)
+            && ! $isActive
             && Credencial::where('rol', 'Administrador')->where('estado', true)->count() <= 1) {
             if ($request->expectsJson()) {
                 return response()->json([
@@ -178,7 +174,6 @@ class CredencialController extends Controller
             return back()->withErrors(['rol' => 'No se puede quitar el acceso al unico Administrador del sistema.']);
         }
 
-        $credencial->rol = $data['rol'];
         $credencial->estado = $isActive;
 
         if (!empty($data['nueva_contrasena'])) {
@@ -301,26 +296,6 @@ class CredencialController extends Controller
                 'correo' => $credencial->persona?->correo,
             ],
         ];
-    }
-
-    private function ensureCompatibleRole(?Persona $persona, string $role): void
-    {
-        if (! $persona) {
-            return;
-        }
-
-        $expectedRole = match (true) {
-            (bool) $persona->docente => 'Docente',
-            (bool) $persona->postulante => 'Postulante',
-            (bool) $persona->personalAdministrativo => 'PersonalAdministrativo',
-            default => null,
-        };
-
-        if ($expectedRole !== null && $role !== $expectedRole) {
-            throw ValidationException::withMessages([
-                'rol' => "El rol seleccionado no corresponde a la persona. Debe ser {$expectedRole}.",
-            ]);
-        }
     }
 
     private function syncCredencialSerialSequence(): void

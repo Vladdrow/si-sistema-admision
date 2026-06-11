@@ -187,6 +187,15 @@ const setupCredentials = () => {
         saveButton.textContent = 'Guardar credencial';
     };
 
+    const syncPasswordRequirement = () => {
+        const isEditing = Boolean(activeRow);
+        const isChangingPassword = fields.password.value !== '' || fields.passwordConfirmation.value !== '';
+        const isRequired = !isEditing || isChangingPassword;
+
+        fields.password.required = isRequired;
+        fields.passwordConfirmation.required = isRequired;
+    };
+
     const openModal = (row) => {
         activeRow = row;
         clearMessage(modalMessage);
@@ -208,6 +217,7 @@ const setupCredentials = () => {
         fields.password.required = false;
         fields.passwordConfirmation.required = false;
         fields.password.placeholder = 'Dejar vacio para no cambiar';
+        syncPasswordRequirement();
         fields.title.textContent = 'Modificar credencial';
         fields.subtitle.textContent = `${row.dataset.registro} - ${row.dataset.nombre}`;
         saveButton.textContent = 'Guardar cambios';
@@ -301,6 +311,9 @@ const setupCredentials = () => {
         button.addEventListener('click', closeModal);
     });
 
+    fields.password.addEventListener('input', syncPasswordRequirement);
+    fields.passwordConfirmation.addEventListener('input', syncPasswordRequirement);
+
     fields.persona.addEventListener('change', () => {
         const option = fields.persona.selectedOptions[0];
 
@@ -331,6 +344,12 @@ const setupCredentials = () => {
         event.preventDefault();
 
         clearMessage(modalMessage);
+        syncPasswordRequirement();
+
+        if (!form.reportValidity()) {
+            return;
+        }
+
         saveButton.disabled = true;
 
         const payload = {

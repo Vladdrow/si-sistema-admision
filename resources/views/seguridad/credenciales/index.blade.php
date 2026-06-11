@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Gestionar Credenciales')
-@section('subtitle', 'Administra roles, estado, correo y reseteo de contrasenas sin salir de esta pantalla.')
+@section('subtitle', 'Administra estado, correo y reseteo de contrasenas sin salir de esta pantalla.')
 
 @section('content')
     <div class="panel">
